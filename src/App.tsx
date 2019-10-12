@@ -1,22 +1,14 @@
-import React from 'react';
-import './App.css';
-import { PYRestaurantRow } from './components/PYRestaurantRow';
-import SignIn from './page/SignIn';
+import React from "react";
+import "./App.css";
+import Routes from "./page/routes/Routes";
+import { routesInfo } from "./page/routes/routesInfo";
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <SignIn/>
-      <PYRestaurantRow
-      name={"Va como pina"}
-      deliveryTimeMaxMinutes={60}
-      link="http://www.pedidosya.com.uy/restaurantes/montevideo/<link>-menu"
-      pathLogo="pathlog"
-      rating={3.4}
-      topCategories={["jama","baile","cosa gorda"]}
-      />
+      <Routes routes={routesInfo} />
     </div>
   );
-}
+};
 
 export default App;
