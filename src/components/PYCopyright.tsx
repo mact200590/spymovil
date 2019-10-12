@@ -2,7 +2,7 @@ import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 
-export const Copyright = () => {
+export const PYCopyright: React.FC = () => {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"PedidosYa © "}
