@@ -22,10 +22,8 @@ export const PYButton: React.FC<Props> = ({
     () => ({ primary: "contained", secondary: "outlined" }[typeVariant] as any),
     [typeVariant]
   );
-  console.log(classes);
   return (
     <Button
-      type="submit"
       {...rest}
       fullWidth
       variant={variant}
