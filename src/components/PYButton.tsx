@@ -1,6 +1,5 @@
 import { Button } from "@material-ui/core";
 import { ButtonBaseProps } from "@material-ui/core/ButtonBase";
-import { makeStyles } from "@material-ui/core/styles";
 import React, { useMemo } from "react";
 
 type ButtonType = "primary" | "secondary";
@@ -17,31 +16,19 @@ export const PYButton: React.FC<Props> = ({
   fullWidth,
   ...rest
 }) => {
-  const classes = useStyles();
   const variant = useMemo(
     () => ({ primary: "contained", secondary: "outlined" }[typeVariant] as any),
     [typeVariant]
   );
   return (
     <Button
-      {...rest}
-      fullWidth
+      fullWidth={fullWidth}
       variant={variant}
+      {...rest}
       color="primary"
-      className={classes.primary}
     >
       {label}
     </Button>
   );
 };
 
-const useStyles = makeStyles((theme: any) => (
-   {
-    primary: {
-      color: theme.palette.primary
-    },
-    secondary: {
-      color: theme.palette.primary
-    }
-  }
-));
