@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import { useFormik } from "formik";
 import React from "react";
 import logo from "../asserts/logo.png";
-import { Copyright } from "../components/Copyright";
+import { PYCopyright } from "../components/PYCopyright";
 import { PYButton } from "../components/PYButton";
 import { PYInput } from "../components/PYInput";
 
@@ -91,7 +91,7 @@ export default function SignIn() {
         </form>
       </div>
       <Box mt={8}>
-        <Copyright />
+        <PYCopyright />
       </Box>
     </Container>
   );
