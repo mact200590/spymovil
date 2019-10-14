@@ -8,6 +8,7 @@ type InputType = "login" | "primary" | "secondary";
 type Props = {
   typeVariant: InputType;
   error?: string;
+  classNameContainer?: string;
 } & PYInputProps;
 
 export type PYInputProps = Omit<TextFieldProps, "error">;
@@ -16,6 +17,7 @@ export const PYInput: React.FC<Props> = ({
   typeVariant,
   required = false,
   error,
+  classNameContainer,
   ...rest
 }) => {
   const classes = useStyles();
@@ -27,7 +29,7 @@ export const PYInput: React.FC<Props> = ({
     [typeVariant]
   );
   return (
-    <div>
+    <div className={classNameContainer}>
       <TextField error={error ? true : false} {...rest} variant={variant} />
       <FormHelperText className={classes.error} id="component-error-text">{error}</FormHelperText>
     </div>

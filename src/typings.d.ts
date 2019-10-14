@@ -8,3 +8,8 @@ export type Restaurant = {
 }
 
 export type RestaurantFactory = Omit<Restaurant, "link">;
+
+export type Coordinates = {
+  readonly lat: number;
+  readonly lng: number;
+}
