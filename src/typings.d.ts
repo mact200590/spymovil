@@ -13,3 +13,15 @@ export type Coordinates = {
   readonly lat: number;
   readonly lng: number;
 }
+
+export type FieldFormik = [{
+  value: any;
+  name: string;
+  onChange: (e: React.ChangeEvent<any>) => void;
+  onBlur: (e: any) => void;
+}, {
+  value: any;
+  error?: string | undefined;
+  touch: boolean;
+  initialValue?: any;
+}]

@@ -1,6 +1,6 @@
 import { RouteComponentProps } from "react-router-dom";
 import Restaurants from "../Restaurants/Restaurants";
-import SignIn from "../SignIn";
+import SignIn from "../signin/SignIn";
 
 export interface Route {
   path: string;

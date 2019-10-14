@@ -6,33 +6,25 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import { useFormik } from "formik";
 import React from "react";
-import logo from "../asserts/logo.png";
-import { PYCopyright } from "../components/PYCopyright";
-import { PYButton } from "../components/PYButton";
-import { PYInput } from "../components/PYInput";
+import { PYButton } from "../../components/PYButton";
+import { PYCopyright } from "../../components/PYCopyright";
+import { PYInput } from "../../components/PYInput";
+import { FieldFormik } from "../../typings";
+import logo from "../../asserts/logo.png";
 
-export default function SignIn() {
+type Props = {
+  handleSubmit: ((event: React.FormEvent<HTMLFormElement>) => void) | undefined;
+  email: FieldFormik;
+  password: FieldFormik;
+};
+
+export const SignInForm: React.FC<Props> = ({
+  handleSubmit,
+  email: [email, metadataEmail],
+  password: [password, metadataPassword]
+}) => {
   const classes = useStyles();
-  const { getFieldProps, handleSubmit, errors, touched } = useFormik({
-    initialValues: {
-      email: "",
-      password: ""
-    },
-    validate: values => {
-      const err: any = {};
-      const message = "Campo obligatório";
-      if (!values.email) err.email = message;
-      if (!values.password) err.password = message;
-      return err;
-    },
-    onSubmit: (values, bag) => {
-    }
-  });
-  const [email, metadataEmail] = getFieldProps("email", "text");
-  const [password, metadataPassword] = getFieldProps("password", "text");
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -95,7 +87,7 @@ export default function SignIn() {
       </Box>
     </Container>
   );
-}
+};
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -125,3 +117,5 @@ const useStyles = makeStyles(theme => ({
     textAlign: "center"
   }
 }));
+
+export default SignInForm;
