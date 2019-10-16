@@ -1,9 +1,7 @@
-import { GoogleMap, useLoadScript, Data } from "@react-google-maps/api";
+import { makeStyles } from "@material-ui/core";
+import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import React from "react";
 import { PYSpinner } from "./PYSpinner";
-import { makeStyles } from "@material-ui/core";
-import { usePosition } from "../utils/hooks";
-import { Coordinates } from "../types";
 
 const options = {
   zoomControlOptions: {
@@ -44,8 +42,7 @@ export const PYMap: React.FC<Props> = ({ lat, lng, onClick }) => {
     controlPosition: "TOP_LEFT",
     controls: ["Point"],
     drawingMode: "Point", //  "LineString" or "Polygon".
-    featureFactory: (geometry: any) => {
-    }
+    featureFactory: (geometry: any) => {}
   };
   return (
     <GoogleMap

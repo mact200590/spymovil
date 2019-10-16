@@ -1,11 +1,11 @@
 import { Grid, makeStyles } from "@material-ui/core";
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo } from "react";
 import { PYLayoutVerticalList } from "../../components/layout/PYLayoutVerticalList";
-import { PYRestaurantRow } from "../../components/PYRestaurantRow";
-import { Restaurant } from "../../types";
-import { usePosition } from "../../utils/hooks";
-import SearchPanel from "./SearchPanel";
 import { PYMap } from "../../components/PYMap";
+import { PYRestaurantRow } from "../../components/PYRestaurantRow";
+import { usePosition } from "../../hooks/map";
+import { Restaurant } from "../../types";
+import SearchPanel from "./SearchPanel";
 
 const Restaurants: React.FC = () => {
   const classes = useStyles();

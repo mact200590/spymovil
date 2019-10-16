@@ -14,7 +14,7 @@ export interface Route {
 export const routesInfo: Route[] = [
   {
     exact: true,
-    path: "/signin",
+    path: "/",
     component: SignIn,
     showMenuItem: false
   },
