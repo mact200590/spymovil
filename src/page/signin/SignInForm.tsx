@@ -56,7 +56,7 @@ export const SignInForm: React.FC<Props> = ({
               required
               fullWidth
               {...password}
-              label="Password"
+              label="Contraseña"
               id="password"
               type="password"
               autoComplete="current-password"
