@@ -1,11 +1,16 @@
-import { useEffect, useState } from 'react';
-import { Coordinates } from '../typings';
+import { useEffect, useState } from "react";
+import useFetch from "react-fetch-hook";
+import { PathApi, Coordinates } from "../types";
 
+export const useFetchPedidosYaApiTest = ({ pathApi }: { pathApi: PathApi }) => {
+  const { isLoading, data } = useFetch(`http://localhost:3000${pathApi}`, {});
+  return { isLoading, data };
+};
 
 export const usePosition = () => {
   const [position, setPosition] = useState<Coordinates>({
-    lat: -13.9142463,
-    lng: -56.1767327
+    lat: "-13.9142463",
+    lng: "-56.1767327"
   });
   const [error, setError] = useState("");
   useEffect(() => {
@@ -25,6 +30,6 @@ export const usePosition = () => {
     }
     const watcher = geo.watchPosition(onSuccess, onError);
     return () => geo.clearWatch(watcher);
-  }, [navigator, ]); 
+  }, []);
   return { ...position, setPosition, error };
 };

@@ -10,7 +10,7 @@ import React from "react";
 import { PYButton } from "../../components/PYButton";
 import { PYCopyright } from "../../components/PYCopyright";
 import { PYInput } from "../../components/PYInput";
-import { FieldFormik } from "../../typings";
+import { FieldFormik } from "../../types";
 import logo from "../../asserts/logo.png";
 
 type Props = {

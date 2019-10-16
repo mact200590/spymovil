@@ -4,7 +4,7 @@ import React from "react";
 export const PYLayoutVerticalList: React.FC = ({ children }) => {
   const classes = useStyles();
   return (
-    <Grid className={classes.root} xs={12} container direction="column">
+    <Grid className={classes.root} container direction="column">
       {children}
     </Grid>
   );

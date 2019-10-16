@@ -1,4 +1,4 @@
-import { Restaurant, RestaurantFactory } from "../typings";
+import { Restaurant, RestaurantFactory } from "../types";
 const factoryRestaurant = (data: RestaurantFactory): Restaurant => {
   return {
     ...data,

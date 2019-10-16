@@ -4,11 +4,11 @@ import React, { useEffect, useState, useCallback } from "react";
 import { PYButton } from "../../components/PYButton";
 import { PYInput } from "../../components/PYInput";
 import { idLatValid, idLngValid } from "../../utils/coordinate";
-import { Coordinates } from "../../typings";
+import { Coordinates } from "../../types";
 
 type Props = {
-  latIni: number;
-  lngIni: number;
+  latIni: string;
+  lngIni: string;
 };
 
 const SearchPanel: React.FC<Props> = ({latIni, lngIni}) => {
@@ -20,7 +20,7 @@ const SearchPanel: React.FC<Props> = ({latIni, lngIni}) => {
       lng: lngIni
     },
     validate: (values: Coordinates) => {
-      const err: any = {};
+      const err: any = {};  
       if (!idLatValid(values.lat)) err.lat = "Inválida Latitud";
       if (!idLngValid(values.lng)) err.lng = "Inválida Longitud";
       return err;
@@ -31,8 +31,8 @@ const SearchPanel: React.FC<Props> = ({latIni, lngIni}) => {
   const { getFieldProps, handleSubmit, errors, touched, resetForm,  } = useFormik(config);
   useEffect(()=>{
   },[latIni, lngIni])
-  const [lat, metadataLat] = getFieldProps("lat", "number");
-  const [lng, metadataLng] = getFieldProps("lng", "number");
+  const [lat, metadataLat] = getFieldProps("lat", "text");
+  const [lng, metadataLng] = getFieldProps("lng", "text");
   useEffect(()=>{
   },[latIni, lngIni])
   return (

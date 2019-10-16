@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Rating from "@material-ui/lab/Rating";
 import React from "react";
 import logo from "../asserts/logo.png";
-import { Restaurant } from "../typings";
+import { Restaurant } from "../types";
 export const PYRestaurantRow: React.FC<Restaurant> = ({
   name,
   topCategories,

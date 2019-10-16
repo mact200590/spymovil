@@ -3,7 +3,7 @@ import React from "react";
 import { PYSpinner } from "./PYSpinner";
 import { makeStyles } from "@material-ui/core";
 import { usePosition } from "../utils/hooks";
-import { Coordinates } from "../typings";
+import { Coordinates } from "../types";
 
 const options = {
   zoomControlOptions: {
@@ -13,15 +13,15 @@ const options = {
   }
 };
 type Props = {
-  lat: number;
-  lng: number;
-  onChangeCoordinate: (coordinate: Coordinates) => void;
+  lat: string;
+  lng: string;
+  onClick: (args: any) => void | undefined;
 };
 
-export const PYMap: React.FC<Props> = ({ lat, lng, onChangeCoordinate }) => {
+export const PYMap: React.FC<Props> = ({ lat, lng, onClick }) => {
   const classes = useStyles();
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyD4IQYqIHW-pq_Ez48TJwghVLxlevdPPhg"
+    googleMapsApiKey: "AIzaSyABi3f5wNa83dWgg35I9rx6UbPIFol2TW0" //adria apikey
     // ...otherOptions
   });
   const onLoad = React.useCallback(mapInstance => {
@@ -51,16 +51,11 @@ export const PYMap: React.FC<Props> = ({ lat, lng, onChangeCoordinate }) => {
     <GoogleMap
       mapContainerClassName={classes.root}
       mapContainerStyle={{ minHeight: 500, minWidth: 500 }}
-      zoom={5}
+      zoom={15}
       center={center}
       options={options}
       onLoad={onLoad}
-      onClick={({ pa: { x, y } }: { pa: { x: number; y: number } }) => {
-        onChangeCoordinate({
-          lat: x,
-          lng: y
-        });
-      }}
+      onClick={onClick}
     >
       {/* <Data  options={dataOptions} /> */}
       {

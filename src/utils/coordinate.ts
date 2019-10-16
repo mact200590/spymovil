@@ -1,16 +1,28 @@
-const numberReg = "^[+-]?([1-9][0-9]*(?:[\.][0-9]*)?|0*\.0*[1-9][0-9]*)(?:[eE][+-][0-9]+)?$";
+import Big from "big.js";
+const numberReg =
+  "^[+-]?([1-9][0-9]*(?:[.][0-9]*)?|0*.0*[1-9][0-9]*)(?:[eE][+-][0-9]+)?$";
 
-export const idLngValid = (lng: number) => {
+export const idLngValid = (lng: string) => {
   try {
-    return lng.toString().match(numberReg) !== null && -180 < lng && lng < 180;
+    const lngB = new Big(lng);
+    return (
+      lng.toString().match(numberReg) !== null &&
+      lngB.gt("-180") &&
+      lngB.lt("180")
+    );
   } catch (error) {
     return false;
   }
 };
 
-export const idLatValid = (lat: number) => {
+export const idLatValid = (lat: string) => {
   try {
-    return lat.toString().match(numberReg) !== null && -90 < lat && lat < 90;
+    const latB = new Big(lat);
+    return (
+      lat.toString().match(numberReg) !== null &&
+      latB.gt("-90") &&
+      latB.lt("90")
+    );
   } catch (error) {
     return false;
   }

@@ -1,22 +1,28 @@
 import { Grid, makeStyles } from "@material-ui/core";
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback } from "react";
 import { PYLayoutVerticalList } from "../../components/layout/PYLayoutVerticalList";
 import { PYRestaurantRow } from "../../components/PYRestaurantRow";
-import { Restaurant } from "../../typings";
+import { Restaurant } from "../../types";
 import { usePosition } from "../../utils/hooks";
 import SearchPanel from "./SearchPanel";
 import { PYMap } from "../../components/PYMap";
 
 const Restaurants: React.FC = () => {
   const classes = useStyles();
-  const {lat, lng, setPosition, error} = usePosition();
+  const { lat, lng, setPosition, error } = usePosition();
   const restaurantMocks = useMemo(() => {
     const restaurants = [];
     for (let index = 0; index < 10; index++) {
-      restaurants.push({id: index, ...restaurantMock});
+      restaurants.push({ id: index, ...restaurantMock });
     }
     return restaurants;
   }, []);
+  const onClickMap = (arg: any) => {
+    const { latLng } = arg;
+    console.log({ lat: latLng.lat(), lng: latLng.lng() });
+    setPosition({ lat: latLng.lat(), lng: latLng.lng() });
+  };
+
   return (
     <Grid
       container
@@ -33,10 +39,10 @@ const Restaurants: React.FC = () => {
       </Grid>
       <Grid item xs={9} container>
         <Grid item xs={12} container className={classes.searchPanel}>
-          <SearchPanel latIni={lat} lngIni={lng}/>
+          <SearchPanel latIni={lat} lngIni={lng} />
         </Grid>
         <Grid item xs={12} container>
-          <PYMap lat={lat} lng={lng} onChangeCoordinate={setPosition}/>
+          <PYMap lat={lat} lng={lng} onClick={onClickMap} />
         </Grid>
       </Grid>
     </Grid>
