@@ -54,4 +54,4 @@ export type Params = {
 
 export type Auth = { access_token: string };
 
-export const UNDEFINE_PARAMS_MESSAGE_ERROR = "Faltan parámetros en su petición";
+export const UNDEFINED_PARAMS_MESSAGE_ERROR = "Faltan parámetros en su petición";
