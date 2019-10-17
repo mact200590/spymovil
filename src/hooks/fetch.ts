@@ -43,6 +43,7 @@ export const useFetchPedidosYaApiTest = (
     data,
     isLoading,
     error,
+    clearError: () =>setError(undefined),
     errorParams
   };
 };
@@ -94,7 +95,8 @@ export const useFetchPedidosYaApiTestLazy = () => {
     data,
     isLoading,
     error,
-    errorParams
+    errorParams,
+    clearError: () =>setError(undefined),
   };
 };
 
