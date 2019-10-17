@@ -12,5 +12,6 @@ export const getHeaders = () => {
 };
 
 export const saveAuth = (auth: Auth) => {
+  if(!auth || !auth.access_token) return;
   localStorage.setItem("pedidosYatest.session", JSON.stringify(auth));
 };
