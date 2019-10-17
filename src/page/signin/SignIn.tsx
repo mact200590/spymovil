@@ -7,6 +7,8 @@ import {
   useFetchPedidosYaApiTestLazy
 } from "../../hooks/fetch";
 import SignInForm from "./SignInForm";
+import { useSnackbar } from "notistack";
+import { Redirect } from "react-router";
 
 const validationSchema = yup.object().shape({
   email: yup
@@ -19,6 +21,7 @@ const validationSchema = yup.object().shape({
 });
 
 export default function SignIn() {
+  const { enqueueSnackbar } = useSnackbar();
   const { isLoading, error: ErrorAppToken } = useFetchPedidosYaApiTest(
     {
       pathApi: "/tokens/app",
@@ -32,7 +35,8 @@ export default function SignIn() {
   const {
     trigger,
     data,
-    error,
+    error: ErrorSignIn,
+    clearError: clearErrorSignIn,
     isLoading: isLoadingSignIn
   } = useFetchPedidosYaApiTestLazy();
   const { getFieldProps, handleSubmit } = useFormik({
@@ -54,7 +58,21 @@ export default function SignIn() {
   const [email, metadataEmail] = getFieldProps("email", "text");
   const [password, metadataPassword] = getFieldProps("password", "text");
 
+  const notifyInvalidCredentials = (ErrorSignIn: any) => {
+    enqueueSnackbar("Sus credenciales no son válidas", { key: ErrorSignIn.code,variant: "error" , preventDuplicate: true});
+    clearErrorSignIn();
+  };
+
+  const notifyLoggedSuccess = () => {
+    enqueueSnackbar("Bienvenido a pedidosYa", { variant: "success", });
+  };
+
   if (isLoading) return <PYSpinner />;
+  if (ErrorSignIn) notifyInvalidCredentials(ErrorSignIn);
+  if (data) {
+    notifyLoggedSuccess();
+    return <Redirect to={"/restaurants"}/>
+  }
 
   return (
     <SignInForm
