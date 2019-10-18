@@ -52,6 +52,8 @@ export type Params = {
   fields?: string;
 };
 
-export type Auth = { access_token: string };
+export type TokenType = "app" | "user";
+export type Auth = { access_token: string, tokenType: string };
+
 
 export const UNDEFINED_PARAMS_MESSAGE_ERROR = "Faltan parámetros en su petición";
