@@ -6,12 +6,12 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
+import React, { useState } from "react";
+import logo from "../../asserts/logo.png";
 import { PYButton } from "../../components/PYButton";
 import { PYCopyright } from "../../components/PYCopyright";
 import { PYInput } from "../../components/PYInput";
 import { FieldFormik } from "../../types";
-import logo from "../../asserts/logo.png";
 
 type Props = {
   handleSubmit: ((event: React.FormEvent<HTMLFormElement>) => void) | undefined;
@@ -25,6 +25,7 @@ export const SignInForm: React.FC<Props> = ({
   password: [password, metadataPassword]
 }) => {
   const classes = useStyles();
+  const [showPassword, setShowPassword] = useState();
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -58,7 +59,7 @@ export const SignInForm: React.FC<Props> = ({
               {...password}
               label="Contraseña"
               id="password"
-              type="password"
+              type={showPassword ? "normal" : "password"}
               autoComplete="current-password"
               error={
                 metadataPassword.touch && metadataPassword.error
@@ -69,8 +70,15 @@ export const SignInForm: React.FC<Props> = ({
           </div>
           <div className={classes.remember}>
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Recordar me"
+              control={
+                <Checkbox
+                  value="remember"
+                  color="primary"
+                  checked={showPassword}
+                  onChange={() => setShowPassword(!showPassword)}
+                />
+              }
+              label="Mostrar constraseña"
             />
           </div>
 
