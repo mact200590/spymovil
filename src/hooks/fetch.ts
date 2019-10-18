@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Params, PathApi, UNDEFINED_PARAMS_MESSAGE_ERROR } from "../types";
-import { useHeaders } from "./auth";
+import { getHeaders } from "../utils/auth";
 import { API_URL } from "../utils/constants";
 
 export const useFetchPedidosYaApiTest = (
@@ -13,14 +13,13 @@ export const useFetchPedidosYaApiTest = (
   },
   depends: any[]
 ) => {
-  const [headers] = useHeaders();
   const [data, setData] = useState(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useErrorToShow(undefined);
   const { url, error: errorParams } = useGenerateApiUrl({ pathApi, params });
   useEffect(() => {
     setIsLoading(true);
-    fetch(url, { headers: (headers as any) })
+    fetch(url, { headers: getHeaders() })
       .then(j => j.json())
       .then(data => {
         setIsLoading(false);
@@ -93,7 +92,6 @@ const useGenerateApiUrl = ({
 };
 
 export const useFetchPedidosYaApiTestLazy = () => {
-  const [headers] = useHeaders();
   const [data, setData] = useState(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useErrorToShow(undefined);
@@ -106,7 +104,7 @@ export const useFetchPedidosYaApiTestLazy = () => {
   useEffect(() => {
     if (count === 0) return;
     setIsLoading(true);
-    fetch(url, { headers: (headers as any) })
+    fetch(url, { headers: getHeaders() })
       .then(j => j.json())
       .then(data => {
         setIsLoading(false);
