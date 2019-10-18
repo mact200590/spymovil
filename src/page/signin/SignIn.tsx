@@ -1,12 +1,12 @@
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router";
 import * as yup from "yup";
 import { PYSpinner } from "../../components/PYSpinner";
-import { useAuth } from "../../hooks/auth";
 import { useFetchPedidosYaApiTestLazy } from "../../hooks/fetch";
 import SignInForm from "./SignInForm";
+import { saveValidAuth, isUserLogged, isAppRegistered } from "../../utils/auth";
 
 const validationSchema = yup.object().shape({
   email: yup
@@ -19,8 +19,9 @@ const validationSchema = yup.object().shape({
 });
 
 export default function SignIn() {
-  const [{ auth, isUserLogged, isAppRegistered }, saveAuth] = useAuth();
   const { enqueueSnackbar: notify } = useSnackbar();
+  const [userLogged, setUserLogger] = useState(isUserLogged());
+  const [appRegister] = useState(isAppRegistered());
   const {
     trigger: registerApp,
     data: dataApp,
@@ -53,13 +54,16 @@ export default function SignIn() {
   const [email, metadataEmail] = getFieldProps("email", "text");
   const [password, metadataPassword] = getFieldProps("password", "text");
   useEffect(() => {
-    if (dataApp) saveAuth(dataApp);
+    if (dataApp) saveValidAuth(dataApp);
   }, [dataApp]);
   useEffect(() => {
-    if (dataSignIn) saveAuth(dataSignIn);
+    if (dataSignIn) {
+      saveValidAuth(dataSignIn);
+      setUserLogger(true);
+    }
   }, [dataSignIn]);
   useEffect(() => {
-    if (isAppRegistered === false && isUserLogged === false)
+    if (!userLogged && !appRegister)
       registerApp({
         pathApi: "/tokens/app",
         params: {
@@ -93,16 +97,13 @@ export default function SignIn() {
     });
   };
 
-  if (isUserLogged) {
+  if (userLogged) {
     return <Redirect to={"/restaurants"} />;
   }
   if (isLoadingApp) return <PYSpinner />;
   if (errorApp) notifyAppError(errorApp);
 
   if (errorSignIn) notifyInvalidCredentials(errorSignIn);
-  if (auth && auth.tokenType === "user") {
-    return <Redirect to={"/restaurants"} />;
-  }
 
   return (
     <SignInForm

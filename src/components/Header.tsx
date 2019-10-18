@@ -6,23 +6,22 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useSnackbar } from "notistack";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useFetchPedidosYaApiTest } from "../hooks/fetch";
 import { PYSpinner } from "./PYSpinner";
-import { useAuth } from "../hooks/auth";
+import { Redirect } from "react-router";
+import { isUserLogged, logOut } from "../utils/auth";
 
 export const Header = () => {
   const classes = useStyles();
-  const [{ auth, isUserLogged, isAppRegistered }, saveAuth] = useAuth();
+  const [userLogged, setUserLogger] = useState(isUserLogged());
   const { enqueueSnackbar } = useSnackbar();
-  const { data, isLoading, error } = useFetchPedidosYaApiTest(
+  const { data, isLoading } = useFetchPedidosYaApiTest(
     {
-      pathApi: "/myAccount",
+      pathApi: "/myAccount"
     },
     []
   );
-
-
 
   const notifyLoggedSuccess = (data: any) => {
     enqueueSnackbar(`Bienvenido a pedidosYa ${name(data)}`, {
@@ -37,9 +36,13 @@ export const Header = () => {
     return `${data.name} ${data.lastName}`;
   };
 
+  if (!userLogged) {
+    return <Redirect to={"/"} />;
+  }
 
   if (isLoading) return <PYSpinner />;
-  if (isUserLogged && data) {
+
+  if (userLogged && data) {
     notifyLoggedSuccess(data);
   }
 
@@ -58,7 +61,15 @@ export const Header = () => {
           <Typography variant="h6" className={classes.title}>
             {name(data)}
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              logOut();
+              setUserLogger(false);
+            }}
+          >
+            Salir
+          </Button>
         </Toolbar>
       </AppBar>
     </div>

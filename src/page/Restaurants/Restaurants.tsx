@@ -8,11 +8,10 @@ import { Restaurant } from "../../types";
 import SearchPanel from "./SearchPanel";
 import { Header } from "../../components/Header";
 import { Redirect } from "react-router";
-import { useAuth } from "../../hooks/auth";
+import { isUserLogged } from "../../utils/auth";
 
 const Restaurants: React.FC = () => {
   const classes = useStyles();
-  const [{ auth, isUserLogged, isAppRegistered }, saveAuth] = useAuth();
   const { lat, lng, setPosition, error } = usePosition();
   const restaurantMocks = useMemo(() => {
     const restaurants = [];
@@ -27,7 +26,7 @@ const Restaurants: React.FC = () => {
     setPosition({ lat: latLng.lat(), lng: latLng.lng() });
   };
 
-  if (!isUserLogged) {
+  if (!isUserLogged()) {
     return <Redirect to={"/"} />;
   }
   
