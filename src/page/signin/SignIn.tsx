@@ -1,14 +1,12 @@
 import { useFormik } from "formik";
-import React from "react";
+import { useSnackbar } from "notistack";
+import React, { useEffect } from "react";
+import { Redirect } from "react-router";
 import * as yup from "yup";
 import { PYSpinner } from "../../components/PYSpinner";
-import {
-  useFetchPedidosYaApiTest,
-  useFetchPedidosYaApiTestLazy
-} from "../../hooks/fetch";
+import { useAuth } from "../../hooks/auth";
+import { useFetchPedidosYaApiTestLazy } from "../../hooks/fetch";
 import SignInForm from "./SignInForm";
-import { useSnackbar } from "notistack";
-import { Redirect } from "react-router";
 
 const validationSchema = yup.object().shape({
   email: yup
@@ -21,23 +19,19 @@ const validationSchema = yup.object().shape({
 });
 
 export default function SignIn() {
-  const { enqueueSnackbar } = useSnackbar();
-  const { isLoading, error: ErrorAppToken } = useFetchPedidosYaApiTest(
-    {
-      pathApi: "/tokens/app",
-      params: {
-        clientId: "test",
-        clientSecret: "PeY@@Tr1v1@943"
-      }
-    },
-    []
-  );
+  const [{ auth, isUserLogged, isAppRegistered }, saveAuth] = useAuth();
+  const { enqueueSnackbar: notify } = useSnackbar();
   const {
-    trigger,
-    data,
-    error: ErrorSignIn,
-    clearError: clearErrorSignIn,
-    isLoading: isLoadingSignIn
+    trigger: registerApp,
+    data: dataApp,
+    error: errorApp,
+    clearError: clearErrorApp,
+    isLoading: isLoadingApp
+  } = useFetchPedidosYaApiTestLazy();
+  const {
+    trigger: signIn,
+    error: errorSignIn,
+    clearError: clearErrorSignIn
   } = useFetchPedidosYaApiTestLazy();
   const { getFieldProps, handleSubmit } = useFormik({
     initialValues: {
@@ -46,7 +40,7 @@ export default function SignIn() {
     },
     validationSchema: validationSchema,
     onSubmit: (values, bag) => {
-      trigger({
+      signIn({
         pathApi: "/tokens/user",
         params: {
           userName: values.email,
@@ -57,21 +51,53 @@ export default function SignIn() {
   });
   const [email, metadataEmail] = getFieldProps("email", "text");
   const [password, metadataPassword] = getFieldProps("password", "text");
-
-  const notifyInvalidCredentials = (ErrorSignIn: any) => {
-    enqueueSnackbar("Sus credenciales no son válidas", { key: ErrorSignIn.code,variant: "error" , preventDuplicate: true});
+  useEffect(() => {
+    if (dataApp) saveAuth(dataApp);
+  }, [dataApp]);
+  useEffect(() => {
+    if (isAppRegistered === false && isUserLogged === false)
+      registerApp({
+        pathApi: "/tokens/app",
+        params: {
+          clientId: "test",
+          clientSecret: "PeY@@Tr1v1@943"
+        }
+      });
+  }, []);
+  const notifyInvalidCredentials = (error: any) => {
+    notify("Sus credenciales no son válidas", {
+      key: error.code,
+      variant: "error",
+      preventDuplicate: true
+    });
     clearErrorSignIn();
   };
 
-  const notifyLoggedSuccess = () => {
-    enqueueSnackbar("Bienvenido a pedidosYa", { variant: "success", });
+  const notifyAppError = (error: any) => {
+    notify(
+      "Se a producido un error registrando su app, póngase en contacto con el proveedor del servicio",
+      { key: error.code, variant: "error", preventDuplicate: true }
+    );
+    clearErrorApp();
   };
 
-  if (isLoading) return <PYSpinner />;
-  if (ErrorSignIn) notifyInvalidCredentials(ErrorSignIn);
-  if (data) {
-    notifyLoggedSuccess();
-    return <Redirect to={"/restaurants"}/>
+  const notifyLoggedSuccess = () => {
+    notify("Bienvenido a pedidosYa", {
+      key: "Bienvenido a pedidosYa",
+      variant: "success",
+      preventDuplicate: true
+    });
+  };
+
+  if (isUserLogged) {
+    return <Redirect to={"/restaurants"} />;
+  }
+  if (isLoadingApp) return <PYSpinner />;
+  if (errorApp) notifyAppError(errorApp);
+
+  if (errorSignIn) notifyInvalidCredentials(errorSignIn);
+  if (auth && auth.tokenType === "user") {
+    return <Redirect to={"/restaurants"} />;
   }
 
   return (

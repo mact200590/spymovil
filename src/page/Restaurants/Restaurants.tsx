@@ -6,9 +6,13 @@ import { PYRestaurantRow } from "../../components/PYRestaurantRow";
 import { usePosition } from "../../hooks/map";
 import { Restaurant } from "../../types";
 import SearchPanel from "./SearchPanel";
+import { Header } from "../../components/Header";
+import { Redirect } from "react-router";
+import { useAuth } from "../../hooks/auth";
 
 const Restaurants: React.FC = () => {
   const classes = useStyles();
+  const [{ auth, isUserLogged, isAppRegistered }, saveAuth] = useAuth();
   const { lat, lng, setPosition, error } = usePosition();
   const restaurantMocks = useMemo(() => {
     const restaurants = [];
@@ -23,6 +27,10 @@ const Restaurants: React.FC = () => {
     setPosition({ lat: latLng.lat(), lng: latLng.lng() });
   };
 
+  if (!isUserLogged) {
+    return <Redirect to={"/"} />;
+  }
+  
   return (
     <Grid
       container
@@ -30,6 +38,9 @@ const Restaurants: React.FC = () => {
       justify="flex-start"
       alignItems="flex-start"
     >
+      <Grid item xs={12} container>
+        <Header/>
+      </Grid>
       <Grid item xs={3} container>
         <PYLayoutVerticalList>
           {restaurantMocks.map(r => (

@@ -1,17 +1,16 @@
 import { Auth } from "../types";
 
-export const getHeaders = () => {
-  const headers = new Headers();
-  headers.append("Content-Type", "application/json");
+export const getAuth = (): Auth | undefined => {
   const session = localStorage.getItem("pedidosYatest.session") || undefined;
-  const auth: Auth = session
-    ? JSON.parse(session)
-    : { access_token: undefined };
-  auth && headers.append("Authorization", auth.access_token);
-  return headers;
+  return session ? JSON.parse(session) : undefined;
 };
 
-export const saveAuth = (auth: Auth) => {
-  if(!auth || !auth.access_token) return;
-  localStorage.setItem("pedidosYatest.session", JSON.stringify(auth));
+export const getHeaders = () => {
+  const auth = getAuth();
+  const headers = new Headers();
+  headers.append("Content-Type", "application/json");
+  auth !== undefined &&
+    (auth as any).access_token &&
+    headers.append("Authorization", (auth as any).access_token);
+  return headers
 };
