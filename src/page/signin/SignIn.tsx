@@ -30,6 +30,7 @@ export default function SignIn() {
   } = useFetchPedidosYaApiTestLazy();
   const {
     trigger: signIn,
+    data: dataSignIn,
     error: errorSignIn,
     clearError: clearErrorSignIn
   } = useFetchPedidosYaApiTestLazy();
@@ -54,6 +55,9 @@ export default function SignIn() {
   useEffect(() => {
     if (dataApp) saveAuth(dataApp);
   }, [dataApp]);
+  useEffect(() => {
+    if (dataSignIn) saveAuth(dataSignIn);
+  }, [dataSignIn]);
   useEffect(() => {
     if (isAppRegistered === false && isUserLogged === false)
       registerApp({
