@@ -16,6 +16,7 @@ export const Header = () => {
   const classes = useStyles();
   const [userLogged, setUserLogger] = useState(isUserLogged());
   const { enqueueSnackbar } = useSnackbar();
+  const [showInitialNotification, setShowInitialNotification] = useState(true);
   const { data, isLoading } = useFetchPedidosYaApiTest(
     {
       pathApi: "/myAccount"
@@ -42,8 +43,9 @@ export const Header = () => {
 
   if (isLoading) return <PYSpinner />;
 
-  if (userLogged && data) {
+  if (userLogged && data && showInitialNotification) {
     notifyLoggedSuccess(data);
+    setShowInitialNotification(false);
   }
 
   return (
