@@ -4,6 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import renderer from 'react-test-renderer';
 import { PYButton } from "../components/PYButton";
+import { act } from "react-dom/test-utils";
 
 afterEach(cleanup)
 it("Button with all mandatory props  or other props ", () => {
@@ -29,11 +30,22 @@ it("It renders correctly",()=>{
 
 
 it("Matches Snapshot",()=>{
-    const tree=renderer.create(<div data-testid='button'><PYButton 
-    label="Buscar"
-    typeVariant="primary"
-    fullWidth={false}
-
-/></div>).toJSON(); 
+    const tree=renderer.create(
+    <div data-testid='button'>
+      <PYButton label="Buscar" typeVariant="primary" fullWidth={false}/>
+    </div>).toJSON(); 
 expect(tree).toMatchSnapshot();
 })
+
+it("Matches Snapshot", () => {
+    let tree;
+    act(() => {
+      tree = create(
+        <div data-testid="button">
+          <PYButton label="Buscar" typeVariant="primary" fullWidth={false} />
+        </div>
+      );
+    });
+  
+    expect(tree.toJSON()).toMatchSnapshot();
+  });
