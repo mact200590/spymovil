@@ -13,6 +13,7 @@ import { Restaurant } from "../../types";
 import { isUserLogged, logOut } from "../../utils/auth";
 import { INVALID_TOKEN } from "../../utils/constants";
 import SearchPanel from "./SearchPanel";
+import { PYSpinner } from "../../components/PYSpinner";
 
 const Restaurants: React.FC = () => {
   const classes = useStyles();
@@ -23,12 +24,14 @@ const Restaurants: React.FC = () => {
   const {
     data,
     error: errorRestaurants,
+    isLoading,
     clearError: clearRestaurantsErrors
   } = useFetchPedidosYaApiTest(
     {
       pathApi: "/search/restaurants",
       params: {
-        point: `${lat},${lng}`,
+        lat,
+        lng,
         country: "1"
       }
     },
@@ -74,9 +77,11 @@ const Restaurants: React.FC = () => {
       </Grid>
       <Grid item xs={3} container>
         <PYLayoutVerticalList height={height}>
-          {data !== undefined ? (
-            data.map((r: any) => <PYRestaurantRow {...r} />)
-          ) : (
+          {isLoading && <PYSpinner />}
+          {!isLoading &&
+            data !== undefined &&
+            data.map((r: any) => <PYRestaurantRow {...r} />)}
+          {!isLoading && data === undefined && (
             <Typography variant="h4" gutterBottom>
               No hay datos para mostrar
             </Typography>

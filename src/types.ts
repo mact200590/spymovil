@@ -46,7 +46,8 @@ export type Params = {
 
   //restaurant
   country?: string;
-  point?: string;
+  lat?: string;
+  lng?: string;
   max?: string;
   offset?: string;
   fields?: string;
