@@ -11,7 +11,8 @@ export const PYRestaurantRow: React.FC<Restaurant> = ({
   name,
   topCategories,
   deliveryTimeMaxMinutes,
-  link
+  link,
+  rating
 }) => {
   const classes = useStyles();
 
@@ -34,7 +35,7 @@ export const PYRestaurantRow: React.FC<Restaurant> = ({
                 </Typography>
                 <Rating
                   name="half-rating"
-                  value={2.5}
+                  value={rating}
                   precision={0.5}
                   readOnly
                 />

@@ -1,5 +1,7 @@
 export type Restaurant = {
+  id: number;
   name: string;
+  coordinates: string;
   topCategories: string[];
   rating: number;
   pathLogo: string;

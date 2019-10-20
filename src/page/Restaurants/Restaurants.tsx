@@ -37,7 +37,7 @@ const Restaurants: React.FC = () => {
     },
     [lat, lng]
   );
-
+  
   const notifyFetchRestaurantError = (error: any) => {
     notify(
       "Se ha producido un error consultando los restaurantes, póngase en contacto con el proveedor del servicio",
@@ -97,7 +97,7 @@ const Restaurants: React.FC = () => {
           <SearchPanel latIni={lat} lngIni={lng} onSearch={onSearch}/>
         </Grid>
         <Grid item xs={12} container>
-          <PYMap lat={lat} lng={lng} onClick={onClickMap} />
+          <PYMap lat={lat} lng={lng} onClick={onClickMap} dataMarkers={data}/>
         </Grid>
       </Grid>
     </Grid>
@@ -111,12 +111,3 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default Restaurants;
-
-const restaurantMock: Restaurant = {
-  name: "Va como pina",
-  deliveryTimeMaxMinutes: 60,
-  link: "http://www.pedidosya.com.uy/restaurantes/montevideo/<link>-menu",
-  pathLogo: "pathlog",
-  rating: 3.4,
-  topCategories: ["jama", "baile", "cosa gorda"]
-};
