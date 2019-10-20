@@ -1,11 +1,7 @@
 {
   "name": "pedidos-ya-test",
   "version": "0.1.0",
-  "private": true,
-   "engines": {
-    "yarn": "1.17.3",
-    "node": "12.12.0"
-  },
+  "private": true, 
   "dependencies": {
     "@material-ui/core": "^4.5.0",
     "@material-ui/icons": "^4.4.3",
