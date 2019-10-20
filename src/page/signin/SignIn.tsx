@@ -83,7 +83,7 @@ export default function SignIn() {
 
   const notifyAppError = (error: any) => {
     notify(
-      "Se a producido un error registrando su app, póngase en contacto con el proveedor del servicio",
+      "Se ha producido un error registrando su app, póngase en contacto con el proveedor del servicio",
       { key: error.code, variant: "error", preventDuplicate: true }
     );
     clearErrorApp();

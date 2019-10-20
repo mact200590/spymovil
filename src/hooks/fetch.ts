@@ -13,7 +13,7 @@ export const useFetchPedidosYaApiTest = (
   },
   depends: any[]
 ) => {
-  const [data, setData] = useState(undefined);
+  const [data, setData] = useState<any>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useErrorToShow(undefined);
   const { url, error: errorParams } = useGenerateApiUrl({ pathApi, params });
@@ -92,7 +92,7 @@ const useGenerateApiUrl = ({
 };
 
 export const useFetchPedidosYaApiTestLazy = () => {
-  const [data, setData] = useState(undefined);
+  const [data, setData] = useState<any>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useErrorToShow(undefined);
   const [{ params, pathApi, count }, setArgs] = useState<{
