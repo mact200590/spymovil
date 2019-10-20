@@ -106,7 +106,7 @@ const Restaurants: React.FC = () => {
 
 const useStyles = makeStyles(theme => ({
   searchPanel: {
-    minHeight: 90
+    minHeight: 70
   }
 }));
 

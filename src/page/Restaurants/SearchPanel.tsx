@@ -28,17 +28,22 @@ const SearchPanel: React.FC<Props> = ({latIni, lngIni, onSearch}) => {
     },
     onSubmit: (values: Coordinates, bag: any) => {
       onSearch(values.lat, values.lng);
-    },
+    },  
   });
   const { getFieldProps, handleSubmit, errors, touched, resetForm,  } = useFormik(config);
   useEffect(()=>{
+    resetForm( {
+        lat: latIni,
+        lng: lngIni
+      }
+    )
   },[latIni, lngIni])
   const [lat, metadataLat] = getFieldProps("lat", "text");
   const [lng, metadataLng] = getFieldProps("lng", "text");
   useEffect(()=>{
   },[latIni, lngIni])
   return (
-    <form onSubmit={handleSubmit} style={{marginTop: latIni > lngIni ? 1 : 2}}>
+    <form onSubmit={handleSubmit} >
       <Grid
         className={classes.form}
         container
@@ -97,12 +102,14 @@ const useStyles = makeStyles(theme => ({
     minWidth: 150
   },
   spacerItems: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(1)
   },
   form: {
     width: "100%",
     alignItems: "center",
-    margin: theme.spacing(2)
+    marginRight: theme.spacing(2),
+    marginLeft: theme.spacing(2),
+    marginBottom: theme.spacing(2)
   }
 }));
 

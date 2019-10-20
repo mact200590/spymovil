@@ -30,7 +30,6 @@ export const PYRestaurantRow: React.FC<Restaurant> = ({
                   {name}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  {/* Categorías: {topCategories.join(", ")} */}
                   Categorías: {topCategories}
                 </Typography>
                 <Rating
@@ -62,6 +61,6 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(2),
-    margin: "auto",
+    margin: "10px",
   }
 }));
