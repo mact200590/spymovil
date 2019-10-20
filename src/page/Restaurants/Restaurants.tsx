@@ -1,21 +1,18 @@
 import { Grid, makeStyles, Typography } from "@material-ui/core";
-import React, { useMemo, useEffect, useState } from "react";
+import { useSnackbar } from "notistack";
+import React, { useState } from "react";
+import { Redirect } from "react-router";
+import useDimensions from "react-use-dimensions";
+import { Header } from "../../components/Header";
 import { PYLayoutVerticalList } from "../../components/layout/PYLayoutVerticalList";
 import { PYMap } from "../../components/PYMap";
 import { PYRestaurantRow } from "../../components/PYRestaurantRow";
+import { useFetchPedidosYaApiTest } from "../../hooks/fetch";
 import { usePosition } from "../../hooks/map";
 import { Restaurant } from "../../types";
-import SearchPanel from "./SearchPanel";
-import { Header } from "../../components/Header";
-import { Redirect } from "react-router";
 import { isUserLogged, logOut } from "../../utils/auth";
-import {
-  useFetchPedidosYaApiTestLazy,
-  useFetchPedidosYaApiTest
-} from "../../hooks/fetch";
-import { useSnackbar } from "notistack";
-import useDimensions from "react-use-dimensions";
 import { INVALID_TOKEN } from "../../utils/constants";
+import SearchPanel from "./SearchPanel";
 
 const Restaurants: React.FC = () => {
   const classes = useStyles();
@@ -56,7 +53,7 @@ const Restaurants: React.FC = () => {
     return <Redirect to={"/"} />;
   }
 
-  if (errorRestaurants && errorRestaurants.code === INVALID_TOKEN) {
+  if (errorRestaurants) {
     if (errorRestaurants.code === INVALID_TOKEN) {
       logOut();
       setUserLogger(false);
