@@ -29,7 +29,8 @@ export const PYRestaurantRow: React.FC<Restaurant> = ({
                   {name}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  Categorías: {topCategories.join(", ")}
+                  {/* Categorías: {topCategories.join(", ")} */}
+                  Categorías: {topCategories}
                 </Typography>
                 <Rating
                   name="half-rating"

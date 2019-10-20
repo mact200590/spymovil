@@ -1,12 +1,19 @@
-import { Grid, makeStyles } from "@material-ui/core";
+import { Grid, makeStyles, Paper, List } from "@material-ui/core";
 import React from "react";
 
-export const PYLayoutVerticalList: React.FC = ({ children }) => {
+type Props = {
+  height: number
+};
+
+export const PYLayoutVerticalList: React.FC<Props> = ({ children, height }) => {
   const classes = useStyles();
   return (
-    <Grid className={classes.root} container direction="column">
-      {children}
-    </Grid>
+    <Paper
+      className={classes.root}
+      style={{  minHeight: 600, height, overflow: "auto" }}
+    >
+      <List className={classes.root}>{children}</List>
+    </Paper>
   );
 };
 
