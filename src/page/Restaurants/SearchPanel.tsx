@@ -9,9 +9,10 @@ import { Coordinates } from "../../types";
 type Props = {
   latIni: string;
   lngIni: string;
+  onSearch: (lat: string, lng: string) => void | undefined;
 };
 
-const SearchPanel: React.FC<Props> = ({latIni, lngIni}) => {
+const SearchPanel: React.FC<Props> = ({latIni, lngIni, onSearch}) => {
   const classes = useStyles();
   const [config, setConfig] = useState<any>({
     enableReinitialize: true,
@@ -26,6 +27,7 @@ const SearchPanel: React.FC<Props> = ({latIni, lngIni}) => {
       return err;
     },
     onSubmit: (values: Coordinates, bag: any) => {
+      onSearch(values.lat, values.lng);
     },
   });
   const { getFieldProps, handleSubmit, errors, touched, resetForm,  } = useFormik(config);

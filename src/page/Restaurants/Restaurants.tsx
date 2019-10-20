@@ -52,6 +52,10 @@ const Restaurants: React.FC = () => {
     setPosition({ lat: latLng.lat(), lng: latLng.lng() });
   };
 
+  const onSearch = (lat: string, lng: string) => {
+    setPosition({ lat, lng });
+  };
+
   if (!userLogged) {
     return <Redirect to={"/"} />;
   }
@@ -79,9 +83,9 @@ const Restaurants: React.FC = () => {
         <PYLayoutVerticalList height={height}>
           {isLoading && <PYSpinner />}
           {!isLoading &&
-            data !== undefined &&
+            data !== undefined && data.length > 0 &&
             data.map((r: any) => <PYRestaurantRow {...r} />)}
-          {!isLoading && data === undefined && (
+          {!isLoading && (data === undefined || data.length === 0) && (
             <Typography variant="h4" gutterBottom>
               No hay datos para mostrar
             </Typography>
@@ -90,7 +94,7 @@ const Restaurants: React.FC = () => {
       </Grid>
       <Grid ref={ref} item xs={9} container>
         <Grid container className={classes.searchPanel}>
-          <SearchPanel latIni={lat} lngIni={lng} />
+          <SearchPanel latIni={lat} lngIni={lng} onSearch={onSearch}/>
         </Grid>
         <Grid item xs={12} container>
           <PYMap lat={lat} lng={lng} onClick={onClickMap} />

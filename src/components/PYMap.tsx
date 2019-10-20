@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core";
-import { GoogleMap, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, Data } from "@react-google-maps/api";
 import React from "react";
 import { PYSpinner } from "./PYSpinner";
 
@@ -19,7 +19,7 @@ type Props = {
 export const PYMap: React.FC<Props> = ({ lat, lng, onClick }) => {
   const classes = useStyles();
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyABi3f5wNa83dWgg35I9rx6UbPIFol2TW0" //adria apikey
+    googleMapsApiKey: "AIzaSyABi3f5wNa83dWgg35I9rx6UbPIFol2TW0" 
     // ...otherOptions
   });
   const onLoad = React.useCallback(mapInstance => {
@@ -34,16 +34,10 @@ export const PYMap: React.FC<Props> = ({ lat, lng, onClick }) => {
     );
   }
   const center = {
-    lat,
-    lng
+      lat: parseFloat(lat),
+      lng: parseFloat(lng)
   };
 
-  const dataOptions = {
-    controlPosition: "TOP_LEFT",
-    controls: ["Point"],
-    drawingMode: "Point", //  "LineString" or "Polygon".
-    featureFactory: (geometry: any) => {}
-  };
   return (
     <GoogleMap
       mapContainerClassName={classes.root}
@@ -52,12 +46,8 @@ export const PYMap: React.FC<Props> = ({ lat, lng, onClick }) => {
       center={center}
       options={options}
       onLoad={onLoad}
-      onClick={onClick}
+      onClick={onClick} 
     >
-      {/* <Data  options={dataOptions} /> */}
-      {
-        // ...Your map components
-      }
     </GoogleMap>
   );
 };
