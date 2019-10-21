@@ -1,16 +1,19 @@
+import { CssBaseline } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/styles";
+import { SnackbarProvider } from "notistack";
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
+import "./index.css";
 import * as serviceWorker from "./serviceWorker";
-import { ThemeProvider } from "@material-ui/styles";
-import { CssBaseline } from "@material-ui/core";
 import theme from "./style/theme";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <App />
+    <SnackbarProvider maxSnack={3}>
+      <CssBaseline />
+      <App />
+    </SnackbarProvider>
   </ThemeProvider>,
   document.getElementById("root")
 );

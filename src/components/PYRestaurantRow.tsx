@@ -11,7 +11,8 @@ export const PYRestaurantRow: React.FC<Restaurant> = ({
   name,
   topCategories,
   deliveryTimeMaxMinutes,
-  link
+  link,
+  rating
 }) => {
   const classes = useStyles();
 
@@ -29,11 +30,11 @@ export const PYRestaurantRow: React.FC<Restaurant> = ({
                   {name}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  Categorías: {topCategories.join(", ")}
+                  Categorías: {topCategories}
                 </Typography>
                 <Rating
                   name="half-rating"
-                  value={2.5}
+                  value={rating}
                   precision={0.5}
                   readOnly
                 />
@@ -60,6 +61,6 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(2),
-    margin: "auto",
+    margin: "10px",
   }
 }));

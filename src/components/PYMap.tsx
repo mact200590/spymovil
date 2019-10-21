@@ -1,6 +1,14 @@
-import { makeStyles } from "@material-ui/core";
-import { GoogleMap, useLoadScript } from "@react-google-maps/api";
-import React from "react";
+import { makeStyles, Typography } from "@material-ui/core";
+import Rating from "@material-ui/lab/Rating";
+import {
+  GoogleMap,
+  InfoWindow,
+  Marker,
+  useLoadScript
+} from "@react-google-maps/api";
+import React, { useState } from "react";
+import { Restaurant } from "../types";
+import { getPoint } from "../utils/helper";
 import { PYSpinner } from "./PYSpinner";
 
 const options = {
@@ -14,12 +22,16 @@ type Props = {
   lat: string;
   lng: string;
   onClick: (args: any) => void | undefined;
+  dataMarkers: Restaurant[];
 };
 
-export const PYMap: React.FC<Props> = ({ lat, lng, onClick }) => {
+export const PYMap: React.FC<Props> = ({ lat, lng, onClick, dataMarkers }) => {
   const classes = useStyles();
+  const [selectedMarker, setSelectedMarker] = useState<Restaurant | undefined>(
+    undefined
+  );
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyABi3f5wNa83dWgg35I9rx6UbPIFol2TW0" //adria apikey
+    googleMapsApiKey: "AIzaSyABi3f5wNa83dWgg35I9rx6UbPIFol2TW0"
     // ...otherOptions
   });
   const onLoad = React.useCallback(mapInstance => {
@@ -34,16 +46,10 @@ export const PYMap: React.FC<Props> = ({ lat, lng, onClick }) => {
     );
   }
   const center = {
-    lat,
-    lng
+    lat: parseFloat(lat),
+    lng: parseFloat(lng)
   };
 
-  const dataOptions = {
-    controlPosition: "TOP_LEFT",
-    controls: ["Point"],
-    drawingMode: "Point", //  "LineString" or "Polygon".
-    featureFactory: (geometry: any) => {}
-  };
   return (
     <GoogleMap
       mapContainerClassName={classes.root}
@@ -54,10 +60,48 @@ export const PYMap: React.FC<Props> = ({ lat, lng, onClick }) => {
       onLoad={onLoad}
       onClick={onClick}
     >
-      {/* <Data  options={dataOptions} /> */}
-      {
-        // ...Your map components
-      }
+      {dataMarkers &&
+        dataMarkers.map(marker => {
+          const latLng = getPoint(marker.coordinates);
+          if (!latLng) return null;
+          return (
+            <Marker
+              key={marker.id}
+              onClick={e => {
+                setSelectedMarker(marker);
+              }}
+              position={{
+                lat: parseFloat(latLng.lat),
+                lng: parseFloat(latLng.lng)
+              }}
+            >
+              {selectedMarker && selectedMarker.id === marker.id && (
+                <InfoWindow
+                  position={{
+                    lat: parseFloat(latLng.lat),
+                    lng: parseFloat(latLng.lng)
+                  }}
+                  onCloseClick={() => {
+                    setSelectedMarker(undefined);
+                  }}
+                >
+                  <div>
+                    <Typography gutterBottom variant="subtitle1">
+                      {marker.name}
+                    </Typography>
+                    <Rating
+                      name="half-rating"
+                      value={marker.rating}
+                      precision={0.5}
+                      readOnly
+                    />
+                  </div>
+                </InfoWindow>
+              )}
+              }
+            </Marker>
+          );
+        })}
     </GoogleMap>
   );
 };

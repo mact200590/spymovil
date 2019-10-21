@@ -1,5 +1,7 @@
 export type Restaurant = {
+  id: number;
   name: string;
+  coordinates: string;
   topCategories: string[];
   rating: number;
   pathLogo: string;
@@ -46,12 +48,15 @@ export type Params = {
 
   //restaurant
   country?: string;
-  point?: string;
+  lat?: string;
+  lng?: string;
   max?: string;
   offset?: string;
   fields?: string;
 };
 
-export type Auth = { access_token: string };
+export type TokenType = "app" | "user";
+export type Auth = { access_token: string, tokenType: string };
 
-export const UNDEFINE_PARAMS_MESSAGE_ERROR = "Faltan parámetros en su petición";
+
+export const UNDEFINED_PARAMS_MESSAGE_ERROR = "Faltan parámetros en su petición";

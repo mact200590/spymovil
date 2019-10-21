@@ -3,7 +3,7 @@ import { Coordinates } from "../types";
 
 export const usePosition = () => {
   const [position, setPosition] = useState<Coordinates>({
-    lat: "-13.9142463",
+    lat: "-34.9142463",
     lng: "-56.1767327"
   });
   const [error, setError] = useState("");
