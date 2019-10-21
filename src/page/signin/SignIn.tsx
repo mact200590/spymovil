@@ -67,8 +67,8 @@ export default function SignIn() {
       registerApp({
         pathApi: "/tokens/app",
         params: {
-          clientId: "test",
-          clientSecret: "PeY@@Tr1v1@943"
+          clientId: process.env.REACT_APP_CLIENT_ID,
+          clientSecret: process.env.REACT_APP_CLIENT_SECRET
         }
       });
   }, []);

@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Params, PathApi, UNDEFINED_PARAMS_MESSAGE_ERROR } from "../types";
 import { getHeaders } from "../utils/auth";
-import { API_URL } from "../utils/constants";
 
 export const useFetchPedidosYaApiTest = (
   {
