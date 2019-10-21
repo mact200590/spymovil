@@ -1,16 +1,14 @@
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import MenuIcon from "@material-ui/icons/Menu";
 import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
-import { useFetchPedidosYaApiTest } from "../hooks/fetch";
-import { PYSpinner } from "./PYSpinner";
+import React, { useState } from "react";
 import { Redirect } from "react-router";
+import { useFetchPedidosYaApiTest } from "../hooks/fetch";
 import { isUserLogged, logOut } from "../utils/auth";
+import { PYSpinner } from "./PYSpinner";
 
 export const Header = () => {
   const classes = useStyles();
@@ -52,17 +50,14 @@ export const Header = () => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h6" className={classes.title}>
             {name(data)}
           </Typography>
+          {data && data.adminId && (
+            <Button color="inherit" onClick={() => {}}>
+              Administrador
+            </Button>
+          )}
           <Button
             color="inherit"
             onClick={() => {

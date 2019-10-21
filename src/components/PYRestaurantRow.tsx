@@ -5,23 +5,22 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Rating from "@material-ui/lab/Rating";
 import React from "react";
-import logo from "../asserts/logo.png";
 import { Restaurant } from "../types";
 export const PYRestaurantRow: React.FC<Restaurant> = ({
   name,
   topCategories,
   deliveryTimeMaxMinutes,
   link,
-  rating
+  rating,
+  pathLogo
 }) => {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <Grid container spacing={2}>
           <Grid item>
-            <Avatar src={logo}></Avatar>
+            <Avatar src={pathLogo}></Avatar>
           </Grid>
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
