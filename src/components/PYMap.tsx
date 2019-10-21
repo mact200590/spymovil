@@ -31,7 +31,7 @@ export const PYMap: React.FC<Props> = ({ lat, lng, onClick, dataMarkers }) => {
     undefined
   );
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyABi3f5wNa83dWgg35I9rx6UbPIFol2TW0"
+    googleMapsApiKey: process.env.GOOGLE_API_KEY
     // ...otherOptions
   });
   const onLoad = React.useCallback(mapInstance => {
