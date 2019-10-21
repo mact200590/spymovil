@@ -73,7 +73,7 @@ const useGenerateApiUrl = ({
 }) => {
   const [error, setError] = useState("");
   const url = useMemo(() => {
-    let url = `${process.env.API_URL}${pathApi}`;
+    let url = `${process.env.REACT_APP_API_URL}${pathApi}`;
     if (!params) return url;
     const keys = Object.keys(params);
     if (keys.length > 0) {
