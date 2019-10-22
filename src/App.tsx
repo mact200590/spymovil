@@ -1,13 +1,18 @@
 import React from "react";
 import "./App.css";
-import Routes from "./page/routes/Routes";
-import { routesInfo } from "./page/routes/routesInfo";
+import { ThemeProvider } from "@material-ui/styles";
+import { SnackbarProvider } from "notistack";
+import { CssBaseline } from "@material-ui/core";
+import theme from "./style/theme";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <Routes routes={routesInfo} />
-    </div>
+    <ThemeProvider  theme={theme}>
+    <SnackbarProvider maxSnack={3}>
+      <CssBaseline />
+      <App />
+    </SnackbarProvider>
+  </ThemeProvider>
   );
 };
 
