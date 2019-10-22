@@ -26,3 +26,15 @@ Debe ponerse en contacto con el admin para más información
 `yarn dev`
 
 este último comando inicia tu proyecto corriendo localmente
+
+
+
+# Stack
+
+
+Se usó react por ser muy potente para el desarrollo de interfaz de usuario y no atarnos a ninguna librería en específico, se puede ser libre de utilizar las que se necesite según las necesidades.
+
+ Como sistema de diseño se usó material ui, el cual tiene una forma correcta de vincular patrones de diseño en una aplicación, además de ciertos componentes personalizables y reutilizables
+
+No fué necesario usar ninguna tecnología para mantener el estado global, el proyecto no lo ameritaba, pero se queda abierto para poder usar redux por ejemplo.
+Usamos hooks, es una enorme ventaja en react, podemos compartir lógica de estado y así hacer nuestro código más entendible.
