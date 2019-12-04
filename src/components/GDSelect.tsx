@@ -5,7 +5,7 @@ import Select, { SelectProps } from "@material-ui/core/Select";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import React, { useMemo } from "react";
 
-type SelectType = "primary" | "secondary";
+export type SelectType = "primary" | "secondary";
 
 type Props = {
   label?: string;
