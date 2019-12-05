@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import React, { useState } from "react";
 import GDAddValues from "../components/GDAddValues";
 import { GDButton } from "../components/GDButton";
-import GDPlayer from "../components/GDPlayer";
+import GDSelectPlayer from "../components/GDSelectPlayer";
 import GDText from "../components/GDText";
 
 const GDStartGame = () => {
@@ -15,14 +15,14 @@ const GDStartGame = () => {
       <GDText title={"Enter Player's Name "} />
       <div className={classes.containerForm}>
         <div className={classes.containerPlayer}>
-          <GDPlayer
-            namePlayer={"Payer 1"}
+          <GDSelectPlayer
+            label={"Payer 1"}
             onChange={setValuePlayer1}
             options={["Scissors", "Paper", "Rock"]}
             typeVariant={"primary"}
           />
-          <GDPlayer
-            namePlayer={"Payer 2"}
+          <GDSelectPlayer
+            label={"Payer 2"}
             onChange={setValuePlayer2}
             options={["Scissors", "Paper", "Rock"]}
             typeVariant={"primary"}
