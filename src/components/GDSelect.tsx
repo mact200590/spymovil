@@ -15,7 +15,7 @@ type Props = {
   onChange?: ((value: string) => void) | undefined;
   styleContainer?: React.CSSProperties | undefined;
 } & SelectProps;
-
+     
 const GDSelect = ({
   label,
   typeVariant,
