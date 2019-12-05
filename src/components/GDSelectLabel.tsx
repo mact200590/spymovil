@@ -13,7 +13,7 @@ interface Props {
   onChange?: ((value: string) => void) | undefined;
 }
 
-const GDSelectPlayer = ({
+const GDSelectLabel = ({
   label: namePlayer,
   typeVariant,
   options,
@@ -35,7 +35,7 @@ const GDSelectPlayer = ({
   );
 };
 
-export default GDSelectPlayer;
+export default GDSelectLabel;
 
 const useStyles = makeStyles(theme => ({
   container: {

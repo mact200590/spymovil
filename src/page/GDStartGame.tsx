@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import React, { useState } from "react";
 import GDAddValues from "../components/GDAddValues";
 import { GDButton } from "../components/GDButton";
-import GDSelectPlayer from "../components/GDSelectPlayer";
+import GDSelectLabel from "../components/GDSelectLabel";
 
 const GDStartGame = () => {
   const classes = useStyles();
@@ -22,13 +22,13 @@ const GDStartGame = () => {
       </Typography>
       <div className={classes.containerForm}>
         <div className={classes.containerPlayer}>
-          <GDSelectPlayer
+          <GDSelectLabel
             label={"Payer 1"}
             onChange={setValuePlayer1}
             options={["Scissors", "Paper", "Rock"]}
             typeVariant={"primary"}
           />
-          <GDSelectPlayer
+          <GDSelectLabel
             label={"Payer 2"}
             onChange={setValuePlayer2}
             options={["Scissors", "Paper", "Rock"]}
