@@ -16,7 +16,6 @@ const GDText = ({ title, titleSubtitle }: Props) => {
     )
 }
 
-
 export default GDText;
 
 const useStyles = makeStyles(theme => ({
@@ -27,10 +26,10 @@ const useStyles = makeStyles(theme => ({
     title: {
         fontFamily: "Times New Roman",
         fontSize: 40,
-        marginBottom:5
     },
     titleSubtitle: {
         fontFamily: "Times New Roman",
-        fontSize: 20
+        fontSize: 20,
+        paddingLeft: 20,
     }
 }));
