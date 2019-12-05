@@ -1,5 +1,5 @@
 import React from 'react'
-import GDScore from './GDScore'
+import GDScoreBoard from './GDScoreBoard'
 import GDRoundView from './GDRoudView'
 import { makeStyles } from '@material-ui/styles'
 
@@ -20,7 +20,7 @@ const GDUnionRoundScoreView = ({ options, numberRound, labelButton, activePlayer
                 <GDRoundView options={options} numberRound={numberRound} labelButton={labelButton} activePlayer={activePlayer} />
             </div>
             <div className={classes.score}>
-                <GDScore tittle={tittleBoard} scores={[{ score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }]} />
+                <GDScoreBoard tittle={"Score Board"} scores={[{ score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }]} />
             </div>
         </div>
     )
