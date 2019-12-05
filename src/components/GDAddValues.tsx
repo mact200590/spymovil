@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/styles';
-import { PYInput } from './PYInput'
-import { PYButton } from './PYButton';
+import { GDInput } from './GDInput'
+import {GDButton }  from './GDButton';
 
 
 interface Props {
@@ -19,7 +19,7 @@ const GDAddValues = ({ textPlaceHolder, onClick, labelButton }: Props) => {
     }
     return (
         <div className={classes.container}>
-            <PYInput
+            <GDInput
                 typeVariant="primary"
                 margin="normal"
                 fullWidth={false}
@@ -29,7 +29,7 @@ const GDAddValues = ({ textPlaceHolder, onClick, labelButton }: Props) => {
                 onChange={handleOnchange}
 
             />
-            <PYButton className={classes.button}
+            <GDButton className={classes.button}
                 label={labelButton}
                 typeVariant="primary"
                 fullWidth={false}
