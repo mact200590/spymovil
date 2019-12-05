@@ -4,21 +4,23 @@ import GDRoundView from './GDRoudView'
 import { makeStyles } from '@material-ui/styles'
 
 interface Props {
-
+    options: string[]
+    numberRound: number
+    labelButton: string
+    activePlayer: string
+    tittleBoard: string
+    scores: { score: number, winner: string }[]
 }
 
-
-
-
-const GDUnionRoundScoreView = () => {
+const GDUnionRoundScoreView = ({ options, numberRound, labelButton, activePlayer, tittleBoard }: Props) => {
     const classes = useStyles();
     return (
         <div className={classes.container}>
             <div>
-                <GDRoundView options={['Scissors', 'Rock', 'Paper']} numberRound={10} labelButton={'OK'} activePlayer="ALEJANDRO" />
+                <GDRoundView options={options} numberRound={numberRound} labelButton={labelButton} activePlayer={activePlayer} />
             </div>
             <div className={classes.score}>
-                <GDScore tittle={'Score'} scores={[{ score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }]} />
+                <GDScore tittle={tittleBoard} scores={[{ score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }, { score: 1, winner: "Alejandro" }]} />
             </div>
         </div>
     )
@@ -31,12 +33,9 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         flexDirection: "row",
         paddingLeft: 10,
-        justifyContent:'center',
-        marginTop:30
-        //backgroundColor: 'red'
+        justifyContent: 'center',
     },
     score: {
-        // backgroundColor:'green',
         paddingLeft: 90
     }
 }));
