@@ -1,9 +1,9 @@
+import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState } from "react";
 import GDAddValues from "../components/GDAddValues";
 import { GDButton } from "../components/GDButton";
 import GDSelectPlayer from "../components/GDSelectPlayer";
-import GDText from "../components/GDText";
 
 const GDStartGame = () => {
   const classes = useStyles();
@@ -12,7 +12,14 @@ const GDStartGame = () => {
 
   return (
     <div className={classes.container}>
-      <GDText title={"Enter Player's Name "} />
+      <Typography
+        className={classes.title}
+        variant="h3"
+        color={"primary"}
+        align="center"
+      >
+        {"Enter Player's Name "}
+      </Typography>
       <div className={classes.containerForm}>
         <div className={classes.containerPlayer}>
           <GDSelectPlayer
@@ -56,7 +63,8 @@ const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    marginTop: theme.spacing(5)
   },
   containerForm: {
     display: "flex",
@@ -64,5 +72,8 @@ const useStyles = makeStyles(theme => ({
   },
   containerPlayer: {
     marginRight: theme.spacing(6)
+  },
+  title: {
+    marginBottom: theme.spacing(10)
   }
 }));
