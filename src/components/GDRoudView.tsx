@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import GDText from './GDText';
 import GDSelect from './GDSelect';
 import { makeStyles } from '@material-ui/styles';
-import { PYButton } from './PYButton';
+import { GDButton } from './GDButton';
 
 interface Props {
     numberRound: number
@@ -23,7 +23,7 @@ const GDRoundView = ({ numberRound, activePlayer, options, onClick, labelButton 
                 <p>Select Move</p>
                 <GDSelect typeVariant={"primary"} options={options} onChange={setValue as any} />
             </div>
-            <PYButton className={classes.button}
+            <GDButton className={classes.button}
                 label={labelButton}
                 typeVariant="primary"
                 fullWidth={false}
