@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import GDText from './GDText'
 import GDPlayer from './GDPlayer'
-import { PYButton } from './PYButton'
+import { GDButton } from './GDButton'
 import { makeStyles } from "@material-ui/core/styles";
 import GDAddValues from './GDAddValues';
 
@@ -22,7 +22,7 @@ const GPPlayerView = ({ onClick }: Props) => {
           <GDPlayer namePlayer={'Payer 1'} onChange={setValuePlayer1} options={['Scissors', 'Paper', 'Rock']} typeVariant={'primary'} />
           <GDPlayer namePlayer={'Payer 2'} onChange={setValuePlayer2} options={['Scissors', 'Paper', 'Rock']} typeVariant={'primary'} />
 
-          <PYButton className={classes.mainButton}
+          <GDButton className={classes.mainButton}
             label="Start"
             typeVariant="primary"
             fullWidth={true}
