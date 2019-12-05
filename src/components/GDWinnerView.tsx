@@ -1,5 +1,5 @@
 import React from 'react'
-import { PYButton } from './PYButton'
+import { GDButton } from './GDButton'
 import { makeStyles } from '@material-ui/styles'
 import GDText from './GDText'
 
@@ -14,7 +14,7 @@ const GDWinnerView = ({ tittleResult, labelButton }: Props) => {
         <div className={classes.column}>
             <GDText title={'We have a WINNER'} titleSubtitle={`${tittleResult}` + "is the new EMPEROR"} />
             <div className={classes.button}>
-                <PYButton
+                <GDButton
                     label={labelButton}
                     typeVariant="primary"
                     fullWidth={true}
