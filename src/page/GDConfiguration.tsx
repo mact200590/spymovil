@@ -3,6 +3,7 @@ import GDAddValues from '../components/GDAddValues'
 import { makeStyles } from '@material-ui/core/styles';
 import GDRules from '../components/GDRules';
 import { Typography, Theme } from '@material-ui/core';
+import GDListRules from '../components/GDListRules';
 
 
 interface Props {
@@ -15,6 +16,7 @@ export type Rule = { move: string, kills: string };
 const GDConfiguration = ({ addRule, onClick }: Props) => {
     const [rules, setRules] = useState<Rule[]>([])
     const classes = useStyles();
+    const arr = [{move: "paper", kills: "rock"},{move: "paper", kills: "rock"},{move: "paper", kills: "rock"}]
     //TODO: Here do something and tell to your father 
     onClick = (value) => {
         console.log(`Insert this value in the BD and tell to your DAD ${value}`)
@@ -36,9 +38,7 @@ const GDConfiguration = ({ addRule, onClick }: Props) => {
                         Add Rule
                     </Typography>
                     <GDRules labelButton={'ADD'} typeVariant={'primary'} onClick={addRule} textPlaceHolder={'Add Move'} />
-                    {rules.map((item) => (
-                        <p>{item.kills}{item.move}</p>
-                    ))}
+                    <GDListRules rules={rules}/>
                 </div>
                 <div className={classes.column}>
                     <Typography variant="h4" color={"textPrimary"} align="center">

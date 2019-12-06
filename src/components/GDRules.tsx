@@ -1,15 +1,17 @@
 import { makeStyles } from "@material-ui/styles";
 import React, { useState } from "react";
 import { GDButton } from "./GDButton";
-import { GDInput } from "./GDInput";
+import GDSelect from "./GDSelect";
+import Size from "../style/size";
 
 export type GDAddValuesType = "primary" | "secondary";
+
+
 interface Props {
     textPlaceHolder: string;
     labelButton: string;
-    onClick?: (move: string, skills:string ) => void;
+    onClick?: (move: string, skills: string) => void;
     typeVariant?: GDAddValuesType;
-
 }
 
 const GDRules = ({
@@ -19,37 +21,26 @@ const GDRules = ({
     typeVariant = "primary"
 }: Props) => {
     const classes = useStyles();
-    const [move, setMove] = useState("");
-    const [kills, setKills] = useState("");
-
-    const handleOnchangeMove = (e: any) => {
-        setMove(e.target.value);
-    };
-
-
-    const handleOnchangeKills = (e: any) => {
-        setKills(e.target.value);
-    };
+    const [move, setMove] = useState("Scissors");
+    const [kills, setKills] = useState("Scissors");
+    
+    const arr=['Scissor','Rock','Paper']
 
     return (
         <div className={classes.container}>
-            <GDInput
+            <GDSelect
+                label={"Add move"}
                 typeVariant={typeVariant}
-                margin="normal"
-                fullWidth={false}
-                label={textPlaceHolder}
-                autoFocus
-                value={move}
-                onChange={handleOnchangeMove}
+                options={arr}  //data && data.movements ? data.movements.map(move => move.name) : []
+                onChange={setMove as any}
+                styleContainer={{ minWidth: Size.box.base }}
             />
-            <GDInput
+            <GDSelect
+                label={'Add kills'}
                 typeVariant={typeVariant}
-                margin="normal"
-                fullWidth={false}
-                label={textPlaceHolder}
-                autoFocus
-                value={kills}
-                onChange={handleOnchangeKills}
+                options={arr}
+                onChange={setKills as any}
+                styleContainer={{ minWidth: Size.box.base }}
             />
 
             <GDButton
@@ -59,11 +50,8 @@ const GDRules = ({
                 fullWidth={false}
                 type="submit"
                 onClick={() => {
-                    onClick && onClick(move,kills);
-                    console.log(`Print this ${move} `)
-                    console.log(`Print this ${kills} `)
-                    setMove("");
-                    setKills("");
+                    onClick && onClick(move, kills);
+                
                 }}
             />
         </div>
