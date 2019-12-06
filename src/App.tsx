@@ -1,19 +1,24 @@
+import { makeStyles } from "@material-ui/styles";
 import React from "react";
 import "./App.css";
-import { ThemeProvider } from "@material-ui/styles";
-import { SnackbarProvider } from "notistack";
-import { CssBaseline } from "@material-ui/core";
-import theme from "./style/theme";
+import GDStartGame from "./page/GDStartGame";
 
 const App: React.FC = () => {
+  const classes = useStyles();
   return (
-    <ThemeProvider  theme={theme}>
-    <SnackbarProvider maxSnack={3}>
-      <CssBaseline />
-      <App />
-    </SnackbarProvider>
-  </ThemeProvider>
+    <div className={classes.container}>
+      <GDStartGame />
+    </div>
   );
 };
 
 export default App;
+
+const useStyles = makeStyles(theme => ({
+  container: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%"
+  }
+}));

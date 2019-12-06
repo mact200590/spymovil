@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import GDScoreBoard from "./GDScoreBoard";
+import React, { useState, useCallback } from "react";
+import GDScoreBoard, { Score } from "./GDScoreBoard";
 import GDRoundBoard from "./GDRoundBoard";
 import { makeStyles } from "@material-ui/styles";
 
@@ -9,6 +9,28 @@ interface Props {
 
 const GDUnionRoundScoreView = ({ players }: Props) => {
   const [numberRoundActive, setNumberRoundActive] = useState(1);
+  const [scores, setScores] = useState<Score[]>([]);
+  const onResult = useCallback(
+    (winner: string) => {
+      setScores([
+        ...scores,
+        {
+          score: numberRoundActive,
+          winner
+        }
+      ]);
+      //TODO: calc who is the winner
+      if (numberRoundActive < 3) {
+        setNumberRoundActive(numberRoundActive + 1);
+      } else {
+        //TODO: show success view
+        setNumberRoundActive(1);
+        setScores([]);
+      }
+    },
+    [numberRoundActive]
+  );
+console.log({numberRoundActive, scores})
   const classes = useStyles();
   return (
     <div className={classes.container}>
@@ -16,23 +38,11 @@ const GDUnionRoundScoreView = ({ players }: Props) => {
         <GDRoundBoard
           numberRound={numberRoundActive}
           players={players}
-          onResult={winner => {
-            console.log(winner);
-          }}
+          onResult={onResult}
         />
       </div>
       <div className={classes.score}>
-        <GDScoreBoard
-          tittle={"Score Board"}
-          scores={[
-            { score: 1, winner: "Alejandro" },
-            { score: 1, winner: "Alejandro" },
-            { score: 1, winner: "Alejandro" },
-            { score: 1, winner: "Alejandro" },
-            { score: 1, winner: "Alejandro" },
-            { score: 1, winner: "Alejandro" }
-          ]}
-        />
+        <GDScoreBoard tittle={"Score Board"} scores={scores} />
       </div>
     </div>
   );

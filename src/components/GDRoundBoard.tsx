@@ -41,7 +41,6 @@ const GDRoundBoard = ({ numberRound, players, onResult }: Props) => {
     return indexActive < players.length - 1 ? "next" : "play";
   }, [indexActive, players]);
   useEffect(() => {
-    console.log({ infoMoves });
     setMoveActive("Scissors");
   }, [infoMoves]);
 

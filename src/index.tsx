@@ -1,6 +1,4 @@
-import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
-import { SnackbarProvider } from "notistack";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
@@ -10,10 +8,7 @@ import theme from "./style/theme";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <SnackbarProvider maxSnack={3}>
-      <CssBaseline />
-      <App />
-    </SnackbarProvider>
+    <App />
   </ThemeProvider>,
   document.getElementById("root")
 );
