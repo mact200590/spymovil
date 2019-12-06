@@ -1,13 +1,10 @@
-import React, { useState, useCallback } from "react";
-import GDScoreBoard, { Score } from "../components/GDScoreBoard";
-import GDRoundBoard from "../components/GDRoundBoard";
 import { makeStyles } from "@material-ui/styles";
+import React, { useCallback, useState } from "react";
+import { RouteComponentProps } from "react-router-dom";
+import GDRoundBoard from "../components/GDRoundBoard";
+import GDScoreBoard, { Score } from "../components/GDScoreBoard";
 
-interface Props {
-  players: string[];
-}
-
-const GDBoardGame = ({ players }: Props) => {
+const GDBoardGame = ({ location: { state } }: RouteComponentProps<{}>) => {
   const [numberRoundActive, setNumberRoundActive] = useState(1);
   const [scores, setScores] = useState<Score[]>([]);
   const onResult = useCallback(
@@ -30,14 +27,13 @@ const GDBoardGame = ({ players }: Props) => {
     },
     [numberRoundActive]
   );
-console.log({numberRoundActive, scores})
   const classes = useStyles();
   return (
     <div className={classes.container}>
       <div>
         <GDRoundBoard
           numberRound={numberRoundActive}
-          players={players}
+          players={state && state.players ? state.players : []}
           onResult={onResult}
         />
       </div>
