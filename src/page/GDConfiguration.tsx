@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import GDAddValues from '../components/GDAddValues'
 import { makeStyles } from '@material-ui/styles';
 import GDRules from '../components/GDRules';
@@ -6,11 +6,14 @@ import { Typography, Theme } from '@material-ui/core';
 
 
 interface Props {
-    // addMove?: (value: string) => void | undefined
     addRule?: (move: string, skills: string) => void | undefined
     onClick?: (value: string) => void;
 }
+
+export type Rule = { move: string, kills: string };
+
 const GDConfiguration = ({ addRule, onClick }: Props) => {
+    const [rules, setRules] = useState<Rule[]>([])
     const classes = useStyles();
     //TODO: Here do something and tell to your father 
     onClick = (value) => {
@@ -19,6 +22,7 @@ const GDConfiguration = ({ addRule, onClick }: Props) => {
     //TODO: Here add the rule to the BD and print it
     addRule = (move, skills) => {
         console.log(`Print this and add to BD , also tell to your DAD ${move} ${skills}`)
+        setRules([...rules, { move: move, kills: skills }])
     }
 
     return (
@@ -26,13 +30,15 @@ const GDConfiguration = ({ addRule, onClick }: Props) => {
             <Typography variant="h2" color={"textPrimary"} align="center" className={classes.tittle}>
                 Configuration
             </Typography>
-            {/* <div className={classes.container}> */}
             <div className={classes.row}>
                 <div className={classes.column}>
                     <Typography variant="h4" color={"textPrimary"} align="center">
                         Add Rule
                     </Typography>
                     <GDRules labelButton={'ADD'} typeVariant={'primary'} onClick={addRule} textPlaceHolder={'Add Move'} />
+                    {rules.map((item) => (
+                        <p>{item.kills}{item.move}</p>
+                    ))}
                 </div>
                 <div className={classes.column}>
                     <Typography variant="h4" color={"textPrimary"} align="center">
@@ -59,8 +65,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     column: {
         display: "flex",
         flexDirection: "column",
+        paddingRight: theme.spacing(8)
     },
-    tittle:{
-        paddingBottom:theme.spacing(12)
+    tittle: {
+        paddingBottom: theme.spacing(12)
     }
 }));
