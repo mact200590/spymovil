@@ -1,6 +1,4 @@
 import { RouteComponentProps } from "react-router-dom";
-import Restaurants from "../Restaurants/Restaurants";
-import SignIn from "../signin/SignIn";
 
 export interface Route {
   path: string;
@@ -12,16 +10,16 @@ export interface Route {
 }
 
 export const routesInfo: Route[] = [
-  {
-    exact: true,
-    path: "/",
-    component: SignIn,
-    showMenuItem: false
-  },
-  {
-    exact: true,
-    path: "/restaurants",
-    component: Restaurants,
-    showMenuItem: true
-  }
+  // {
+  //   exact: true,
+  //   path: "/",
+  //   component: SignIn,
+  //   showMenuItem: false
+  // },
+  // {
+  //   exact: true,
+  //   path: "/restaurants",
+  //   component: Restaurants,
+  //   showMenuItem: true
+  // }
 ];

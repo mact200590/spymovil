@@ -1,7 +1,7 @@
 import { CircularProgress, makeStyles } from "@material-ui/core";
 import React from "react";
 
-export const PYSpinner: React.FC = () => {
+export const GDSpinner: React.FC = () => {
   const classes = useStyles();
   return <CircularProgress className={classes.progress} />;
 };
