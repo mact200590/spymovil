@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/styles";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { GDButton } from "./GDButton";
 import GDSelectLabel from "./GDSelectLabel";
+import { useUseGetAllMovementsQuery } from "../types";
+import { GDSpinner } from "./GDSpinner";
 
 interface Props {
   numberRound: number;
@@ -20,6 +22,7 @@ const GDRoundBoard = ({ numberRound, players, onResult }: Props) => {
   const [indexActive, setIndexActive] = useState(0);
   const [moveActive, setMoveActive] = useState("Scissors");
   const [infoMoves, setInfoMoves] = useState<InfoMove[]>([]);
+  const { loading, error, data } = useUseGetAllMovementsQuery();
   const onClick = useCallback(() => {
     setInfoMoves([
       ...infoMoves,
@@ -44,6 +47,12 @@ const GDRoundBoard = ({ numberRound, players, onResult }: Props) => {
     setMoveActive("Scissors");
   }, [infoMoves]);
 
+  if (loading) return <GDSpinner />;
+  if (error) {
+    //TODO: add notification
+    console.log("error", error);
+  }
+
   return (
     <div className={classes.container}>
       <Typography variant="h4" color={"textSecondary"} align="center">
@@ -57,7 +66,9 @@ const GDRoundBoard = ({ numberRound, players, onResult }: Props) => {
         <GDSelectLabel
           label={"Select Move"}
           onChange={setMoveActive}
-          options={["Scissors", "Paper", "Rock"]}
+          options={
+            data && data.movements ? data.movements.map(move => move.name) : []
+          }
           typeVariant={"primary"}
         />
       </div>
