@@ -2,6 +2,8 @@ import { RouteComponentProps } from "react-router-dom";
 import GDStartGame from "../GDStartGame";
 import GDBoardGame from "../GDBoardGame";
 import GDWinnerView from "../../components/GDWinnerView";
+import GDConfiguration from "../GDConfiguration";
+import GDStatistics from "../GDStatistics";
 
 export interface Route {
   path: string;
@@ -26,5 +28,15 @@ export const routesInfo: Route[] = [
     exact: true,
     path: "/result",
     component: GDWinnerView,
+  },
+  {
+    exact: true,
+    path: "/config",
+    component: GDConfiguration,
+  },
+  {
+    exact: true,
+    path: "/statistics",
+    component: GDStatistics,
   }
 ];
