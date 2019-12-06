@@ -1,13 +1,13 @@
 import React, { useState, useCallback } from "react";
-import GDScoreBoard, { Score } from "./GDScoreBoard";
-import GDRoundBoard from "./GDRoundBoard";
+import GDScoreBoard, { Score } from "../components/GDScoreBoard";
+import GDRoundBoard from "../components/GDRoundBoard";
 import { makeStyles } from "@material-ui/styles";
 
 interface Props {
   players: string[];
 }
 
-const GDUnionRoundScoreView = ({ players }: Props) => {
+const GDBoardGame = ({ players }: Props) => {
   const [numberRoundActive, setNumberRoundActive] = useState(1);
   const [scores, setScores] = useState<Score[]>([]);
   const onResult = useCallback(
@@ -48,7 +48,7 @@ console.log({numberRoundActive, scores})
   );
 };
 
-export default GDUnionRoundScoreView;
+export default GDBoardGame;
 
 const useStyles = makeStyles(theme => ({
   container: {
