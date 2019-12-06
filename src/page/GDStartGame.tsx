@@ -1,11 +1,12 @@
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import GDAddValues from "../components/GDAddValues";
 import { GDButton } from "../components/GDButton";
 import GDSelectLabel from "../components/GDSelectLabel";
-import { useUseGetAllPlayersQuery } from "../types";
 import { GDSpinner } from "../components/GDSpinner";
+import { useUseGetAllPlayersQuery } from "../types";
 
 const GDStartGame = () => {
   const classes = useStyles();
@@ -18,7 +19,6 @@ const GDStartGame = () => {
     //TODO: add notification
     console.log("error", error);
   }
-  if(data) {console.log(data)}
 
   return (
     <div className={classes.container}>
@@ -35,25 +35,36 @@ const GDStartGame = () => {
           <GDSelectLabel
             label={"Payer 1"}
             onChange={setValuePlayer1}
-            options={data && data.players ? data.players.map(move => move.name) : []}
+            options={
+              data && data.players ? data.players.map(move => move.name) : []
+            }
             typeVariant={"primary"}
           />
           <GDSelectLabel
             label={"Payer 2"}
             onChange={setValuePlayer2}
-            options={data && data.players ? data.players.map(move => move.name) : []}
+            options={
+              data && data.players ? data.players.map(move => move.name) : []
+            }
             typeVariant={"primary"}
           />
 
-          <GDButton
-            label="Start"
-            typeVariant="primary"
-            fullWidth={true}
-            type="submit"
-            onClick={() => {
-              console.log("Value Player", valuePlayer1, valuePlayer2);
+          <Link
+            className="w-100"
+            to={{
+              pathname: "/main",
+              state: {
+                players: [valuePlayer1, valuePlayer2]
+              }
             }}
-          />
+          >
+            <GDButton
+              label="Start"
+              typeVariant="primary"
+              fullWidth={true}
+              type="submit"
+            />
+          </Link>
         </div>
         <div>
           <GDAddValues
@@ -73,7 +84,7 @@ const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "center"
   },
   containerForm: {
     display: "flex",
