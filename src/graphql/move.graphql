@@ -1,0 +1,6 @@
+query useGetAllMovements {
+   movements{
+    id
+    name
+  }
+}

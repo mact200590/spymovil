@@ -3,13 +3,21 @@ import React from "react";
 import "./App.css";
 import Routes from "./page/routes/Routes";
 import { routesInfo } from "./page/routes/routesInfo";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "@apollo/react-hooks";
+
+const client = new ApolloClient({
+  uri: "http://localhost:4000"
+});
 
 const App: React.FC = () => {
   const classes = useStyles();
   return (
-    <div className={classes.container}>
-      <Routes routes={routesInfo} />
-    </div>
+    <ApolloProvider client={client}>
+      <div className={classes.container}>
+        <Routes routes={routesInfo} />
+      </div>
+    </ApolloProvider>
   );
 };
 
