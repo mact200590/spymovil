@@ -74,6 +74,17 @@ export type UseGetAllMovementsQuery = (
   )> }
 );
 
+export type UseGetAllPlayersQueryVariables = {};
+
+
+export type UseGetAllPlayersQuery = (
+  { __typename?: 'Query' }
+  & { players: Array<(
+    { __typename?: 'Player' }
+    & Pick<Player, 'id' | 'name' | 'win' | 'lose'>
+  )> }
+);
+
 
 export const UseGetAllMovementsDocument = gql`
     query useGetAllMovements {
@@ -108,3 +119,38 @@ export function useUseGetAllMovementsLazyQuery(baseOptions?: ApolloReactHooks.La
 export type UseGetAllMovementsQueryHookResult = ReturnType<typeof useUseGetAllMovementsQuery>;
 export type UseGetAllMovementsLazyQueryHookResult = ReturnType<typeof useUseGetAllMovementsLazyQuery>;
 export type UseGetAllMovementsQueryResult = ApolloReactCommon.QueryResult<UseGetAllMovementsQuery, UseGetAllMovementsQueryVariables>;
+export const UseGetAllPlayersDocument = gql`
+    query useGetAllPlayers {
+  players {
+    id
+    name
+    win
+    lose
+  }
+}
+    `;
+
+/**
+ * __useUseGetAllPlayersQuery__
+ *
+ * To run a query within a React component, call `useUseGetAllPlayersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUseGetAllPlayersQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUseGetAllPlayersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useUseGetAllPlayersQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<UseGetAllPlayersQuery, UseGetAllPlayersQueryVariables>) {
+        return ApolloReactHooks.useQuery<UseGetAllPlayersQuery, UseGetAllPlayersQueryVariables>(UseGetAllPlayersDocument, baseOptions);
+      }
+export function useUseGetAllPlayersLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<UseGetAllPlayersQuery, UseGetAllPlayersQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<UseGetAllPlayersQuery, UseGetAllPlayersQueryVariables>(UseGetAllPlayersDocument, baseOptions);
+        }
+export type UseGetAllPlayersQueryHookResult = ReturnType<typeof useUseGetAllPlayersQuery>;
+export type UseGetAllPlayersLazyQueryHookResult = ReturnType<typeof useUseGetAllPlayersLazyQuery>;
+export type UseGetAllPlayersQueryResult = ApolloReactCommon.QueryResult<UseGetAllPlayersQuery, UseGetAllPlayersQueryVariables>;

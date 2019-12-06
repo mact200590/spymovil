@@ -1,0 +1,8 @@
+query useGetAllPlayers {
+  players {
+    id
+    name
+    win
+    lose
+  }
+}

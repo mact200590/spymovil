@@ -4,11 +4,21 @@ import React, { useState } from "react";
 import GDAddValues from "../components/GDAddValues";
 import { GDButton } from "../components/GDButton";
 import GDSelectLabel from "../components/GDSelectLabel";
+import { useUseGetAllPlayersQuery } from "../types";
+import { GDSpinner } from "../components/GDSpinner";
 
 const GDStartGame = () => {
   const classes = useStyles();
   const [valuePlayer1, setValuePlayer1] = useState("");
   const [valuePlayer2, setValuePlayer2] = useState("");
+  const { loading, error, data } = useUseGetAllPlayersQuery();
+
+  if (loading) return <GDSpinner />;
+  if (error) {
+    //TODO: add notification
+    console.log("error", error);
+  }
+  if(data) {console.log(data)}
 
   return (
     <div className={classes.container}>
@@ -25,13 +35,13 @@ const GDStartGame = () => {
           <GDSelectLabel
             label={"Payer 1"}
             onChange={setValuePlayer1}
-            options={["Scissors", "Paper", "Rock"]}
+            options={data && data.players ? data.players.map(move => move.name) : []}
             typeVariant={"primary"}
           />
           <GDSelectLabel
             label={"Payer 2"}
             onChange={setValuePlayer2}
-            options={["Scissors", "Paper", "Rock"]}
+            options={data && data.players ? data.players.map(move => move.name) : []}
             typeVariant={"primary"}
           />
 
