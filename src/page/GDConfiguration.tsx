@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import GDAddValues from '../components/GDAddValues'
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import GDRules from '../components/GDRules';
 import { Typography, Theme } from '@material-ui/core';
 
@@ -53,7 +53,7 @@ const GDConfiguration = ({ addRule, onClick }: Props) => {
 
 export default GDConfiguration;
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     mainContainer: {
         display: "flex",
         flexDirection: "column",

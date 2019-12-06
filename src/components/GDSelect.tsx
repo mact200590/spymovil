@@ -48,7 +48,7 @@ const GDSelect = ({
         {label && <InputLabel>{label}</InputLabel>}
         <Select value={selected} onChange={handleChange}>
           {options.map((item, i) => (
-            <MenuItem value={item}>{item}</MenuItem>
+            <MenuItem value={i}>{item}</MenuItem>
           ))}
         </Select>
       </FormControl>
@@ -56,7 +56,7 @@ const GDSelect = ({
   );
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     formControl: {
       margin: theme.spacing(1),
