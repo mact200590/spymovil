@@ -1,47 +1,59 @@
-import React from 'react'
-import { GDButton } from './GDButton'
-import { makeStyles } from '@material-ui/styles'
-import GDText from './GDText'
+import { Theme, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+import React from "react";
+import { GDButton } from "./GDButton";
 
 interface Props {
-    tittleResult: string
-    labelButton: string
+  winner: string;
 }
 
-const GDWinnerView = ({ tittleResult, labelButton }: Props) => {
-    const classes = useStyles();
-    return (
-        <div className={classes.column}>
-            <GDText title={'We have a WINNER'} titleSubtitle={`${tittleResult}` + "is the new EMPEROR"} />
-            <div className={classes.button}>
-                <GDButton
-                    label={labelButton}
-                    typeVariant="primary"
-                    fullWidth={true}
-                    type="submit"
-                    onClick={() => {
-
-                    }}
-                />
-            </div>
-        </div>
-    )
-}
+const GDWinnerView = ({ winner }: Props) => {
+  const classes = useStyles();
+  return (
+    <div className={classes.container}>
+      <Typography
+        className={classes.title}
+        variant="h3"
+        color={"textSecondary"}
+        align="center"
+      >
+        {"We have a WINNER!!"}
+      </Typography>
+      <Typography
+        className={classes.title}
+        variant="h4"
+        color={"textSecondary"}
+        align="center"
+      >
+        {`${winner} is the new EMPEROR!`}
+      </Typography>
+      <div className={classes.containerButton}>
+        <GDButton
+          style={{ maxWidth: 250 }}
+          label={"Play Again"}
+          typeVariant="primary"
+          fullWidth={true}
+          type="submit"
+          onClick={() => {}}
+        />
+      </div>
+    </div>
+  );
+};
 
 export default GDWinnerView;
 
-const useStyles = makeStyles(theme => ({
-    column: {
-        display: "flex",
-        flexDirection: "column",
-        paddingLeft: 10,
-    },
-    row: {
-        display: "flex",
-        flexDirection: "row"
-    },
-    button: {
-        maxWidth: 250,
-        paddingLeft: 90,
-    }
+const useStyles = makeStyles((theme: Theme) => ({
+  container: {
+    display: "flex",
+    flexDirection: "column"
+  },
+  containerButton: {
+    display: "flex",
+    marginTop: theme.spacing(4),
+    justifyContent: "center"
+  },
+  title: {
+    marginBottom: theme.spacing(2)
+  }
 }));
