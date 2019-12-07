@@ -1,14 +1,16 @@
 import { makeStyles } from "@material-ui/styles";
 import React, { useCallback, useState } from "react";
-import { RouteComponentProps } from "react-router-dom";
+import { Redirect, RouteComponentProps } from "react-router-dom";
 import GDRoundBoard from "../components/GDRoundBoard";
 import GDScoreBoard, { Score } from "../components/GDScoreBoard";
-import { useUseUpdatePlayerMutation, Player } from "../types";
+import { GDSpinner } from "../components/GDSpinner";
+import { Player, useUseUpdatePlayerMutation } from "../types";
 
 const GDBoardGame = ({ location: { state } }: RouteComponentProps<{}>) => {
   const [numberRoundActive, setNumberRoundActive] = useState(1);
   const [scores, setScores] = useState<Score[]>([]);
-  const [updatePlayer] = useUseUpdatePlayerMutation();
+  const [winner, setWinner] = useState<string | undefined>(undefined);
+  const [updatePlayer, { loading }] = useUseUpdatePlayerMutation();
 
   const onResult = useCallback(
     (winnersRound: string[]) => {
@@ -32,8 +34,10 @@ const GDBoardGame = ({ location: { state } }: RouteComponentProps<{}>) => {
           (p: Player) => p.name === winnersGame[0]
         );
         updatePlayer({
-          variables: { id: finder.id, win: finder.win + 1 }
-        }).then(() => {});
+          variables: { id: finder.id, win: `${parseInt(finder.win) + 1}` }
+        }).then(() => {
+          setWinner(winnersGame[0]);
+        });
         setNumberRoundActive(1);
         setScores([]);
       }
@@ -41,6 +45,18 @@ const GDBoardGame = ({ location: { state } }: RouteComponentProps<{}>) => {
     [numberRoundActive, scores, state.players, updatePlayer]
   );
   const classes = useStyles();
+
+  if (loading) return <GDSpinner />;
+
+  if (winner)
+    return (
+      <Redirect
+        to={{
+          pathname: "/result",
+          state: { winner: winner }
+        }}
+      />
+    );
 
   return (
     <div className={classes.container}>
