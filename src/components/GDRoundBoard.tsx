@@ -1,7 +1,7 @@
 import { Theme, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { useUseGetAllMovementsQuery } from "../types";
+import { useUseGetAllMovementsQuery, useUseGetAllRulesQuery } from "../types";
 import { GDButton } from "./GDButton";
 import GDSelectLabel from "./GDSelectLabel";
 import { GDSpinner } from "./GDSpinner";
@@ -23,23 +23,19 @@ const GDRoundBoard = ({ numberRound, players, onResult }: Props) => {
   const [moveActive, setMoveActive] = useState("");
   const [infoMoves, setInfoMoves] = useState<InfoMove[]>([]);
   const { loading, error, data } = useUseGetAllMovementsQuery();
-  const [rules, setRules] = useState([
-    {
-      id: "1",
-      move: "Rock",
-      kill: "Scissors"
-    },
-    {
-      id: "2",
-      move: "Scissors",
-      kill: "Paper"
-    },
-    {
-      id: "3",
-      move: "Paper",
-      kill: "Rock"
-    }
-  ]);
+  const {
+    loading: loadingRules,
+    error: errorRules,
+    data: dataRules
+  } = useUseGetAllRulesQuery();
+  const rules = useMemo(() => {
+    if (!dataRules || !dataRules.rules) return [];
+    return dataRules.rules.map(r => ({
+      id: r.id,
+      move: r.move.name,
+      kill: r.kill.name
+    }));
+  }, [dataRules]);
   const winners = useCallback(
     (infoMoves: InfoMove[]) => {
       const winners: string[] = [];
@@ -80,8 +76,8 @@ const GDRoundBoard = ({ numberRound, players, onResult }: Props) => {
   }, [infoMoves, moveActive]);
   const disable = useMemo(() => moveActive === "", [moveActive]);
 
-  if (loading) return <GDSpinner />;
-  if (error) {
+  if (loading || loadingRules) return <GDSpinner />;
+  if (error || errorRules) {
     //TODO: add notification
     console.log("error", error);
   }

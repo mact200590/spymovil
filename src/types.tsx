@@ -61,6 +61,14 @@ export type Query = {
    __typename?: 'Query',
   players: Array<Player>,
   movements: Array<Movement>,
+  rules: Array<Rule>,
+};
+
+export type Rule = {
+   __typename?: 'Rule',
+  id: Scalars['String'],
+  move: Movement,
+  kill: Movement,
 };
 
 export type UseGetAllMovementsQueryVariables = {};
@@ -93,6 +101,24 @@ export type UseAddPlayerMutationVariables = {
 export type UseAddPlayerMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'createPlayer'>
+);
+
+export type UseGetAllRulesQueryVariables = {};
+
+
+export type UseGetAllRulesQuery = (
+  { __typename?: 'Query' }
+  & { rules: Array<(
+    { __typename?: 'Rule' }
+    & Pick<Rule, 'id'>
+    & { move: (
+      { __typename?: 'Movement' }
+      & Pick<Movement, 'id' | 'name'>
+    ), kill: (
+      { __typename?: 'Movement' }
+      & Pick<Movement, 'id' | 'name'>
+    ) }
+  )> }
 );
 
 
@@ -194,3 +220,43 @@ export function useUseAddPlayerMutation(baseOptions?: ApolloReactHooks.MutationH
 export type UseAddPlayerMutationHookResult = ReturnType<typeof useUseAddPlayerMutation>;
 export type UseAddPlayerMutationResult = ApolloReactCommon.MutationResult<UseAddPlayerMutation>;
 export type UseAddPlayerMutationOptions = ApolloReactCommon.BaseMutationOptions<UseAddPlayerMutation, UseAddPlayerMutationVariables>;
+export const UseGetAllRulesDocument = gql`
+    query useGetAllRules {
+  rules {
+    id
+    move {
+      id
+      name
+    }
+    kill {
+      id
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useUseGetAllRulesQuery__
+ *
+ * To run a query within a React component, call `useUseGetAllRulesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUseGetAllRulesQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUseGetAllRulesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useUseGetAllRulesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<UseGetAllRulesQuery, UseGetAllRulesQueryVariables>) {
+        return ApolloReactHooks.useQuery<UseGetAllRulesQuery, UseGetAllRulesQueryVariables>(UseGetAllRulesDocument, baseOptions);
+      }
+export function useUseGetAllRulesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<UseGetAllRulesQuery, UseGetAllRulesQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<UseGetAllRulesQuery, UseGetAllRulesQueryVariables>(UseGetAllRulesDocument, baseOptions);
+        }
+export type UseGetAllRulesQueryHookResult = ReturnType<typeof useUseGetAllRulesQuery>;
+export type UseGetAllRulesLazyQueryHookResult = ReturnType<typeof useUseGetAllRulesLazyQuery>;
+export type UseGetAllRulesQueryResult = ApolloReactCommon.QueryResult<UseGetAllRulesQuery, UseGetAllRulesQueryVariables>;
