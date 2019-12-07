@@ -15,7 +15,7 @@ const GDWinnerView = ({ location: { state } }: RouteComponentProps<{}>) => {
         color={"textSecondary"}
         align="center"
       >
-        {"We have a WINNER!!"}
+        {state && state.winner && "We have a WINNER!!"}
       </Typography>
       <Typography
         className={classes.title}
@@ -23,14 +23,24 @@ const GDWinnerView = ({ location: { state } }: RouteComponentProps<{}>) => {
         color={"textSecondary"}
         align="center"
       >
-        {`${state.winner} is the new EMPEROR!`}
+        { state && state.winner && `${state.winner} is the new EMPEROR!`}
       </Typography>
       <div className={classes.containerButton}>
-        <Link to="/">
+        <Link to="/" style={{marginBottom: 10}}>
           <GDButton
             style={{ maxWidth: 250 }}
             label={"Play Again"}
             typeVariant="primary"
+            fullWidth={true}
+            type="submit"
+            onClick={() => {}}
+          />
+        </Link>
+        <Link to="/statistics">
+          <GDButton
+            style={{ maxWidth: 250 }}
+            label={"Statistics"}
+            typeVariant="secondary"
             fullWidth={true}
             type="submit"
             onClick={() => {}}
@@ -50,6 +60,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   containerButton: {
     display: "flex",
+    flexDirection: "column",
     marginTop: theme.spacing(4),
     justifyContent: "center"
   },

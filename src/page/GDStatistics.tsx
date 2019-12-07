@@ -1,14 +1,17 @@
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import React from "react";
+import React, { useMemo } from "react";
+import { useUseGetAllPlayersQuery } from "../types";
+import { GDSpinner } from "../components/GDSpinner";
 
 const GDStatistics = () => {
   const classes = useStyles();
-  const arr = [
-    { name: "Ale", win: 3, lost: 4 },
-    { name: "Ale", win: 3, lost: 4 },
-    { name: "Ale", win: 3, lost: 4 }
-  ];
+  const { loading, data } = useUseGetAllPlayersQuery();
+  const players = useMemo(() => {
+    return data && data.players ? data.players : [];
+  }, [data]);
+
+  if (loading) return <GDSpinner />;
 
   return (
     <div className={classes.mainContainer}>
@@ -41,8 +44,8 @@ const GDStatistics = () => {
           {"Lost"}
         </Typography>
       </div>
-      {arr.map(item => (
-        <div className={classes.row}>
+      {players.map((item, i) => (
+        <div key={i} className={classes.row}>
           <Typography
             variant="body1"
             color={"textSecondary"}
@@ -66,7 +69,7 @@ const GDStatistics = () => {
             align="center"
             className={classes.headRow}
           >
-            {item.lost}
+            {item.lose}
           </Typography>
         </div>
       ))}
