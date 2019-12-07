@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/styles";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { GDButton } from "./GDButton";
 import { GDInput } from "./GDInput";
 
@@ -22,6 +22,8 @@ const GDAddValues = ({
   const handleOnchange = (e: any) => {
     setValue(e.target.value);
   };
+  const disable = useMemo(() => value === "", [value]);
+
   return (
     <div className={classes.container}>
       <GDInput
@@ -34,14 +36,15 @@ const GDAddValues = ({
         onChange={handleOnchange}
       />
       <GDButton
+        disabled={disable}
         className={classes.button}
         label={labelButton}
         typeVariant={typeVariant}
         fullWidth={false}
         type="submit"
         onClick={() => {
-          onClick && onClick(value);
-          setValue("");
+          !disable && onClick && onClick(value);
+          !disable && setValue("");
         }}
       />
     </div>
