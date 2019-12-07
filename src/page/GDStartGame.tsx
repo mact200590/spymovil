@@ -18,6 +18,9 @@ const GDStartGame = () => {
       ? { pointerEvents: "none" }
       : {};
   }, [valuePlayer2, valuePlayer1]);
+  const players = useMemo(() => {
+    return data && data.players ? data.players : [];
+  }, [data]);
 
   const [addPlayer] = useUseAddPlayerMutation();
 
@@ -62,7 +65,9 @@ const GDStartGame = () => {
             to={{
               pathname: "/main",
               state: {
-                players: [valuePlayer1, valuePlayer2]
+                players: players.filter(
+                  p => p.name === valuePlayer1 || p.name === valuePlayer2
+                )
               }
             }}
           >

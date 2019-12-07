@@ -9,3 +9,7 @@ query useGetAllPlayers {
 mutation useAddPlayer($name: String!) {
   createPlayer(name: $name)
 }
+
+mutation  useUpdatePlayer($id: String!, $win: String!){
+  updatePlayer(id: $id, win: $win)
+}

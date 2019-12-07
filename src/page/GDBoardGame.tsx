@@ -3,10 +3,13 @@ import React, { useCallback, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import GDRoundBoard from "../components/GDRoundBoard";
 import GDScoreBoard, { Score } from "../components/GDScoreBoard";
+import { useUseUpdatePlayerMutation, Player } from "../types";
 
 const GDBoardGame = ({ location: { state } }: RouteComponentProps<{}>) => {
   const [numberRoundActive, setNumberRoundActive] = useState(1);
   const [scores, setScores] = useState<Score[]>([]);
+  const [updatePlayer] = useUseUpdatePlayerMutation();
+
   const onResult = useCallback(
     (winnersRound: string[]) => {
       const winnersRoundMap: Score[] = winnersRound.map(w => ({
@@ -14,11 +17,9 @@ const GDBoardGame = ({ location: { state } }: RouteComponentProps<{}>) => {
         winner: w
       }));
       const allScores = [...scores, ...winnersRoundMap];
-      const winnersGame = [];
+      const winnersGame: string[] = [];
       allScores.forEach(({ winner }, iM) => {
-        const matchWon = allScores.filter(
-          score => winner === score.winner
-        );
+        const matchWon = allScores.filter(score => winner === score.winner);
         matchWon.length >= 3 && winnersGame.push(winner);
       });
 
@@ -26,21 +27,31 @@ const GDBoardGame = ({ location: { state } }: RouteComponentProps<{}>) => {
         setScores(allScores);
         setNumberRoundActive(numberRoundActive + 1);
       } else {
-
-        //TODO: show success view
+        // only the first winner was saved to simplify
+        const finder = state.players.find(
+          (p: Player) => p.name === winnersGame[0]
+        );
+        updatePlayer({
+          variables: { id: finder.id, win: finder.win + 1 }
+        }).then(() => {});
         setNumberRoundActive(1);
         setScores([]);
       }
     },
-    [numberRoundActive, scores]
+    [numberRoundActive, scores, state.players, updatePlayer]
   );
   const classes = useStyles();
+
   return (
     <div className={classes.container}>
       <div>
         <GDRoundBoard
           numberRound={numberRoundActive}
-          players={state && state.players ? state.players : []}
+          players={
+            state && state.players
+              ? state.players.map((p: Player) => p.name)
+              : []
+          }
           onResult={onResult}
         />
       </div>

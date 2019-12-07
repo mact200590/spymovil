@@ -21,6 +21,7 @@ export type Mutation = {
    __typename?: 'Mutation',
   createPlayer: Scalars['String'],
   updatePlayer: Scalars['Boolean'],
+  updatePlayerByName: Scalars['Boolean'],
   createMovement: Scalars['String'],
   updateMovement: Scalars['Boolean'],
 };
@@ -34,6 +35,13 @@ export type MutationCreatePlayerArgs = {
 export type MutationUpdatePlayerArgs = {
   id: Scalars['String'],
   name?: Maybe<Scalars['String']>,
+  win?: Maybe<Scalars['String']>,
+  lose?: Maybe<Scalars['String']>
+};
+
+
+export type MutationUpdatePlayerByNameArgs = {
+  name: Scalars['String'],
   win?: Maybe<Scalars['String']>,
   lose?: Maybe<Scalars['String']>
 };
@@ -101,6 +109,17 @@ export type UseAddPlayerMutationVariables = {
 export type UseAddPlayerMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'createPlayer'>
+);
+
+export type UseUpdatePlayerMutationVariables = {
+  id: Scalars['String'],
+  win: Scalars['String']
+};
+
+
+export type UseUpdatePlayerMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'updatePlayer'>
 );
 
 export type UseGetAllRulesQueryVariables = {};
@@ -220,6 +239,37 @@ export function useUseAddPlayerMutation(baseOptions?: ApolloReactHooks.MutationH
 export type UseAddPlayerMutationHookResult = ReturnType<typeof useUseAddPlayerMutation>;
 export type UseAddPlayerMutationResult = ApolloReactCommon.MutationResult<UseAddPlayerMutation>;
 export type UseAddPlayerMutationOptions = ApolloReactCommon.BaseMutationOptions<UseAddPlayerMutation, UseAddPlayerMutationVariables>;
+export const UseUpdatePlayerDocument = gql`
+    mutation useUpdatePlayer($id: String!, $win: String!) {
+  updatePlayer(id: $id, win: $win)
+}
+    `;
+export type UseUpdatePlayerMutationFn = ApolloReactCommon.MutationFunction<UseUpdatePlayerMutation, UseUpdatePlayerMutationVariables>;
+
+/**
+ * __useUseUpdatePlayerMutation__
+ *
+ * To run a mutation, you first call `useUseUpdatePlayerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUseUpdatePlayerMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [useUpdatePlayerMutation, { data, loading, error }] = useUseUpdatePlayerMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      win: // value for 'win'
+ *   },
+ * });
+ */
+export function useUseUpdatePlayerMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UseUpdatePlayerMutation, UseUpdatePlayerMutationVariables>) {
+        return ApolloReactHooks.useMutation<UseUpdatePlayerMutation, UseUpdatePlayerMutationVariables>(UseUpdatePlayerDocument, baseOptions);
+      }
+export type UseUpdatePlayerMutationHookResult = ReturnType<typeof useUseUpdatePlayerMutation>;
+export type UseUpdatePlayerMutationResult = ApolloReactCommon.MutationResult<UseUpdatePlayerMutation>;
+export type UseUpdatePlayerMutationOptions = ApolloReactCommon.BaseMutationOptions<UseUpdatePlayerMutation, UseUpdatePlayerMutationVariables>;
 export const UseGetAllRulesDocument = gql`
     query useGetAllRules {
   rules {
