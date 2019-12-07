@@ -2,12 +2,10 @@ import { Theme, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import React from "react";
 import { GDButton } from "./GDButton";
+import { Link, RouteComponentProps } from "react-router-dom";
 
-interface Props {
-  winner: string;
-}
 
-const GDWinnerView = ({ winner }: Props) => {
+const GDWinnerView = ({ location: { state } }: RouteComponentProps<{}>) => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
@@ -25,17 +23,19 @@ const GDWinnerView = ({ winner }: Props) => {
         color={"textSecondary"}
         align="center"
       >
-        {`${winner} is the new EMPEROR!`}
+        {`${state.winner} is the new EMPEROR!`}
       </Typography>
       <div className={classes.containerButton}>
-        <GDButton
-          style={{ maxWidth: 250 }}
-          label={"Play Again"}
-          typeVariant="primary"
-          fullWidth={true}
-          type="submit"
-          onClick={() => {}}
-        />
+        <Link to="/">
+          <GDButton
+            style={{ maxWidth: 250 }}
+            label={"Play Again"}
+            typeVariant="primary"
+            fullWidth={true}
+            type="submit"
+            onClick={() => {}}
+          />
+        </Link>
       </div>
     </div>
   );
