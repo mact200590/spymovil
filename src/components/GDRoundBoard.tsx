@@ -67,7 +67,7 @@ const GDRoundBoard = ({ numberRound, players, onResult }: Props) => {
       setIndexActive(0);
       setInfoMoves([]);
     }
-  }, [moveActive, indexActive, players]);
+  }, [moveActive, indexActive, players, infoMoves, onResult, winners]);
   const labelButton = useMemo(() => {
     return indexActive < players.length - 1 ? "next" : "play";
   }, [indexActive, players]);

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import GDAddValues from "../components/GDAddValues";
 import { makeStyles } from "@material-ui/core/styles";
 import GDRules from "../components/GDRules";
-import { Typography, Theme } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import GDListRules from "../components/GDListRules";
 
 interface Props {
@@ -15,11 +15,6 @@ export type Rule = { move: string; kills: string };
 const GDConfiguration = ({ addRule, onClick }: Props) => {
   const [rules, setRules] = useState<Rule[]>([]);
   const classes = useStyles();
-  const arr = [
-    { move: "paper", kills: "rock" },
-    { move: "paper", kills: "rock" },
-    { move: "paper", kills: "rock" }
-  ];
   //TODO: Here do something and tell to your father
   onClick = value => {
     console.log(`Insert this value in the BD and tell to your DAD ${value}`);

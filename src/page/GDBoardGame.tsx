@@ -26,12 +26,13 @@ const GDBoardGame = ({ location: { state } }: RouteComponentProps<{}>) => {
         setScores(allScores);
         setNumberRoundActive(numberRoundActive + 1);
       } else {
+
         //TODO: show success view
         setNumberRoundActive(1);
         setScores([]);
       }
     },
-    [numberRoundActive]
+    [numberRoundActive, scores]
   );
   const classes = useStyles();
   return (

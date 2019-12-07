@@ -2,7 +2,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select, { SelectProps } from "@material-ui/core/Select";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
 import React, { useMemo } from "react";
 
 export type SelectType = "primary" | "secondary";
@@ -48,9 +48,9 @@ const GDSelect = ({
         fullWidth={fullWidth || false}
       >
         {label && <InputLabel>{label}</InputLabel>}
-        <Select value={selected} defaultValue={defaultValue} onChange={handleChange}>
+        <Select value={selected} onChange={handleChange}>
           {options.map((item, i) => (
-            <MenuItem value={item}>{item}</MenuItem>
+            <MenuItem key={i} value={item}>{item}</MenuItem>
           ))}
         </Select>
       </FormControl>

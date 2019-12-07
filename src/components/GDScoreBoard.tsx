@@ -34,8 +34,8 @@ const GDScoreBoard = ({ scores, tittle }: Props) => {
           {"Winner"}
         </Typography>
       </div>
-      {scores.map(score => (
-        <div className={classes.row}>
+      {scores.map((score, i) => (
+        <div key={i} className={classes.row}>
           <Typography
             variant="body1"
             color={"textSecondary"}
