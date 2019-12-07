@@ -1,6 +1,6 @@
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import GDAddValues from "../components/GDAddValues";
 import { GDButton } from "../components/GDButton";
@@ -13,7 +13,11 @@ const GDStartGame = () => {
   const [valuePlayer1, setValuePlayer1] = useState("");
   const [valuePlayer2, setValuePlayer2] = useState("");
   const { loading, error, data } = useUseGetAllPlayersQuery();
-
+  const styleLink = useMemo(() => {
+    return valuePlayer1 === "" || valuePlayer2 === ""
+      ? { pointerEvents: "none" }
+      : {};
+  }, [valuePlayer2, valuePlayer1]);
   if (loading) return <GDSpinner />;
   if (error) {
     //TODO: add notification
@@ -50,6 +54,7 @@ const GDStartGame = () => {
           />
 
           <Link
+            style={styleLink as any}
             className="w-100"
             to={{
               pathname: "/main",
