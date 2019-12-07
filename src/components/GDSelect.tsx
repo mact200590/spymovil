@@ -48,7 +48,7 @@ const GDSelect = ({
         {label && <InputLabel>{label}</InputLabel>}
         <Select value={selected} onChange={handleChange}>
           {options.map((item, i) => (
-            <MenuItem value={i}>{item}</MenuItem>
+            <MenuItem value={item}>{item}</MenuItem>
           ))}
         </Select>
       </FormControl>
