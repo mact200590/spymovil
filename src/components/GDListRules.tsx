@@ -37,7 +37,7 @@ const GDListRules = ({ rules }: Props) => {
                 align="center"
                 className={classes.middle}
               >
-                => KILLS =>
+                => kill =>
               </Typography>
               <Typography
                 variant="h6"
@@ -45,7 +45,7 @@ const GDListRules = ({ rules }: Props) => {
                 align="center"
                 className={classes.kill}
               >
-                {item.kills}
+                {item.kill}
               </Typography>
             </div>
           ))}
