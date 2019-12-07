@@ -4,21 +4,19 @@ import { makeStyles } from "@material-ui/core/styles";
 import GDRules from "../components/GDRules";
 import { Typography } from "@material-ui/core";
 import GDListRules from "../components/GDListRules";
+import { useUseAddMovementMutation } from "../types";
 
 interface Props {
   addRule?: (move: string, skills: string) => void | undefined;
-  onClick?: (value: string) => void;
 }
 
 export type Rule = { move: string; kills: string };
 
-const GDConfiguration = ({ addRule, onClick }: Props) => {
+const GDConfiguration = ({ addRule }: Props) => {
   const [rules, setRules] = useState<Rule[]>([]);
   const classes = useStyles();
-  //TODO: Here do something and tell to your father
-  onClick = value => {
-    console.log(`Insert this value in the BD and tell to your DAD ${value}`);
-  };
+  const [addMovement] = useUseAddMovementMutation();
+  
   //TODO: Here add the rule to the BD and print it
   addRule = (move, skills) => {
     console.log(
@@ -48,13 +46,22 @@ const GDConfiguration = ({ addRule, onClick }: Props) => {
             onClick={addRule}
             textPlaceHolder={"Add Move"}
           />
-          <Typography style={{marginTop: 100}} variant="h4" color={"textPrimary"} align="center">
+          <Typography
+            style={{ marginTop: 100 }}
+            variant="h4"
+            color={"textPrimary"}
+            align="center"
+          >
             Add Move
           </Typography>
           <GDAddValues
             labelButton={"ADD"}
             typeVariant={"primary"}
-            onClick={onClick}
+            onClick={(name) => {
+              addMovement({ variables: { name } }).then(() => {
+                // refetch();
+              });
+            }}
             textPlaceHolder={"Add Move"}
           />
         </div>

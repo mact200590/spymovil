@@ -90,6 +90,16 @@ export type UseGetAllMovementsQuery = (
   )> }
 );
 
+export type UseAddMovementMutationVariables = {
+  name: Scalars['String']
+};
+
+
+export type UseAddMovementMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'createMovement'>
+);
+
 export type UseGetAllPlayersQueryVariables = {};
 
 
@@ -175,6 +185,36 @@ export function useUseGetAllMovementsLazyQuery(baseOptions?: ApolloReactHooks.La
 export type UseGetAllMovementsQueryHookResult = ReturnType<typeof useUseGetAllMovementsQuery>;
 export type UseGetAllMovementsLazyQueryHookResult = ReturnType<typeof useUseGetAllMovementsLazyQuery>;
 export type UseGetAllMovementsQueryResult = ApolloReactCommon.QueryResult<UseGetAllMovementsQuery, UseGetAllMovementsQueryVariables>;
+export const UseAddMovementDocument = gql`
+    mutation useAddMovement($name: String!) {
+  createMovement(name: $name)
+}
+    `;
+export type UseAddMovementMutationFn = ApolloReactCommon.MutationFunction<UseAddMovementMutation, UseAddMovementMutationVariables>;
+
+/**
+ * __useUseAddMovementMutation__
+ *
+ * To run a mutation, you first call `useUseAddMovementMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUseAddMovementMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [useAddMovementMutation, { data, loading, error }] = useUseAddMovementMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *   },
+ * });
+ */
+export function useUseAddMovementMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UseAddMovementMutation, UseAddMovementMutationVariables>) {
+        return ApolloReactHooks.useMutation<UseAddMovementMutation, UseAddMovementMutationVariables>(UseAddMovementDocument, baseOptions);
+      }
+export type UseAddMovementMutationHookResult = ReturnType<typeof useUseAddMovementMutation>;
+export type UseAddMovementMutationResult = ApolloReactCommon.MutationResult<UseAddMovementMutation>;
+export type UseAddMovementMutationOptions = ApolloReactCommon.BaseMutationOptions<UseAddMovementMutation, UseAddMovementMutationVariables>;
 export const UseGetAllPlayersDocument = gql`
     query useGetAllPlayers {
   players {
