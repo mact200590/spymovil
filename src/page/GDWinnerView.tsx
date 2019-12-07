@@ -28,7 +28,7 @@ const GDWinnerView = ({ location: { state } }: RouteComponentProps<{}>) => {
       <div className={classes.containerButton}>
         <Link to="/" style={{marginBottom: 10}}>
           <GDButton
-            style={{ maxWidth: 250 }}
+            style={{ width: 150 }}
             label={"Play Again"}
             typeVariant="primary"
             fullWidth={true}
@@ -36,10 +36,20 @@ const GDWinnerView = ({ location: { state } }: RouteComponentProps<{}>) => {
             onClick={() => {}}
           />
         </Link>
-        <Link to="/statistics">
+        <Link to="/statistics" style={{marginBottom: 10}}>
           <GDButton
-            style={{ maxWidth: 250 }}
+            style={{ width: 150 }}
             label={"Statistics"}
+            typeVariant="secondary"
+            fullWidth={true}
+            type="submit"
+            onClick={() => {}}
+          />
+        </Link>
+        <Link to="/config">
+          <GDButton
+            style={{ width: 150 }}
+            label={"Config"}
             typeVariant="secondary"
             fullWidth={true}
             type="submit"

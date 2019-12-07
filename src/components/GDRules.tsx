@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Size from "../style/size";
 import { GDButton } from "./GDButton";
 import GDSelect from "./GDSelect";
+import { Rule } from "../page/GDConfiguration";
 
 export type GDAddValuesType = "primary" | "secondary";
 
@@ -11,32 +12,33 @@ interface Props {
   labelButton: string;
   onClick?: (move: string, skills: string) => void;
   typeVariant?: GDAddValuesType;
+  movements: string[];
 }
 
 const GDRules = ({
   textPlaceHolder,
   onClick,
   labelButton,
-  typeVariant = "primary"
+  typeVariant = "primary",
+  movements
 }: Props) => {
   const classes = useStyles();
   const [move, setMove] = useState("Scissors");
-  const [kills, setKills] = useState("Scissors");
+  const [kill, setKills] = useState("Scissors");
 
-  const arr = ["Scissor", "Rock", "Paper"];
   return (
     <div className={classes.container}>
       <GDSelect
         label={"Add move"}
         typeVariant={typeVariant}
-        options={arr} //data && data.movements ? data.movements.map(move => move.name) : []
+        options={movements} //data && data.movements ? data.movements.map(move => move.name) : []
         onChange={setMove as any}
         styleContainer={{ minWidth: Size.box.base }}
       />
       <GDSelect
-        label={"Add kills"}
+        label={"Add kill"}
         typeVariant={typeVariant}
-        options={arr}
+        options={movements}
         onChange={setKills as any}
         styleContainer={{ minWidth: Size.box.base }}
       />
@@ -48,7 +50,7 @@ const GDRules = ({
         fullWidth={false}
         type="submit"
         onClick={() => {
-          onClick && onClick(move, kills);
+          onClick && onClick(move, kill);
         }}
       />
     </div>
