@@ -113,7 +113,8 @@ export type UseAddPlayerMutation = (
 
 export type UseUpdatePlayerMutationVariables = {
   id: Scalars['String'],
-  win: Scalars['String']
+  win?: Maybe<Scalars['String']>,
+  lose?: Maybe<Scalars['String']>
 };
 
 
@@ -240,8 +241,8 @@ export type UseAddPlayerMutationHookResult = ReturnType<typeof useUseAddPlayerMu
 export type UseAddPlayerMutationResult = ApolloReactCommon.MutationResult<UseAddPlayerMutation>;
 export type UseAddPlayerMutationOptions = ApolloReactCommon.BaseMutationOptions<UseAddPlayerMutation, UseAddPlayerMutationVariables>;
 export const UseUpdatePlayerDocument = gql`
-    mutation useUpdatePlayer($id: String!, $win: String!) {
-  updatePlayer(id: $id, win: $win)
+    mutation useUpdatePlayer($id: String!, $win: String, $lose: String) {
+  updatePlayer(id: $id, win: $win, lose: $lose)
 }
     `;
 export type UseUpdatePlayerMutationFn = ApolloReactCommon.MutationFunction<UseUpdatePlayerMutation, UseUpdatePlayerMutationVariables>;
@@ -261,6 +262,7 @@ export type UseUpdatePlayerMutationFn = ApolloReactCommon.MutationFunction<UseUp
  *   variables: {
  *      id: // value for 'id'
  *      win: // value for 'win'
+ *      lose: // value for 'lose'
  *   },
  * });
  */

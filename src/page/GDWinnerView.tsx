@@ -1,7 +1,7 @@
 import { Theme, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import React from "react";
-import { GDButton } from "./GDButton";
+import { GDButton } from "../components/GDButton";
 import { Link, RouteComponentProps } from "react-router-dom";
 
 
@@ -62,7 +62,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     marginTop: theme.spacing(4),
-    justifyContent: "center"
+    justifyContent: "center",
+    alignItems: "center"
   },
   title: {
     marginBottom: theme.spacing(2)

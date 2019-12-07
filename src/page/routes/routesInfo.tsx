@@ -1,7 +1,7 @@
 import { RouteComponentProps } from "react-router-dom";
 import GDStartGame from "../GDStartGame";
 import GDBoardGame from "../GDBoardGame";
-import GDWinnerView from "../../components/GDWinnerView";
+import GDWinnerView from "../GDWinnerView";
 import GDConfiguration from "../GDConfiguration";
 import GDStatistics from "../GDStatistics";
 

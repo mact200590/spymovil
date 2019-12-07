@@ -30,12 +30,18 @@ const GDBoardGame = ({ location: { state } }: RouteComponentProps<{}>) => {
         setNumberRoundActive(numberRoundActive + 1);
       } else {
         // only the first winner was saved to simplify
-        const finder = state.players.find(
+        const winnerFind = state.players.find(
           (p: Player) => p.name === winnersGame[0]
         );
+        const loserFind = state.players.find(
+          (p: Player) => p.name !== winnersGame[0]
+        );
         updatePlayer({
-          variables: { id: finder.id, win: `${parseInt(finder.win) + 1}` }
+          variables: { id: winnerFind.id, win: `${parseInt(winnerFind.win) + 1}` }
         }).then(() => {
+          updatePlayer({
+            variables: { id: loserFind.id, lose: `${parseInt(loserFind.lose) + 1}` }
+          })
           setWinner(winnersGame[0]);
         });
         setNumberRoundActive(1);

@@ -6,7 +6,7 @@ import { GDSpinner } from "../components/GDSpinner";
 
 const GDStatistics = () => {
   const classes = useStyles();
-  const { loading, data } = useUseGetAllPlayersQuery();
+  const { loading, data } = useUseGetAllPlayersQuery({fetchPolicy: "cache-and-network"});
   const players = useMemo(() => {
     return data && data.players ? data.players : [];
   }, [data]);
