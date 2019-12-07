@@ -1,32 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import GDAddValues from "../components/GDAddValues";
 import { makeStyles } from "@material-ui/core/styles";
 import GDRules from "../components/GDRules";
 import { Typography } from "@material-ui/core";
 import GDListRules from "../components/GDListRules";
+import { useUseAddMovementMutation, useUseGetAllRulesQuery, useUseGetAllMovementsQuery } from "../types";
+import { GDSpinner } from "../components/GDSpinner";
 
 interface Props {
   addRule?: (move: string, skills: string) => void | undefined;
-  onClick?: (value: string) => void;
 }
 
-export type Rule = { move: string; kills: string };
+export type Rule = { move: string; kill: string };
 
-const GDConfiguration = ({ addRule, onClick }: Props) => {
-  const [rules, setRules] = useState<Rule[]>([]);
+const GDConfiguration = ({ addRule }: Props) => {
   const classes = useStyles();
-  //TODO: Here do something and tell to your father
-  onClick = value => {
-    console.log(`Insert this value in the BD and tell to your DAD ${value}`);
-  };
-  //TODO: Here add the rule to the BD and print it
-  addRule = (move, skills) => {
-    console.log(
-      `Print this and add to BD , also tell to your DAD ${move} ${skills}`
-    );
-    setRules([...rules, { move: move, kills: skills }]);
-  };
+  const [addMovement, {loading}] = useUseAddMovementMutation();
+  const {
+    loading: loadingRules,
+    error: errorRules,
+    data: dataRules,
+  } = useUseGetAllRulesQuery();
+  const { loading: loadingMove, data, refetch } = useUseGetAllMovementsQuery();
+  const rules = useMemo(() => {
+    if (!dataRules || !dataRules.rules) return [];
+    return dataRules.rules.map(r => ({
+      id: r.id,
+      move: r.move.name,
+      kill: r.kill.name
+    }));
+  }, [dataRules]);
 
+  if ( loadingRules || loadingMove) return <GDSpinner />;
+  
   return (
     <div className={classes.mainContainer}>
       <Typography
@@ -47,14 +53,24 @@ const GDConfiguration = ({ addRule, onClick }: Props) => {
             typeVariant={"primary"}
             onClick={addRule}
             textPlaceHolder={"Add Move"}
+            movements={(data && data.movements) ? data.movements.map(move => move.name) : []}
           />
-          <Typography style={{marginTop: 100}} variant="h4" color={"textPrimary"} align="center">
+          <Typography
+            style={{ marginTop: 100 }}
+            variant="h4"
+            color={"textPrimary"}
+            align="center"
+          >
             Add Move
           </Typography>
           <GDAddValues
             labelButton={"ADD"}
             typeVariant={"primary"}
-            onClick={onClick}
+            onClick={(name) => {
+              addMovement({ variables: { name } }).then(() => {
+                refetch();
+              });
+            }}
             textPlaceHolder={"Add Move"}
           />
         </div>

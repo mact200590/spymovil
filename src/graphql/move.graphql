@@ -4,3 +4,7 @@ query useGetAllMovements {
     name
   }
 }
+
+mutation useAddMovement($name: String!) {
+  createMovement(name: $name)
+}
