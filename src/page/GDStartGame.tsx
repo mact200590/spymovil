@@ -6,18 +6,21 @@ import GDAddValues from "../components/GDAddValues";
 import { GDButton } from "../components/GDButton";
 import GDSelectLabel from "../components/GDSelectLabel";
 import { GDSpinner } from "../components/GDSpinner";
-import { useUseGetAllPlayersQuery } from "../types";
+import { useUseGetAllPlayersQuery, useUseAddPlayerMutation } from "../types";
 
 const GDStartGame = () => {
   const classes = useStyles();
   const [valuePlayer1, setValuePlayer1] = useState("");
   const [valuePlayer2, setValuePlayer2] = useState("");
-  const { loading, error, data } = useUseGetAllPlayersQuery();
+  const { loading, error, data, refetch } = useUseGetAllPlayersQuery();
   const styleLink = useMemo(() => {
     return valuePlayer1 === "" || valuePlayer2 === ""
       ? { pointerEvents: "none" }
       : {};
   }, [valuePlayer2, valuePlayer1]);
+
+  const [addPlayer] = useUseAddPlayerMutation();
+
   if (loading) return <GDSpinner />;
   if (error) {
     //TODO: add notification
@@ -75,7 +78,11 @@ const GDStartGame = () => {
           <GDAddValues
             labelButton="Add player"
             textPlaceHolder={"Add Player"}
-            onClick={() => console.log("Imprime en la BD")}
+            onClick={name => {
+              addPlayer({ variables: { name } }).then(() => {
+                refetch();
+              });
+            }}
           />
         </div>
       </div>

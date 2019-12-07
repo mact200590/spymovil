@@ -6,3 +6,6 @@ query useGetAllPlayers {
     lose
   }
 }
+mutation useAddPlayer($name: String!) {
+  createPlayer(name: $name)
+}
