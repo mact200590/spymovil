@@ -1,15 +1,15 @@
 import { Theme, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useUseGetAllMovementsQuery } from "../types";
 import { GDButton } from "./GDButton";
 import GDSelectLabel from "./GDSelectLabel";
-import { useUseGetAllMovementsQuery } from "../types";
 import { GDSpinner } from "./GDSpinner";
 
 interface Props {
   numberRound: number;
   players: string[];
-  onResult?: (player: string) => void;
+  onResult?: (player: string[]) => void;
 }
 
 interface InfoMove {
@@ -20,22 +20,54 @@ interface InfoMove {
 const GDRoundBoard = ({ numberRound, players, onResult }: Props) => {
   const classes = useStyles();
   const [indexActive, setIndexActive] = useState(0);
-  const [moveActive, setMoveActive] = useState("Scissors");
+  const [moveActive, setMoveActive] = useState("");
   const [infoMoves, setInfoMoves] = useState<InfoMove[]>([]);
   const { loading, error, data } = useUseGetAllMovementsQuery();
+  const [rules, setRules] = useState([
+    {
+      id: "1",
+      move: "Rock",
+      kill: "Scissors"
+    },
+    {
+      id: "2",
+      move: "Scissors",
+      kill: "Paper"
+    },
+    {
+      id: "3",
+      move: "Paper",
+      kill: "Rock"
+    }
+  ]);
+  const winners = useCallback(
+    (infoMoves: InfoMove[]) => {
+      const winners: string[] = [];
+      infoMoves.forEach((move, iM) => {
+        infoMoves.forEach((kill, iK) => {
+          const rulesAccepted = rules.filter(
+            r => r.kill === kill.move && r.move === move.move && iM !== iK
+          );
+          rulesAccepted.length > 0 && winners.push(move.player);
+        });
+      });
+      return winners;
+    },
+    [rules]
+  );
   const onClick = useCallback(() => {
-    setInfoMoves([
+    const newInfoMoves = [
       ...infoMoves,
       {
         move: moveActive,
         player: players[indexActive]
       }
-    ]);
+    ];
     if (indexActive < players.length - 1) {
+      setInfoMoves(newInfoMoves);
       setIndexActive(indexActive + 1);
     } else {
-      //TODO: calc Result is pending
-      onResult && onResult("Ale");
+      onResult && onResult(winners(newInfoMoves));
       setIndexActive(0);
       setInfoMoves([]);
     }
@@ -44,8 +76,9 @@ const GDRoundBoard = ({ numberRound, players, onResult }: Props) => {
     return indexActive < players.length - 1 ? "next" : "play";
   }, [indexActive, players]);
   useEffect(() => {
-    setMoveActive("Scissors");
-  }, [infoMoves]);
+    setMoveActive(moveActive);
+  }, [infoMoves, moveActive]);
+  const disable = useMemo(() => moveActive === "", [moveActive]);
 
   if (loading) return <GDSpinner />;
   if (error) {
@@ -69,10 +102,12 @@ const GDRoundBoard = ({ numberRound, players, onResult }: Props) => {
           options={
             data && data.movements ? data.movements.map(move => move.name) : []
           }
+          defaultValue={moveActive}
           typeVariant={"primary"}
         />
       </div>
       <GDButton
+        disabled={disable}
         className={classes.button}
         label={labelButton}
         typeVariant="primary"

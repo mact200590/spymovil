@@ -8,16 +8,22 @@ const GDBoardGame = ({ location: { state } }: RouteComponentProps<{}>) => {
   const [numberRoundActive, setNumberRoundActive] = useState(1);
   const [scores, setScores] = useState<Score[]>([]);
   const onResult = useCallback(
-    (winner: string) => {
-      setScores([
-        ...scores,
-        {
-          score: numberRoundActive,
-          winner
-        }
-      ]);
-      //TODO: calc who is the winner
-      if (numberRoundActive < 3) {
+    (winnersRound: string[]) => {
+      const winnersRoundMap: Score[] = winnersRound.map(w => ({
+        score: numberRoundActive,
+        winner: w
+      }));
+      const allScores = [...scores, ...winnersRoundMap];
+      const winnersGame = [];
+      allScores.forEach(({ winner }, iM) => {
+        const matchWon = allScores.filter(
+          score => winner === score.winner
+        );
+        matchWon.length >= 3 && winnersGame.push(winner);
+      });
+
+      if (winnersGame.length === 0) {
+        setScores(allScores);
         setNumberRoundActive(numberRoundActive + 1);
       } else {
         //TODO: show success view

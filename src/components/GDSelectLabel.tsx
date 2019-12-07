@@ -8,6 +8,7 @@ export type GDSelectPlayerType = "primary" | "secondary";
 
 interface Props {
   label: string;
+  defaultValue?: string;
   typeVariant: GDSelectPlayerType;
   options: string[];
   onChange?: ((value: string) => void) | undefined;
@@ -17,7 +18,8 @@ const GDSelectLabel = ({
   label: namePlayer,
   typeVariant,
   options,
-  onChange
+  onChange,
+  defaultValue=""
 }: Props) => {
   const classes = useStyles();
   return (
@@ -26,6 +28,7 @@ const GDSelectLabel = ({
         {namePlayer}
       </Typography>
       <GDSelect
+      defaultValue={defaultValue}
         typeVariant={typeVariant}
         options={options}
         onChange={onChange as any}

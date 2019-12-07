@@ -9,23 +9,25 @@ export type SelectType = "primary" | "secondary";
 
 type Props = {
   label?: string;
+  defaultValue?: string;
   typeVariant: SelectType;
   fullWidth?: boolean;
   options: string[];
   onChange?: ((value: string) => void) | undefined;
   styleContainer?: React.CSSProperties | undefined;
 } & SelectProps;
-     
+
 const GDSelect = ({
   label,
   typeVariant,
   fullWidth,
   options,
   onChange,
-  styleContainer
+  styleContainer,
+  defaultValue = ""
 }: Props) => {
   const classes = useStyles();
-  const [selected, setSelected] = React.useState("");
+  const [selected, setSelected] = React.useState(defaultValue);
   const variant = useMemo(
     () => ({ primary: "standard", secondary: "outlined" }[typeVariant] as any),
     [typeVariant]
@@ -46,7 +48,7 @@ const GDSelect = ({
         fullWidth={fullWidth || false}
       >
         {label && <InputLabel>{label}</InputLabel>}
-        <Select value={selected} onChange={handleChange}>
+        <Select value={selected} defaultValue={defaultValue} onChange={handleChange}>
           {options.map((item, i) => (
             <MenuItem value={item}>{item}</MenuItem>
           ))}
@@ -56,7 +58,7 @@ const GDSelect = ({
   );
 };
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(theme =>
   createStyles({
     formControl: {
       margin: theme.spacing(1),
