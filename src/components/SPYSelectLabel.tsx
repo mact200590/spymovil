@@ -2,7 +2,7 @@ import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import React from "react";
 import Size from "../style/size";
-import GDSelect from "./GDSelect";
+import GDSelect from "./SPYSelect";
 
 export type GDSelectPlayerType = "primary" | "secondary";
 
