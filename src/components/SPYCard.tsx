@@ -11,7 +11,7 @@ interface Plants {
     name: string
 }
 
-interface Data {
+interface DataApi {
     id: number,
     name: string,
     chlorine: number,
@@ -21,7 +21,7 @@ interface Data {
     type: Plants
 }
 
-const SYPCard = ({id, name, chlorine, ph, turbidity, date, type }: Data) => {
+const SYPCard = ({id, name, chlorine, ph, turbidity, date, type }: DataApi) => {
     const classes = useStyles();
     return (
         <Card className={classes.card} variant="elevation">
