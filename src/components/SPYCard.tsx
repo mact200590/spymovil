@@ -25,10 +25,9 @@ const SYPCard = ({id, name, chlorine, ph, turbidity, date, type }: DataApi) => {
     const classes = useStyles();
     return (
         <Card className={classes.card} variant="elevation">
-        <CardHeader classes={{title: classes.title } }
+        <CardHeader className={classes.title}
         title={name}>
             </CardHeader>
-            <hr/>
             <CardContent className={classes.content}>
                 <Typography variant="h5" component="h2">
                 { `Chlorine: ${chlorine}`}
@@ -56,8 +55,9 @@ const useStyles = makeStyles({
     },
     title: {
         fontSize: 54,
-        color: 'blue', 
-        textAlign:'center'
+        color: 'white', 
+        textAlign:'center',
+        backgroundColor:'blue'
     },
     content: {
         fontSize: 24, 
