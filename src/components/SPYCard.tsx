@@ -11,7 +11,7 @@ interface Plants {
     name: string
 }
 
-interface DataApi {
+export interface DataApi {
     id: number,
     name: string,
     chlorine: number,
@@ -20,6 +20,7 @@ interface DataApi {
     date: string,
     type: Plants
 }
+
 
 const SYPCard = ({id, name, chlorine, ph, turbidity, date, type }: DataApi) => {
     const classes = useStyles();
