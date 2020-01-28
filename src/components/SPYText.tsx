@@ -6,7 +6,7 @@ interface Props {
     titleSubtitle?: string;
 }
 
-const GDText = ({ title, titleSubtitle }: Props) => {
+const SPYText = ({ title, titleSubtitle }: Props) => {
     const classes = useStyles();
     return (
         <div className={classes.container}>
@@ -16,7 +16,7 @@ const GDText = ({ title, titleSubtitle }: Props) => {
     )
 }
 
-export default GDText;
+export default SPYText;
 
 const useStyles = makeStyles(theme => ({
     container: {

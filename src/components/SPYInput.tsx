@@ -7,13 +7,14 @@ type InputType = "login" | "primary" | "secondary";
 
 type Props = {
   typeVariant: InputType;
+  placeholder:string,
   error?: string;
   classNameContainer?: string;
 } & GDInputProps;
 
 export type GDInputProps = Omit<TextFieldProps, "error">;
 
-export const GDInput: React.FC<Props> = ({
+export const SPYInput: React.FC<Props> = ({
   typeVariant,
   required = false,
   error,
