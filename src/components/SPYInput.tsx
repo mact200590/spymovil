@@ -7,7 +7,6 @@ type InputType = "login" | "primary" | "secondary";
 
 type Props = {
   typeVariant: InputType;
-  placeholder:string,
   error?: string;
   classNameContainer?: string;
 } & GDInputProps;
