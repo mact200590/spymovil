@@ -18,7 +18,7 @@ interface Props {
   format: string
   id:string
   label:string 
-  onChange:(date:Date)=>void
+  onChange:(date:Date|null)=>void
 }
 
 
@@ -44,7 +44,7 @@ const SPYDateSelector=( {variant,justify,format,id,label,disableToolbar,onChange
           value={selectedDate}
           onChange={(date)=>{
             handleDateChange(date);
-            onChange((date) as any)     
+            onChange(date)     
           }
         }
         />
