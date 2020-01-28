@@ -14,9 +14,11 @@ const phScale = [
     "Moderately alkaline",
     "Very alkaline"
 ]
+interface Props{
+    onClick:()=>void
+}
 
-
-const SPYFilters = () => {
+const SPYFilters = ({onClick}:Props) => {
     const classes = useStyles();
 
 const [name,setName]=useState('');
@@ -75,7 +77,7 @@ const [select,setSelect]=useState('')
                       console.log(select)
                     }}
                 />
-                 <GDButton label={'Filter'} typeVariant={'primary'} fullWidth={false} />
+                 <GDButton label={'Filter'} typeVariant={'primary'} fullWidth={false}  onClick={onClick}/>
             </div>
            
         </div>
