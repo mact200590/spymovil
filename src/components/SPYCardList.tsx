@@ -17,13 +17,7 @@ const SYPCardList = ({ listCardApi }: Props) => {
             {listCardApi.map(item => (
                 <ListItem>
                   <SYPCard
-                    id={item.id}
-                    name={item.name}
-                    chlorine={item.chlorine} 
-                    ph={item.ph}
-                    turbidity={item.turbidity}
-                    date={item.date}
-                    type={item.type}
+                   dataApi={item}
                   />
                 </ListItem>
             ))}
