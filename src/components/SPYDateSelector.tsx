@@ -6,6 +6,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker, 
 } from '@material-ui/pickers';
+import {DATE_FORMAT} from '../utils/constant'
 
 type VariantDate = "dialog" | "inline" | "static" | undefined
 type VariantJustify= "center" | "flex-start" | "flex-end" | "space-between" | "space-around" | "space-evenly" | undefined
@@ -35,7 +36,7 @@ const SPYDateSelector=({variant="inline",justify="space-around",id,label,disable
         <KeyboardDatePicker
           disableToolbar={disableToolbar}
           variant={variant}
-          format="MM/dd/yyyy"
+          format={DATE_FORMAT}
           id={id}
           label={label}
           value={selectedDate}
