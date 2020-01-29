@@ -11,7 +11,7 @@ const SPYText = ({ title, titleSubtitle }: Props) => {
     return (
         <div className={classes.container}>
             <p className={classes.title}>{title}</p>
-            <p className={classes.titleSubtitle}>{titleSubtitle}</p>
+           {titleSubtitle &&<p className={classes.titleSubtitle}>{titleSubtitle}</p>}
         </div>
     )
 }
