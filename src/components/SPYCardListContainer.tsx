@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { DataApi } from '../components/SPYCard'
 import SYPCardList from './SPYCardList';
+import { SPYSpinner } from './SPYSpinner';
+
 const data: DataApi[] = [
     {
         id: 1,
@@ -15,7 +17,7 @@ const data: DataApi[] = [
             name: "Tipo A"
         }
     },
-    {    
+    {
         id: 2,
         name: "Rivera",
         chlorine: 6.0,
@@ -101,7 +103,7 @@ const SPYCardListContainer = () => {
             setIsError(false);
             setIsLoading(true);
             try {
-                setDataApi(data);
+                await setDataApi(data);
             } catch (error) {
                 setIsError(true);
                 setIsLoading(false);
@@ -109,11 +111,18 @@ const SPYCardListContainer = () => {
             setIsLoading(false);
         };
         fetchData();
-    }, [dataApi,setIsLoading,setIsError]);
+    }, [dataApi, setIsLoading, setIsError,setDataApi]);
 
 
     return (
-        <SYPCardList listCardApi={dataApi} />
+        <div>
+
+            {isError && <div>Something went wrong ...</div>}
+            {isLoading ? <SPYSpinner /> : <SYPCardList listCardApi={dataApi} />
+
+            }
+
+        </div>
     )
 }
 
