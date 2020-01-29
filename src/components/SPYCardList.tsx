@@ -14,7 +14,7 @@ const SYPCardList = ({ isLoading, listCardApi }: Props) => {
     const classes = useStyles();
     return (
         <div>
-            {isLoading && <GDSpinner />}
+            {isLoading? <GDSpinner />:
             <List className={classes.root}>
                 {listCardApi.map(item => (
                     <ListItem>
@@ -24,6 +24,7 @@ const SYPCardList = ({ isLoading, listCardApi }: Props) => {
                     </ListItem>
                 ))}
             </List>
+            }
         </div>
     );
 }
