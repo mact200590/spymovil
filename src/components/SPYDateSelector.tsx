@@ -4,16 +4,15 @@ import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
+  KeyboardDatePicker, 
 } from '@material-ui/pickers';
 
-type variantDate = "dialog" | "inline" | "static" | undefined
-type variantJustify= "center" | "flex-start" | "flex-end" | "space-between" | "space-around" | "space-evenly" | undefined
+type VariantDate = "dialog" | "inline" | "static" | undefined
+type VariantJustify= "center" | "flex-start" | "flex-end" | "space-between" | "space-around" | "space-evenly" | undefined
 
 interface Props {
-  variant: variantDate
-  justify: variantJustify
+  variant: VariantDate
+  justify: VariantJustify
   disableToolbar:boolean
   format: string
   id:string
@@ -22,8 +21,7 @@ interface Props {
 }
 
 
-const SPYDateSelector=( {variant,justify,format,id,label,disableToolbar,onChange}:Props)=> {
-  // The first commit of Material-UI
+const SPYDateSelector=({variant="inline",justify="space-around",format,id,label,disableToolbar,onChange}:Props)=> {
   const [selectedDate, setSelectedDate] = React.useState<Date | null>(
     new Date('2014-08-18T21:11:54'),
   );
