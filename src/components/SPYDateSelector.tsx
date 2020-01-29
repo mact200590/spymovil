@@ -14,16 +14,15 @@ interface Props {
   variant: VariantDate
   justify: VariantJustify
   disableToolbar:boolean
-  format: string
   id:string
   label:string 
   onChange:(date:Date|null)=>void
 }
 
 
-const SPYDateSelector=({variant="inline",justify="space-around",format,id,label,disableToolbar,onChange}:Props)=> {
+const SPYDateSelector=({variant="inline",justify="space-around",id,label,disableToolbar,onChange}:Props)=> {
   const [selectedDate, setSelectedDate] = React.useState<Date | null>(
-    new Date('2014-08-18T21:11:54'),
+    new Date(),
   );
 
   const handleDateChange = (date: Date | null) => {
@@ -36,7 +35,7 @@ const SPYDateSelector=({variant="inline",justify="space-around",format,id,label,
         <KeyboardDatePicker
           disableToolbar={disableToolbar}
           variant={variant}
-          format={format}
+          format="MM/dd/yyyy"
           id={id}
           label={label}
           value={selectedDate}
