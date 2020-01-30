@@ -91,9 +91,8 @@ const data: DataApi[] = [
     }
 ]
 
-
 const SPYCardListContainer = () => {
-    const [dataApi, setDataApi] = useState<DataApi[]>([])
+    const [dataApis, setDataApis] = useState<DataApi[]>([])
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const classes = useStyles();
@@ -102,26 +101,17 @@ const SPYCardListContainer = () => {
         const fetchData = async () => {
             setIsError(false);
             setIsLoading(true);
-            try {
-                await setDataApi(data);
-            } catch (error) {
-                setIsError(true);
-                setIsLoading(false);
-            }
+            setDataApis(data);
             setIsLoading(false);
         };
         fetchData();
-    }, [dataApi, setIsLoading, setIsError,setDataApi]);
-
+    }, [dataApis, setIsLoading, setIsError, setDataApis]);
 
     return (
         <div>
-
-            {isError && <div>Something went wrong ...</div>}
-            {isLoading ? <SPYSpinner /> : <SYPCardList listCardApi={dataApi} />
-
+            {isError && <div>Algo esta mal ...</div>}
+            {isLoading ? <SPYSpinner /> : <SYPCardList listCardApi={dataApis} />
             }
-
         </div>
     )
 }
