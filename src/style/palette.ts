@@ -2,10 +2,10 @@ import { red } from '@material-ui/core/colors';
 
 export const palette = {
   primary: {
-    main: '#25D34D',
+    main: '#2663c0',
   },
   secondary: {
-    main: '#19857b',
+    main: '#92b1df',
   },
   error: {
     main: red.A400,

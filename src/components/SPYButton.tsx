@@ -10,7 +10,7 @@ type Props = {
   fullWidth: boolean;
 } & ButtonBaseProps;
 
-export const GDButton: React.FC<Props> = ({
+export const SPYButton: React.FC<Props> = ({
   label,
   typeVariant,
   fullWidth,

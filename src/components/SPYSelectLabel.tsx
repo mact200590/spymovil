@@ -14,7 +14,7 @@ interface Props {
   onChange?: ((value: string) => void) | undefined;
 }
 
-const GDSelectLabel = ({
+const SPYSelectLabel = ({
   label: namePlayer,
   typeVariant,
   options,
@@ -38,7 +38,7 @@ const GDSelectLabel = ({
   );
 };
 
-export default GDSelectLabel;
+export default SPYSelectLabel;
 
 const useStyles = makeStyles(theme => ({
   container: {

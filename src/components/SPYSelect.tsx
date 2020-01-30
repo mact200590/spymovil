@@ -17,7 +17,7 @@ type Props = {
   styleContainer?: React.CSSProperties | undefined;
 } & SelectProps;
 
-const GDSelect = ({
+const SPYSelect = ({
   label,
   typeVariant,
   fullWidth,
@@ -70,4 +70,4 @@ const useStyles = makeStyles(theme =>
   })
 );
 
-export default GDSelect;
+export default SPYSelect;
