@@ -4,19 +4,22 @@ import SPYText from './SPYText';
 import { SPYInput } from './SPYInput'
 import { SPYButton } from './SPYButton'
 import { ButtonType } from './SPYButton'
+import {InputType} from "./SPYInput"
 
 interface Props {
+    typeInput?:string
     title: string
     label: string
     fullWidth: boolean,
     placeholderUser?:string
     placeholderPassword:string
-    typeVariant: ButtonType;
+    typeVariantButton: ButtonType
+    typeVariantInput: InputType
     onClick: (user: string, password: string) => void
 }
 
 
-const SPYLogin = ({ title, label,placeholderUser,placeholderPassword, fullWidth, typeVariant, onClick }: Props) => {
+const SPYLogin = ({typeInput="password", title, label,placeholderUser,placeholderPassword, fullWidth,typeVariantInput, typeVariantButton, onClick }: Props) => {
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
 
@@ -26,23 +29,23 @@ const SPYLogin = ({ title, label,placeholderUser,placeholderPassword, fullWidth,
             <SPYText title={title} />
             <div className={classes.fields}>
                 <SPYInput 
-                typeVariant={'login'}
+                typeVariant={typeVariantInput}
                     value={user}
                     placeholder={placeholderUser}
                     onChange={(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setUser(event.target.value)}
                 />
                 <SPYInput
-                    type={"password"}
+                    type={typeInput}
                     placeholder={placeholderPassword}
                     value={password}
                     onChange={(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setPassword(event.target.value)}
-                    typeVariant={'login'} />
+                    typeVariant={typeVariantInput} />
             </div>
             <SPYButton
                 title={title}
                 label={label}
                 fullWidth={fullWidth}
-                typeVariant={typeVariant}
+                typeVariant={typeVariantButton}
                 onClick={() => { onClick(user, password) }}
             />
         </div>
@@ -58,10 +61,6 @@ const useStyles = makeStyles({
         fontSize: 54,
         color: 'white',
         textAlign: 'center',
-    },
-    content: {
-        fontSize: 24,
-        textAlign: 'left'
     }
 });
 

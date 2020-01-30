@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField, { TextFieldProps } from "@material-ui/core/TextField";
 import React, { useMemo } from "react";
 
-type InputType = "login" | "primary" | "secondary";
+export type InputType = "login" | "primary" | "secondary";
 
 type Props = {
   typeVariant: InputType;
