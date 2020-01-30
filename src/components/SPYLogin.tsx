@@ -15,7 +15,7 @@ const SPYLogin = ({ onClick }: Props) => {
 
     return (
         <div className={classes.container}>
-            <SPYText title={"Iniciar sección"} />
+            <SPYText title={"Iniciar sesión"} />
             <div className={classes.fields}>
                 <SPYInput
                     typeVariant={"login"}
