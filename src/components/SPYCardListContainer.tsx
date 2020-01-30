@@ -110,7 +110,7 @@ const SPYCardListContainer = () => {
     return (
         <div>
             {isError && <div>Algo esta mal ...</div>}
-            {isLoading ? <SPYSpinner /> : <SYPCardList listCardApi={dataApis} />
+            <SYPCardList listCardApi={dataApis} isLoading={isLoading} />
             }
         </div>
     )
