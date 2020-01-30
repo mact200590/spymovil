@@ -8,38 +8,43 @@ import { ButtonType } from './SPYButton'
 interface Props {
     title: string
     label: string
-    fullWidth: boolean
+    fullWidth: boolean,
+    placeholderUser?:string
+    placeholderPassword:string
     typeVariant: ButtonType;
     onClick: (user: string, password: string) => void
 }
 
 
-const SPYLogin = ({ title, label, fullWidth, typeVariant, onClick }: Props) => {
-    const [user,setUser]=useState('');
-    const [password,setPassword]=useState('');
+const SPYLogin = ({ title, label,placeholderUser,placeholderPassword, fullWidth, typeVariant, onClick }: Props) => {
+    const [user, setUser] = useState('');
+    const [password, setPassword] = useState('');
 
     const classes = useStyles();
     return (
         <div className={classes.container}>
             <SPYText title={title} />
             <div className={classes.fields}>
-                <SPYInput typeVariant={'login'} 
-                  value={user}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>setUser(event.target.value)}
-                />
                 <SPYInput 
-                type={"password"}
-                value={password}
-                onChange={(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>setPassword(event.target.value)}
-                typeVariant={'login'} />
-            </div>
-            <SPYButton 
-                  title={title} 
-                  label={label} 
-                  fullWidth={fullWidth} 
-                  typeVariant={typeVariant}
-                  onClick={()=>{onClick(user,password)}}
+                typeVariant={'login'}
+                    value={user}
+                    placeholder={placeholderUser}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setUser(event.target.value)}
                 />
+                <SPYInput
+                    type={"password"}
+                    placeholder={placeholderPassword}
+                    value={password}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setPassword(event.target.value)}
+                    typeVariant={'login'} />
+            </div>
+            <SPYButton
+                title={title}
+                label={label}
+                fullWidth={fullWidth}
+                typeVariant={typeVariant}
+                onClick={() => { onClick(user, password) }}
+            />
         </div>
     )
 }
@@ -47,7 +52,7 @@ const useStyles = makeStyles({
     container: {
         display: "flex",
         flexDirection: "column",
-        textAlign:"center"
+        textAlign: "center"
     },
     fields: {
         fontSize: 54,
