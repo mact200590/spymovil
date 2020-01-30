@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { DataApi } from '../components/SPYCard'
 import SYPCard from '../components/SPYCard'
 import { ListItem, List } from '@material-ui/core';
-import { GDSpinner } from './SPYSpinner';
+import { SPYSpinner } from './SPYSpinner';
 
 interface Props {
     listCardApi: DataApi[]
@@ -14,7 +14,7 @@ const SYPCardList = ({ isLoading, listCardApi }: Props) => {
     const classes = useStyles();
     return (
         <div>
-            {isLoading? <GDSpinner />:
+            {isLoading? <SPYSpinner />:
             <List className={classes.root}>
                 {listCardApi.map(item => (
                     <ListItem>
