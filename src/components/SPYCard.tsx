@@ -21,8 +21,11 @@ export interface DataApi {
     type: Plants
 }
 
+interface Props {
+    dataApi: DataApi,
+  }
 
-const SYPCard = ({id, name, chlorine, ph, turbidity, date, type }: DataApi) => {
+const SYPCard = ({dataApi: {id, name, chlorine, ph, turbidity, date, type }}: Props) => {
     const classes = useStyles();
     return (
         <Card className={classes.card} variant="elevation">

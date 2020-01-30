@@ -3,31 +3,29 @@ import { makeStyles } from '@material-ui/core/styles';
 import { DataApi } from '../components/SPYCard'
 import SYPCard from '../components/SPYCard'
 import { ListItem, List } from '@material-ui/core';
+import { SPYSpinner } from './SPYSpinner';
 
 interface Props {
     listCardApi: DataApi[]
+    isLoading: boolean
 }
 
-
-const SYPCardList = ({ listCardApi }: Props) => {
+const SYPCardList = ({ isLoading, listCardApi }: Props) => {
     const classes = useStyles();
     return (
-        <List className={classes.root}>
-            {listCardApi.map(item => (
-                <ListItem>
-                  <SYPCard
-                    id={item.id}
-                    name={item.name}
-                    chlorine={item.chlorine} 
-                    ph={item.ph}
-                    turbidity={item.turbidity}
-                    date={item.date}
-                    type={item.type}
-                  />
-                </ListItem>
-            ))}
-        
-        </List>
+        <div>
+            {isLoading? <SPYSpinner />:
+            <List className={classes.root}>
+                {listCardApi.map(item => (
+                    <ListItem>
+                        <SYPCard
+                            dataApi={item}
+                        />
+                    </ListItem>
+                ))}
+            </List>
+            }
+        </div>
     );
 }
 
@@ -38,7 +36,7 @@ const useStyles = makeStyles({
         width: '100%',
         position: 'relative',
         overflow: 'auto',
-        maxHeight:"550px",
+        maxHeight: "550px",
     }
 });
 
