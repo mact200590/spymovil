@@ -120,7 +120,10 @@ const useStyles = makeStyles({
     container: {
         display: "flex",
         flexDirection: "row",
-        width: '100%'
+        width: '100%',
+        position: "relative",
+        overflow: 'auto',
+        maxHeight: "550px",
     }
 });
 
