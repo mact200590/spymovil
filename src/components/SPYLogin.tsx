@@ -3,49 +3,37 @@ import { makeStyles } from '@material-ui/core/styles';
 import SPYText from './SPYText';
 import { SPYInput } from './SPYInput'
 import { SPYButton } from './SPYButton'
-import { ButtonType } from './SPYButton'
-import {InputType} from "./SPYInput"
 
 interface Props {
-    typeInput?:string
-    title: string
-    label: string
-    fullWidth: boolean,
-    placeholderUser?:string
-    placeholderPassword:string
-    typeVariantButton: ButtonType
-    typeVariantInput: InputType
     onClick: (user: string, password: string) => void
 }
 
-
-const SPYLogin = ({typeInput="password", title, label,placeholderUser,placeholderPassword, fullWidth,typeVariantInput, typeVariantButton, onClick }: Props) => {
+const SPYLogin = ({ onClick }: Props) => {
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
-
     const classes = useStyles();
+
     return (
         <div className={classes.container}>
-            <SPYText title={title} />
+            <SPYText title={"Iniciar sección"} />
             <div className={classes.fields}>
-                <SPYInput 
-                typeVariant={typeVariantInput}
+                <SPYInput
+                    typeVariant={"login"}
                     value={user}
-                    placeholder={placeholderUser}
+                    placeholder={"Usuario"}
                     onChange={(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setUser(event.target.value)}
                 />
                 <SPYInput
-                    type={typeInput}
-                    placeholder={placeholderPassword}
+                    type={"password"}
+                    placeholder={"Contraseña"}
                     value={password}
                     onChange={(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setPassword(event.target.value)}
-                    typeVariant={typeVariantInput} />
+                    typeVariant={"login"} />
             </div>
             <SPYButton
-                title={title}
-                label={label}
-                fullWidth={fullWidth}
-                typeVariant={typeVariantButton}
+                label={"Entrar"}
+                fullWidth={false}
+                typeVariant={"primary"}
                 onClick={() => { onClick(user, password) }}
             />
         </div>
