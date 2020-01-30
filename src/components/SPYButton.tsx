@@ -2,7 +2,7 @@ import { Button } from "@material-ui/core";
 import { ButtonBaseProps } from "@material-ui/core/ButtonBase";
 import React, { useMemo } from "react";
 
-type ButtonType = "primary" | "secondary";
+export type ButtonType = "primary" | "secondary";
 
 type Props = {
   label: string;
