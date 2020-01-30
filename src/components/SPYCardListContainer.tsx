@@ -108,7 +108,7 @@ const SPYCardListContainer = () => {
     }, [dataApis, setIsLoading, setIsError, setDataApis]);
 
     return (
-        <div>
+        <div className={classes.container}>
             {isError && <div>Algo esta mal ...</div>}
             <SYPCardList listCardApi={dataApis} isLoading={isLoading} />
             }
@@ -117,13 +117,10 @@ const SPYCardListContainer = () => {
 }
 
 const useStyles = makeStyles({
-    root: {
+    container: {
         display: "flex",
         flexDirection: "row",
-        width: '100%',
-        position: 'relative',
-        overflow: 'auto',
-        maxHeight: "550px",
+        width: '100%'
     }
 });
 
