@@ -31,7 +31,7 @@ export const SPYInput: React.FC<Props> = ({
     [typeVariant]
   );
   return (
-    <div className={classes.classNameContainer}>
+    <div className={classNameContainer}>
       <TextField error={error ? true : false} {...rest} variant={variant} onChange={onChange}  value={value}/>
       <FormHelperText className={classes.error} id="component-error-text">{error}</FormHelperText>
     </div>
@@ -43,8 +43,5 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.error.main,
     width: "100%",
     textAlign: "left"
-  },
-  classNameContainer:{
-    margin:"5px"
   }
 }));
