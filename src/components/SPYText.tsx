@@ -26,6 +26,9 @@ const useStyles = makeStyles(theme => ({
     title: {
         fontFamily: "Times New Roman",
         fontSize: 40,
+        marginBottom: "0px",
+        marginTop: "0px",
+       
     },
     titleSubtitle: {
         fontFamily: "Times New Roman",
