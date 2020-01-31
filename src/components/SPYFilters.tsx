@@ -68,7 +68,7 @@ const SPYFilters = ({ onClickClear, onClick }: Props) => {
                 />
                 <SPYSelect
                     label={"Turbidez"}
-                    styleContainer={{ marginTop: "5px" }}
+                    styleContainer={{ marginTop: "0px" }}
                     typeVariant={"primary"}
                     options={TURBIDITY_OF_WATER}
                     value={turbidity}
@@ -92,7 +92,7 @@ const SPYFilters = ({ onClickClear, onClick }: Props) => {
                 />
                 <SPYSelect
                     label={"Elija el Ph"}
-                    styleContainer={{ marginTop: "5px" }}
+                    styleContainer={{ marginTop: "0px" }}
                     typeVariant={"primary"}
                     options={FIELDS_API}
                     value={selectPh}
@@ -127,7 +127,6 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         flexDirection: "row",
         width: "100%"
-
     }
 }));
 
