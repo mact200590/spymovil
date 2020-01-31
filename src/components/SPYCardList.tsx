@@ -32,11 +32,12 @@ const SYPCardList = ({ isLoading, listCardApi }: Props) => {
 const useStyles = makeStyles({
     root: {
         display: "flex",
-        flexDirection: "row",
-        width: '100%',
+        flexDirection: "column",
+        width: "100%",
+        maxWidth: 360,
         position: 'relative',
         overflow: 'auto',
-        maxHeight: "550px",
+        maxHeight: 300
     }
 });
 

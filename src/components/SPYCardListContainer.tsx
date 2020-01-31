@@ -111,7 +111,7 @@ const SPYCardListContainer = () => {
         <div className={classes.container}>
             {isError && <div>Algo esta mal ...</div>}
             <SYPCardList listCardApi={dataApis} isLoading={isLoading} />
-            }
+            
         </div>
     )
 }
