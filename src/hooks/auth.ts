@@ -30,5 +30,5 @@ export function useFetchSPYAuth() {
   }, [request, setError]);
 
   const { loading, data } = request;
-  return { loading, error, data, auth };
+  return { loading, error, data, auth, setError };
 }
