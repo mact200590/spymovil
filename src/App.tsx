@@ -8,8 +8,7 @@ const App: React.FC = () => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      Test
-      {/* <Routes routes={routesInfo} /> */}
+      <Routes routes={routesInfo} />
     </div>
   );
 };

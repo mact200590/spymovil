@@ -1,4 +1,5 @@
 import { RouteComponentProps } from "react-router-dom";
+import SPYLogin from "../../components/SPYLogin";
 
 export interface Route {
   path: string;
@@ -9,9 +10,9 @@ export interface Route {
 }
 
 export const routesInfo: Route[] = [
-  // {
-  //   exact: true,
-  //   path: "/",
-  //   component: GDStartGame,
-  // }
+  {
+    exact: true,
+    path: "/",
+    component: SPYLogin,
+  }
 ];
