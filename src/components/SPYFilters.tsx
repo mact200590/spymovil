@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { SPYInput } from './SPYInput';
 import { SPYButton } from './SPYButton'
@@ -23,30 +23,30 @@ const SPYFilters = ({ onClickClear, onClick }: Props) => {
     const [type, setType] = useState('')
     const [selectPh, setSelectPh] = useState('')
 
-    const handleOnchangeName = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleOnchangeName = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setName(event.target.value)
-    }
+    },[setName])
 
-    const handleOnchangeChlorine = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleOnchangeChlorine =useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setChlorine(event.target.value)
-    }
+    },[setChlorine])
 
-    const handleOnchangeSelectTurbidity = (value: any) => {
+    const handleOnchangeSelectTurbidity =useCallback((value: any) => {
         setTurbidity(value)
-    }
+    },[setTurbidity])
 
-    const handleOnchangeDate = (date: any) => {
+    const handleOnchangeDate = useCallback((date: any) => {
         setDate(date)
-    }
+    },[setDate])
 
-    const handleOnchangeType = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleOnchangeType = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setType(event.target.value)
-    }
+    },[setType])
 
 
-    const handleOnchangeSelectPh = (value: any) => {
+    const handleOnchangeSelectPh =useCallback( (value: any) => {
         setSelectPh(value)
-    }
+    },[setSelectPh])
 
     return (
         <div className={classes.container}>
