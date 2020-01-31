@@ -11,13 +11,13 @@ const SPYPageMain = () => {
     <div className={classes.container}>
       <div>
         <SPYFilters
-          onClick={() => console.log(`ooo`)}
-          onClickClear={() => console.log(`dddd`)}
+          onClick={() => {}}
+          onClickClear={() =>{}}
         />
       </div>
       <div className={classes.order}>
         <SPYOrderBy
-          typeVariant={'primary'} title={"Ordenar"} onChange={() => console.log(`hello`)} />
+          typeVariant={'primary'} title={"Ordenar"} onChange={() => {}} />
       </div>
       <div className={classes.result}>
         <SPYText title={"Resultado"} />
