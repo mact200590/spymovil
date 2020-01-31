@@ -17,11 +17,12 @@ interface Props {
   disableToolbar:boolean
   id:string
   label:string 
+  classNameContainer:string
   onChange:(date:Date|null)=>void
 }
 
 
-const SPYDateSelector=({variant="inline",justify="space-around",id,label,disableToolbar,onChange}:Props)=> {
+const SPYDateSelector=({classNameContainer,variant="inline",justify="space-around",id,label,disableToolbar,onChange}:Props)=> {
   const [selectedDate, setSelectedDate] = React.useState<Date | null>(
     new Date(),
   );
@@ -31,9 +32,9 @@ const SPYDateSelector=({variant="inline",justify="space-around",id,label,disable
   };
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Grid container justify={justify}>
-        <KeyboardDatePicker
+    <MuiPickersUtilsProvider  utils={DateFnsUtils}>
+      <Grid className={classNameContainer} container justify={justify}>
+        <KeyboardDatePicker 
           disableToolbar={disableToolbar}
           variant={variant}
           format={DATE_FORMAT}
