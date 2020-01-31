@@ -1,85 +1,109 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { GDInput } from './SPYInput';
-import GDText from './SPYText'
-import { GDButton } from './SPYButton'
-import GDSelect from './SPYSelect'
+import { SPYInput } from './SPYInput';
+import { SPYButton } from './SPYButton'
+import SPYSelect from './SPYSelect'
+import SPYText from './SPYText'
+import { FIELDS_API } from '../utils/constant'
+import { TURBIDITY_OF_WATER } from '../utils/constant'
+import SPYDateSelector from './SPYDateSelector'
 
-const phScale = [
-    "Very acid",
-    "Moderately acidic",
-    "Slightly acidic",
-    "Neutral",
-    "Slightly alkaline",
-    "Moderately alkaline",
-    "Very alkaline"
-]
-interface Props{
-    onClick:()=>void
+interface Props {
+    onClick: (name: string, chlorine: string, turbidity: string, date: string, type: string, selectPh: string) => void
+    onClickClear: () => void
 }
 
-const SPYFilters = ({onClick}:Props) => {
+const SPYFilters = ({ onClickClear, onClick }: Props) => {
     const classes = useStyles();
 
-const [name,setName]=useState('');
-const [chlorine,setChlorine]=useState('')
-const [turbidity,setTurbidity]=useState('')
-const [date,setDate]=useState('')
-const [type,setType]=useState('')
-const [select,setSelect]=useState('')
+    const [name, setName] = useState('');
+    const [chlorine, setChlorine] = useState('')
+    const [turbidity, setTurbidity] = useState('')
+    const [date, setDate] = useState('')
+    const [type, setType] = useState('')
+    const [selectPh, setSelectPh] = useState('')
 
+    const handleOnchangeName = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setName(event.target.value)
+    }
+
+    const handleOnchangeChlorine = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setChlorine(event.target.value)
+    }
+
+    const handleOnchangeSelectTurbidity = (value: any) => {
+        setTurbidity(value)
+    }
+
+    const handleOnchangeDate = (date: any) => {
+        setDate(date)
+    }
+
+    const handleOnchangeType = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setType(event.target.value)
+    }
+
+
+    const handleOnchangeSelectPh = (value: any) => {
+        setSelectPh(value)
+    }
 
     return (
         <div className={classes.container}>
-            <GDText  title={'Filters'} />
+            <SPYText title={'Filters'} />
             <div className={classes.filters}>
-                <GDInput
+                <SPYInput
                     typeVariant="primary"
-                    placeholder="Name"
-                    label="Name"
+                    placeholder="Nombre"
+                    label="Nombre"
                     value={name}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{setName(event.target.value)}}
+                    onChange={handleOnchangeName}
                 />
-                <GDInput
+                <SPYInput
                     typeVariant="primary"
-                    placeholder="Chlorine"
-                    label="Chlorine"
+                    placeholder="Cloro"
+                    label="Cloro"
                     value={chlorine}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{setChlorine(event.target.value)}}
+                    onChange={handleOnchangeChlorine}
                 />
-                <GDInput
-                    typeVariant="primary"
-                    placeholder="Turbidity"
-                    label="Turbidity"
-                    value={turbidity}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{setTurbidity(event.target.value)}}
-                />
-                <GDInput
-                    typeVariant="primary"
-                    placeholder="Date"
-                    label="Date"
-                    value={date}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{setDate(event.target.value)}}
-                />
-                <GDInput
-                    typeVariant="primary"
-                    placeholder="Type"
-                    label="Type"
-                    value={type}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{setType(event.target.value)}}
-                />
-                    <GDSelect className={classes.select}
+                <SPYSelect
+                    label={"Turbidez"}
+                    styleContainer={{ marginTop: "5px" }}
                     typeVariant={"primary"}
-                    options={phScale}
-                    value={select}
-                    onChange={(value: any)=>{ 
-                      setSelect(value)
-                      console.log(select)
-                    }}
+                    options={TURBIDITY_OF_WATER}
+                    value={turbidity}
+                    onChange={handleOnchangeSelectTurbidity}
                 />
-                 <GDButton label={'Filter'} typeVariant={'primary'} fullWidth={false}  onClick={onClick}/>
+                <SPYDateSelector
+                    variant={"inline"}
+                    justify={"center"}
+                    disableToolbar={false}
+                    id={"id-ph"}
+                    label={"Elija la fecha"}
+                    onChange={handleOnchangeDate}
+                />
+
+                <SPYInput
+                    typeVariant="primary"
+                    placeholder="Tipo"
+                    label="Tipo"
+                    value={type}
+                    onChange={handleOnchangeType}
+                />
+                <SPYSelect
+                    label={"Elija el Ph"}
+                    styleContainer={{ marginTop: "5px" }}
+                    typeVariant={"primary"}
+                    options={FIELDS_API}
+                    value={selectPh}
+                    onChange={handleOnchangeSelectPh}
+                />
+                <div className={classes.button}>
+                    <SPYButton style={{ paddingRight: "15px" }}
+                        label={'Filtrar'} typeVariant={'primary'} fullWidth={false} onClick={() => onClick(name, chlorine, selectPh, turbidity, date, type)} />
+                    <SPYButton label={'Borrar'} typeVariant={'primary'} fullWidth={false} onClick={() => onClickClear} />
+                </div>
             </div>
-           
         </div>
     )
 }
@@ -94,13 +118,16 @@ const useStyles = makeStyles(theme => ({
     filters: {
         display: "flex",
         flexDirection: "row",
-        marginBottom:"5px",
-        marginTop:"-50px",
-
+        minWidth: "400px"
     },
-    select: {
-     paddingTop:"125px",
-     backgroundColor:"blue"
+    button: {
+        marginTop: "10px",
+        marginRight: "50px",
+        maxHeight: "40px",
+        display: "flex",
+        flexDirection: "row",
+        width: "100%"
+
     }
 }));
 
