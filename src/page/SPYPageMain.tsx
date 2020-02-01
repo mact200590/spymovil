@@ -5,9 +5,12 @@ import SPYCardListContainer from "../components/SPYCardListContainer";
 import SPYFilters from "../components/SPYFilters";
 import SPYOrderBy from "../components/SPYOrderBy";
 import SPYText from "../components/SPYText";
+import { SPYButton } from "../components/SPYButton";
+import { useClearAuth } from "../hooks/auth";
 
 const SPYPageMain = () => {
   const classes = useStyles();
+  const { clearAuth } = useClearAuth();
   return (
     <Container className={classes.container}>
       <Container className={classes.width50}>
@@ -40,6 +43,17 @@ const SPYPageMain = () => {
           <SPYCardListContainer />
         </Box>
       </Container>
+      <Box className={classes.containerButton}>
+        <SPYButton
+          style={{
+            margin: "1em"
+          }}
+          label={"Salir"}
+          typeVariant={"primary"}
+          fullWidth={true}
+          onClick={clearAuth}
+        />
+      </Box>
     </Container>
   );
 };
@@ -93,6 +107,10 @@ const useStyles = makeStyles(theme =>
     result: {
       height: 50,
       textAlign: "center"
+    },
+    containerButton: {
+      position: "absolute",
+      bottom: 0
     }
   })
 );

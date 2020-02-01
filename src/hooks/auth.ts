@@ -12,7 +12,7 @@ export type LoginParams = {
 export function useFetchSPYAuth() {
   const [error, setError] = useState();
   const [request, response] = useFetch(`${process.env.REACT_APP_API}`);
-  const { push } = useHistory();
+  const { push, replace, } = useHistory();
 
   const auth = useCallback(
     ({ user, password }: LoginParams) => {
@@ -50,14 +50,11 @@ export function useFetchSPYRefresh() {
   const { push } = useHistory();
   const [request, response] = useFetch(`${process.env.REACT_APP_API}`);
 
-  const refresh = useCallback(
-    () => {
-      request.post("auth/token/refresh/", {
-          refresh: `${getAuth().refresh}`,
-      });
-    },
-    [request.post]
-  );
+  const refresh = useCallback(() => {
+    request.post("auth/token/refresh/", {
+      refresh: `${getAuth().refresh}`
+    });
+  }, [request.post]);
 
   useEffect(() => {
     if (response.status === 401) {
@@ -82,6 +79,15 @@ export function useFetchSPYRefresh() {
 export function safeAuth(data: { access: string; refresh: string }) {
   set("access", data.access);
   data.refresh && set("refresh", data.refresh);
+}
+
+export function useClearAuth() {
+  const { replace } = useHistory();
+  const clearAuth = useCallback(() => {
+    clear();
+    replace("/");
+  }, [clear, replace]);
+  return { clearAuth };
 }
 
 export function getAuth() {
