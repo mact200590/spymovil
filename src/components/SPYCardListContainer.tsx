@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { DataApi } from "../components/SPYCard";
+import React, { useMemo } from "react";
 import { useFetchSPYData } from "../hooks/fetch";
 import SYPCardList from "./SPYCardList";
 
 const SPYCardListContainer = () => {
-  const [dataApis, setDataApis] = useState<DataApi[]>([]);
   const { loading, error, data = [] } = useFetchSPYData();
-  useEffect(() => {
+  const dataMemo = useMemo(() => {
     const dataPrepared = data.map((item: any) => ({
       id: item.id,
       name: item.nombre,
@@ -19,11 +17,10 @@ const SPYCardListContainer = () => {
         name: item.tipo.nombre
       }
     }));
-    setDataApis(dataPrepared);
+    return dataPrepared;
   }, [data]);
-
   return (
-    <SYPCardList listCardApi={dataApis} isLoading={loading} error={error} />
+    <SYPCardList listCardApi={dataMemo} isLoading={loading} error={error} />
   );
 };
 

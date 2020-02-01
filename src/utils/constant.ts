@@ -4,3 +4,4 @@ export const TURBIDITY_OF_WATER=["Limpios","Sucio"]
 
 //ERROR
 export const INCORRECT_PASSWORD="Credenciales inválidas";
+export const INCORRECT_TOKEN="Ha ocurrido un error inesperado, intente loguearse de nuevo";
