@@ -27,7 +27,7 @@ const SPYCardListContainer = () => {
   return (
     <div className={classes.container}>
       {error && <div>Algo está mal ...</div>}
-      <SYPCardList listCardApi={dataApis} isLoading={loading} />}
+      <SYPCardList listCardApi={dataApis} isLoading={loading} />
     </div>
   );
 };
