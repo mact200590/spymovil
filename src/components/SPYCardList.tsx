@@ -7,7 +7,7 @@ import { SPYSpinner } from "./SPYSpinner";
 interface Props {
   listCardApi: DataApi[];
   isLoading: boolean;
-  error: string;
+  error?: string;
 }
 
 const SYPCardList = ({ error, isLoading, listCardApi }: Props) => {
