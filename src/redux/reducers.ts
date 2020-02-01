@@ -13,21 +13,17 @@ function reducerDataApi(
 ) {
   switch (action.type) {
     case FETCH_DATA:
-      const { dataApi= [], loading } = action;
+      const { dataApi = [], loading } = action;
       return { ...state, dataApi, loading };
     default:
       return state;
   }
 }
 
-function reducerFilter(
-  state: FilterState = { name: "" },
-  action: ActionTypes
-) {
+function reducerFilter(state: FilterState = {}, action: ActionTypes) {
   switch (action.type) {
     case CHANGES_FILTER:
-      const { name } = action;
-      return { ...state, name };
+      return { ...state, ...action };
     case CLEAR_FILTER:
       return { ...state, filter: {} };
     default:

@@ -1,9 +1,10 @@
 import { DataApi } from "../components/SPYCard";
 import { CHANGES_FILTER, CLEAR_FILTER, FETCH_DATA } from "../utils/constant";
+import { Pair } from "../utils/helper";
 
 export interface State {
   dataApi: DataApiState;
-  filer: FilterState;
+  filter: FilterState;
 }
 
 export interface DataApiState {
@@ -13,7 +14,12 @@ export interface DataApiState {
 }
 
 export interface FilterState {
-  name: string;
+  name?: string;
+  chlorine?: number;
+  ph?: Pair;
+  turbidity?: number;
+  date?: string;
+  typeData?: string;
 }
 
 interface FetchDataAction {
