@@ -7,7 +7,7 @@ import { SPYSpinner } from "./SPYSpinner";
 interface Props {
   listCardApi: DataApi[];
   isLoading: boolean;
-  error: Error;
+  error: string;
 }
 
 const SYPCardList = ({ error, isLoading, listCardApi }: Props) => {
@@ -25,7 +25,7 @@ const SYPCardList = ({ error, isLoading, listCardApi }: Props) => {
           ))}
         </List>
       )}
-      {error && <div className={classes.error}>{error.message}</div>}
+      {error && <div className={classes.error}>{error}</div>}
     </div>
   );
 };
