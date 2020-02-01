@@ -33,10 +33,12 @@ const SPYPageMain = () => {
       </Container>
 
       <Container className={classes.width50}>
-        <div className={classes.result}>
+        <Box className={classes.result}>
           <SPYText title={"Resultado"} />
-        </div>
-        <SPYCardListContainer />
+        </Box>
+        <Box className={classes.height100}>
+          <SPYCardListContainer />
+        </Box>
       </Container>
     </Container>
   );
@@ -71,12 +73,11 @@ const useStyles = makeStyles(theme =>
       height: "30%",
       width: "50%"
     },
-    result: {
-      textAlign: "center",
-      marginTop: 25
-    },
     width100: {
       width: "100%"
+    },
+    height100: {
+      height: "100%"
     },
     order: {
       textAlign: "center"
@@ -88,6 +89,10 @@ const useStyles = makeStyles(theme =>
       borderWidth: 1,
       borderTopStyle: "solid",
       borderColor: "grey"
+    },
+    result: {
+      height: 50,
+      textAlign: "center"
     }
   })
 );

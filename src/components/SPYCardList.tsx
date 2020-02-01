@@ -1,8 +1,7 @@
-import React from "react";
+import { List, ListItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { DataApi } from "../components/SPYCard";
-import SYPCard from "../components/SPYCard";
-import { ListItem, List } from "@material-ui/core";
+import React from "react";
+import SYPCard, { DataApi } from "../components/SPYCard";
 import { SPYSpinner } from "./SPYSpinner";
 
 interface Props {
@@ -14,13 +13,13 @@ interface Props {
 const SYPCardList = ({ error, isLoading, listCardApi }: Props) => {
   const classes = useStyles();
   return (
-    <div>
+    <div className={classes.root}>
       {isLoading ? (
         <SPYSpinner />
       ) : (
-        <List className={classes.root}>
+        <List className={classes.list}>
           {listCardApi.map(item => (
-            <ListItem id={`${item.id}`}>
+            <ListItem className={classes.item} id={`${item.id}`}>
               <SYPCard dataApi={item} />
             </ListItem>
           ))}
@@ -33,16 +32,19 @@ const SYPCardList = ({ error, isLoading, listCardApi }: Props) => {
 
 const useStyles = makeStyles({
   root: {
-    display: "flex",
-    flexDirection: "column",
     width: "100%",
-    maxWidth: 360,
-    position: "relative",
-    overflow: "auto",
-    maxHeight: 300
+    height: "100%"
+  },
+  list: {
+    width: "100%",
+    maxHeight: "100%",
+    overflow: "auto"
+  },
+  item: {
+    width: "100%"
   },
   error: {
-    color: "red",
+    color: "red"
   }
 });
 
