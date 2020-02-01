@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardHeader from '@material-ui/core/CardHeader';
-
+import theme from "../style/theme";
 
 interface Plants {
     id: number,
@@ -23,31 +23,39 @@ export interface DataApi {
 
 interface Props {
     dataApi: DataApi,
-  }
+}
 
-const SYPCard = ({dataApi: {id, name, chlorine, ph, turbidity, date, type }}: Props) => {
+const SYPCard = ({ dataApi: { id, name, chlorine, ph, turbidity, date, type } }: Props) => {
     const classes = useStyles();
     return (
         <Card className={classes.card} variant="elevation">
-        <CardHeader className={classes.title}
-        title={name}>
+            <CardHeader
+                className={classes.title}
+                title={name}
+            >
             </CardHeader>
             <CardContent className={classes.content}>
-                <Typography variant="h5" component="h2">
-                { `Chlorine: ${chlorine}`}
-                </Typography>
-                <Typography variant="h5" component="h2">
-                    {`Ph: ${ph}`}
-                </Typography>
-                <Typography variant="h5" component="h2">
-                    {`Turbidity: ${turbidity}`}
-                </Typography>
-                <Typography variant="h5" component="h2">
-                    {`Date: ${date}`}
-                </Typography>
-                <Typography variant="h5" component="h4">
-                 {`Type of plant: ${type.name}`}
-                </Typography>
+                <CardContent className={classes.column}>
+                    <Typography component="h2">
+                        {`Chlorine: ${chlorine}`}
+                    </Typography>
+                    <Typography component="h2">
+                        {`Ph:  ${ph}`}
+                    </Typography>
+                    <Typography component="h2">
+                        {`Turbidity: ${turbidity}`}
+                    </Typography>
+                </CardContent>
+
+                <CardContent className={classes.column}>
+                    <Typography component="h2">
+                        {`Date: ${date}`}
+                    </Typography>
+
+                    <Typography component="h2">
+                        {`Type of plant: ${type.name}`}
+                    </Typography>
+                </CardContent>
             </CardContent>
         </Card>
     )
@@ -55,17 +63,29 @@ const SYPCard = ({dataApi: {id, name, chlorine, ph, turbidity, date, type }}: Pr
 
 const useStyles = makeStyles({
     card: {
-        minWidth: 275,
+        minWidth: "100%",
     },
     title: {
-        fontSize: 54,
-        color: 'white', 
-        textAlign:'center',
-        backgroundColor:'blue'
+        fontSize: 14,
+        fontFamily: "Arial",
+        color: 'white',
+        textAlign: 'center',
+        maxHeight: "10px",
+        backgroundColor: theme.palette.primary.main
     },
     content: {
-        fontSize: 24, 
-        textAlign:'left'
+        fontSize: 24,
+        textAlign: 'left',
+        display: "flex",
+        flexDirection: "row"
+    },
+    typography: {
+        fontFamily: "Arial",
+        fontWeight: "bolder"
+    },
+    column: {
+        display: "flex",
+        flexDirection: "column"
     }
 });
 
