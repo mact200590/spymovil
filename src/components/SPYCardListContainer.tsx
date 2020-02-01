@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useEffect, useState } from "react";
 import { DataApi } from "../components/SPYCard";
-import SYPCardList from "./SPYCardList";
 import { useFetchSPYData } from "../hooks/fetch";
+import SYPCardList from "./SPYCardList";
 
 const SPYCardListContainer = () => {
   const [dataApis, setDataApis] = useState<DataApi[]>([]);
-  const classes = useStyles();
   const { loading, error, data = [] } = useFetchSPYData();
   useEffect(() => {
     const dataPrepared = data.map((item: any) => ({
@@ -25,22 +23,8 @@ const SPYCardListContainer = () => {
   }, [data]);
 
   return (
-    <div className={classes.container}>
-      {error && <div>Algo está mal ...</div>}
-      <SYPCardList listCardApi={dataApis} isLoading={loading} />
-    </div>
+    <SYPCardList listCardApi={dataApis} isLoading={loading} error={error} />
   );
 };
-
-const useStyles = makeStyles({
-  container: {
-    display: "flex",
-    flexDirection: "row",
-    width: "100%",
-    position: "relative",
-    overflow: "auto",
-    maxHeight: "550px"
-  }
-});
 
 export default SPYCardListContainer;

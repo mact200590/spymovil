@@ -8,9 +8,10 @@ import { SPYSpinner } from "./SPYSpinner";
 interface Props {
   listCardApi: DataApi[];
   isLoading: boolean;
+  error: Error;
 }
 
-const SYPCardList = ({ isLoading, listCardApi }: Props) => {
+const SYPCardList = ({ error, isLoading, listCardApi }: Props) => {
   const classes = useStyles();
   return (
     <div>
@@ -25,20 +26,24 @@ const SYPCardList = ({ isLoading, listCardApi }: Props) => {
           ))}
         </List>
       )}
+      {error && <div className={classes.error}>{error.message}</div>}
     </div>
   );
 };
 
 const useStyles = makeStyles({
-    root: {
-        display: "flex",
-        flexDirection: "column",
-        width: "100%",
-        maxWidth: 360,
-        position: 'relative',
-        overflow: 'auto',
-        maxHeight: 300
-    }
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    maxWidth: 360,
+    position: "relative",
+    overflow: "auto",
+    maxHeight: 300
+  },
+  error: {
+    color: "red",
+  }
 });
 
 export default SYPCardList;
