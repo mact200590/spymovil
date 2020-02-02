@@ -8,7 +8,7 @@ export const dataApiLoading = (state: State) => state.dataApi.loading;
 export const dataApiError = (state: State) => state.dataApi.error;
 export const filter = (state: State) => state.filter;
 
-export const getData = createSelector([dataApi], dataApi => {
+export const getDataSelector = createSelector([dataApi], dataApi => {
   const dataPrepared = dataApi.map((item: any) => ({
     id: item.id,
     name: item.nombre,
@@ -24,11 +24,16 @@ export const getData = createSelector([dataApi], dataApi => {
   return dataPrepared;
 });
 
-export const getDataFilter = createSelector(
-  [getData, filter],
+export const getDataFilteredSelector = createSelector(
+  [getDataSelector, filter],
   (getData, filter) =>
     getData.filter(data => {
-      const keys = Object.keys(filter);
+      const keys = Object.keys(filter).filter(
+        d =>
+          (filter as any)[d] !== undefined &&
+          (filter as any)[d] !== "" &&
+          d !== "type"
+      );
       return !keys.some(key => {
         const valueFilter = (filter as any)[key];
         switch (key) {
