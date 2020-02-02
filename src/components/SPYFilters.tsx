@@ -59,12 +59,7 @@ const SPYFilters = ({ filter, onClickClear, onClick }: Props) => {
 
   const handleOnchangeChlorine = useCallback(
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const float = parseFloat(event.target.value);
-      if (event.target.value === "" || isNaN(float)) {
-        setChlorine(event.target.value as any);
-      } else {
-        setChlorine(float);
-      }
+      setChlorine(event.target.value as any);
     },
     [setChlorine]
   );
@@ -173,7 +168,7 @@ const SPYFilters = ({ filter, onClickClear, onClick }: Props) => {
           style={{
             margin: "1em"
           }}
-          label={"Delete"}
+          label={"Clear"}
           typeVariant={"primary"}
           fullWidth={true}
           onClick={() => onClickClear}
