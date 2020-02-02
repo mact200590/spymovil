@@ -1,32 +1,47 @@
 import { Box, Container, makeStyles } from "@material-ui/core";
-import React, { useCallback, useState } from "react";
-import { FIELDS_API, TURBIDITY_OF_WATER } from "../utils/constant";
+import React, { useCallback, useMemo, useState } from "react";
+import { FilterState } from "../redux/action";
+import { INCORRECT_CHLORINE, TURBIDITY_OF_WATER } from "../utils/constant";
 import { SPYButton } from "./SPYButton";
 import SPYDateSelector from "./SPYDateSelector";
 import { SPYInput } from "./SPYInput";
 import SPYSelect from "./SPYSelect";
 
 interface Props {
-  onClick: (
-    name: string,
-    chlorine: string,
-    turbidity: string,
-    date: string,
-    type: string,
-    selectPh: string
-  ) => void;
+  filter: FilterState;
+  onClick: (filter: FilterState) => void;
   onClickClear: () => void;
 }
 
-const SPYFilters = ({ onClickClear, onClick }: Props) => {
+const SPYFilters = ({ filter, onClickClear, onClick }: Props) => {
   const classes = useStyles();
+  const [name, setName] = useState(filter.name);
+  const [typeData, setTypeData] = useState(filter.typeData);
+  const [chlorine, setChlorine] = useState(filter.chlorine);
+  const [turbidity, setTurbidity] = useState(filter.turbidity);
+  const [date, setDate] = useState(filter.date);
+  const [ph, setPh] = useState(filter.ph);
+  const chlorineError = useMemo(() => {
+    if (chlorine && isNaN(chlorine)) {
+      return INCORRECT_CHLORINE;
+    } else {
+      return;
+    }
+  }, [chlorine]);
 
-  const [name, setName] = useState("");
-  const [chlorine, setChlorine] = useState("");
-  const [turbidity, setTurbidity] = useState("");
-  const [date, setDate] = useState("");
-  const [type, setType] = useState("");
-  const [selectPh, setSelectPh] = useState("");
+  const onClickCallBack = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      if (chlorineError) return;
+      const filter: FilterState = {};
+      filter.name = name;
+      filter.typeData = typeData;
+      filter.chlorine = chlorine;
+      filter.turbidity = turbidity;
+
+      onClick(filter);
+    },
+    [onClick, chlorineError, name, typeData, chlorine, turbidity]
+  );
 
   const handleOnchangeName = useCallback(
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -37,14 +52,19 @@ const SPYFilters = ({ onClickClear, onClick }: Props) => {
 
   const handleOnchangeChlorine = useCallback(
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setChlorine(event.target.value);
+      const float = parseFloat(event.target.value);
+      if (event.target.value === "" || isNaN(float)) {
+        setChlorine(event.target.value as any);
+      } else {
+        setChlorine(float);
+      }
     },
     [setChlorine]
   );
 
   const handleOnchangeSelectTurbidity = useCallback(
     (value: any) => {
-      setTurbidity(value);
+      setTurbidity(value === "Limpios" ? 0 : 10);
     },
     [setTurbidity]
   );
@@ -58,18 +78,18 @@ const SPYFilters = ({ onClickClear, onClick }: Props) => {
 
   const handleOnchangeType = useCallback(
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setType(event.target.value);
+      setTypeData(event.target.value);
     },
-    [setType]
+    [setTypeData]
   );
 
-  const handleOnchangeSelectPh = useCallback(
-    (value: any) => {
-      setSelectPh(value);
-    },
-    [setSelectPh]
-  );
-
+  // const handleOnchangeSelectPh = useCallback(
+  //   (value: any) => {
+  //     setSelectPh(value);
+  //   },
+  //   [setSelectPh]
+  // );
+  
   return (
     <Container className={classes.container}>
       <Box className={classes.width50}>
@@ -87,6 +107,7 @@ const SPYFilters = ({ onClickClear, onClick }: Props) => {
           placeholder="Cloro"
           label="Cloro"
           value={chlorine}
+          error={chlorineError}
           onChange={handleOnchangeChlorine}
         />
 
@@ -95,7 +116,7 @@ const SPYFilters = ({ onClickClear, onClick }: Props) => {
           typeVariant="primary"
           placeholder="Tipo"
           label="Tipo"
-          value={type}
+          value={typeData}
           onChange={handleOnchangeType}
         />
         <SPYSelect
@@ -103,17 +124,17 @@ const SPYFilters = ({ onClickClear, onClick }: Props) => {
           styleContainer={{ marginTop: "0px", minWidth: "165px" }}
           typeVariant={"primary"}
           options={TURBIDITY_OF_WATER}
-          value={turbidity}
+          defaultValue={turbidity === 0 ? "Limpios" : "Sucios"}
           onChange={handleOnchangeSelectTurbidity}
         />
-        <SPYSelect
+        {/* <SPYSelect
           styleContainer={{ marginTop: "10px", minWidth: "165px" }}
           label={"Elija el Ph"}
           typeVariant={"primary"}
           options={FIELDS_API}
           value={selectPh}
           onChange={handleOnchangeSelectPh}
-        />
+        /> */}
         <SPYDateSelector
           classNameContainer={classes.date}
           variant={"inline"}
@@ -130,9 +151,7 @@ const SPYFilters = ({ onClickClear, onClick }: Props) => {
           label={"Filtrar"}
           typeVariant={"primary"}
           fullWidth={true}
-          onClick={() =>
-            onClick(name, chlorine, selectPh, turbidity, date, type)
-          }
+          onClick={onClickCallBack}
         />
         <SPYButton
           style={{

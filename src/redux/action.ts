@@ -30,7 +30,12 @@ interface FetchDataAction {
 
 interface ChangesFilterAction {
   type: typeof CHANGES_FILTER;
-  name: string;
+  name?: string;
+  chlorine?: number;
+  ph?: Pair;
+  turbidity?: number;
+  date?: string;
+  typeData?: string;
 }
 
 interface ClearFilterAction {

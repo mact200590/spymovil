@@ -6,7 +6,7 @@ import { State } from "./action";
 const dataApi = (state: State) => state.dataApi.dataApi;
 export const dataApiLoading = (state: State) => state.dataApi.loading;
 export const dataApiError = (state: State) => state.dataApi.error;
-const filter = (state: State) => state.filter;
+export const filter = (state: State) => state.filter;
 
 export const getData = createSelector([dataApi], dataApi => {
   const dataPrepared = dataApi.map((item: any) => ({
@@ -29,16 +29,18 @@ export const getDataFilter = createSelector(
   (getData, filter) =>
     getData.filter(data => {
       const keys = Object.keys(filter);
-
       return !keys.some(key => {
         const valueFilter = (filter as any)[key];
         switch (key) {
+          case "type":
+            return false;
           case "typeData":
+            if (!valueFilter) return false;
             return (data as any)["type"].name !== valueFilter;
           case "turbidity":
             return !(
               (valueFilter > 3 && (data as any)[key] > 3) ||
-              (valueFilter < 3 && (data as any)[key] < 3)
+              (valueFilter <= 3 && (data as any)[key] <= 3)
             );
           case "date":
             const momentDate = moment((data as any)[key]);
@@ -47,7 +49,11 @@ export const getDataFilter = createSelector(
           case "ph":
             return !isContainer(valueFilter, (data as any)[key]);
           default:
-            if ((data as any)[key] !== valueFilter) {
+            if (!valueFilter) return false;
+            if (
+              `${(data as any)[key]}`.toLocaleLowerCase() !==
+              `${valueFilter}`.toLocaleLowerCase()
+            ) {
               return true;
             }
             return false;

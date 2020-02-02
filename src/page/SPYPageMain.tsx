@@ -1,11 +1,11 @@
 import { Box, Container } from "@material-ui/core";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import React from "react";
-import SPYCardListContainer from "../components/SPYCardListContainer";
-import SPYFilters from "../components/SPYFilters";
+import { SPYButton } from "../components/SPYButton";
 import SPYOrderBy from "../components/SPYOrderBy";
 import SPYText from "../components/SPYText";
-import { SPYButton } from "../components/SPYButton";
+import SPYCardListContainer from "../containers/SPYCardListContainer";
+import SPYFilterContainer from "../containers/SPYFilterContainer";
 import { useClearAuth } from "../hooks/auth";
 
 const SPYPageMain = () => {
@@ -15,7 +15,7 @@ const SPYPageMain = () => {
     <Container className={classes.container}>
       <Container className={classes.width50}>
         <Box className={classes.height70}>
-          <SPYFilters onClick={() => {}} onClickClear={() => {}} />
+          <SPYFilterContainer />
         </Box>
 
         <Box className={classes.width100}>

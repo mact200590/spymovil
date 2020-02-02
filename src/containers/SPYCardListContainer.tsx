@@ -6,7 +6,7 @@ import {
   dataApiLoading,
   getDataFilter
 } from "../redux/selectors";
-import SYPCardList from "./SPYCardList";
+import SYPCardList from "../components/SPYCardList";
 
 const SPYCardListContainer = () => {
   useFetchSPYData();
