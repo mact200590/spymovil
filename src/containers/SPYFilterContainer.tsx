@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SPYFilters from "../components/SPYFilters";
 import { FilterState } from "../redux/action";
-import { filter as filterSelector } from "../redux/selectors";
+import { filterSelector } from "../redux/selectors";
 import { CHANGES_FILTER, CLEAR_FILTER } from "../utils/constant";
 
 const SPYFilterContainer = () => {

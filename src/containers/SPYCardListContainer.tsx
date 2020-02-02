@@ -4,13 +4,13 @@ import { useFetchSPYData } from "../hooks/fetch";
 import {
   dataApiError,
   dataApiLoading,
-  getDataFilteredSelector
+  getDataOrderSelector
 } from "../redux/selectors";
 import SYPCardList from "../components/SPYCardList";
 
 const SPYCardListContainer = () => {
   useFetchSPYData();
-  const dataMemo = useSelector(getDataFilteredSelector);
+  const dataMemo = useSelector(getDataOrderSelector);
   const loading = useSelector(dataApiLoading);
   const error = useSelector(dataApiError);
 

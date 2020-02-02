@@ -4,13 +4,12 @@ import SPYSelect from "../components/SPYSelect";
 import { SelectType } from "./SPYSelect";
 
 const phScale = [
-  "Very acid",
-  "Moderately acidic",
-  "Slightly acidic",
-  "Neutral",
-  "Slightly alkaline",
-  "Moderately alkaline",
-  "Very alkaline"
+  "name",
+  "chlorine",
+  "ph",
+  "turbidity",
+  "date",
+  "typeData",
 ];
 interface Props {
   typeVariant: SelectType;

@@ -1,10 +1,11 @@
-import { CHANGES_FILTER, CLEAR_FILTER, FETCH_DATA } from "../utils/constant";
-import { ActionTypes, DataApiState, FilterState } from "./action";
+import { CHANGES_FILTER, CLEAR_FILTER, FETCH_DATA, ORDER_BY } from "../utils/constant";
+import { ActionTypes, DataApiState, FilterState, OrderState } from "./action";
 import { combineReducers } from "redux";
 
 export const rootReducer = combineReducers({
   dataApi: reducerDataApi,
-  filter: reducerFilter
+  filter: reducerFilter,
+  order: reducerOrder,
 });
 
 function reducerDataApi(
@@ -26,6 +27,15 @@ function reducerFilter(state: FilterState = {}, action: ActionTypes) {
       return { ...state, ...action };
     case CLEAR_FILTER:
       return { ...state, filter: {} };
+    default:
+      return state;
+  }
+}
+
+function reducerOrder(state: OrderState = {}, action: ActionTypes) {
+  switch (action.type) {
+    case ORDER_BY:
+      return { ...state, ...action };
     default:
       return state;
   }

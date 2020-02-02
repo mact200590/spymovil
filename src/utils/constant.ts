@@ -20,4 +20,6 @@ export const INCORRECT_TOKEN =
 //REDUX
 export const FETCH_DATA = "FETCH_DATA";
 export const CHANGES_FILTER = "CHANGES_FILTER";
+export const ORDER_BY = "ORDER_BY";
+
 export const CLEAR_FILTER = "CLEAR_FILTER";

@@ -2,11 +2,13 @@ import moment from "moment";
 import { createSelector } from "reselect";
 import { isContainer } from "../utils/helper";
 import { State } from "./action";
+import { DataApi } from "../components/SPYCard";
 
 const dataApi = (state: State) => state.dataApi.dataApi;
 export const dataApiLoading = (state: State) => state.dataApi.loading;
 export const dataApiError = (state: State) => state.dataApi.error;
-export const filter = (state: State) => state.filter;
+export const filterSelector = (state: State) => state.filter;
+export const orderSelector = (state: State) => state.order;
 
 export const getDataSelector = createSelector([dataApi], dataApi => {
   const dataPrepared = dataApi.map((item: any) => ({
@@ -25,7 +27,7 @@ export const getDataSelector = createSelector([dataApi], dataApi => {
 });
 
 export const getDataFilteredSelector = createSelector(
-  [getDataSelector, filter],
+  [getDataSelector, filterSelector],
   (getData, filter) =>
     getData.filter(data => {
       const keys = Object.keys(filter).filter(
@@ -56,8 +58,8 @@ export const getDataFilteredSelector = createSelector(
           default:
             if (!valueFilter) return false;
             if (
-              `${(data as any)[key]}`.toLocaleLowerCase() !==
-              `${valueFilter}`.toLocaleLowerCase()
+              (data as any)[key].toString().toLocaleLowerCase() !==
+              valueFilter.toString().toLocaleLowerCase()
             ) {
               return true;
             }
@@ -66,3 +68,18 @@ export const getDataFilteredSelector = createSelector(
       });
     })
 );
+
+export const getDataOrderSelector = createSelector(
+  [getDataFilteredSelector, orderSelector],
+  (getDataFilter, order) => orderBasicValues(getDataFilter, order.value)
+);
+
+const orderBasicValues = (data: DataApi[], valueOrder: string | undefined) => {
+  let value = valueOrder ? valueOrder : "name";
+
+  return data.sort((a: any, b: any) => {
+    return value === "typeData"
+      ? a.type.name.toString().localeCompare(b.type.name.toString())
+      : a[value].toString().localeCompare(b[value].toString());
+  });
+};
