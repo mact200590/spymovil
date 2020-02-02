@@ -42,11 +42,12 @@ const SPYFilters = ({ filter, onClickClear, onClick }: Props) => {
         typeData,
         chlorine,
         turbidity,
-        ph
+        ph,
+        date
       };
       onClick(filter);
     },
-    [onClick, chlorineError, name, typeData, chlorine, turbidity, ph]
+    [onClick, chlorineError, name, typeData, chlorine, turbidity, ph, date]
   );
 
   const handleOnchangeName = useCallback(
@@ -93,6 +94,7 @@ const SPYFilters = ({ filter, onClickClear, onClick }: Props) => {
 
   const handleOnchangeDate = useCallback(
     (date: any) => {
+      console.log(date);
       setDate(date);
     },
     [setDate]
