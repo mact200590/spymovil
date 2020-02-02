@@ -171,7 +171,7 @@ const SPYFilters = ({ filter, onClickClear, onClick }: Props) => {
           label={"Clear"}
           typeVariant={"primary"}
           fullWidth={true}
-          onClick={() => onClickClear}
+          onClick={ onClickClear}
         />
       </Box>
     </Container>

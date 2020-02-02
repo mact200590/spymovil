@@ -26,7 +26,7 @@ function reducerFilter(state: FilterState = {}, action: ActionTypes) {
     case CHANGES_FILTER:
       return { ...state, ...action };
     case CLEAR_FILTER:
-      return { ...state, filter: {} };
+      return {};
     default:
       return state;
   }
