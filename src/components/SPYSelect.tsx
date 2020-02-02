@@ -17,7 +17,7 @@ type Props = {
   styleContainer?: React.CSSProperties | undefined;
 } & SelectProps;
 
-const GDSelect = ({
+const SPYSelect = ({
   label,
   typeVariant,
   fullWidth,
@@ -40,21 +40,21 @@ const GDSelect = ({
   };
 
   return (
-    <div>
-      <FormControl
-        style={styleContainer}
-        variant={variant}
-        className={classes.formControl}
-        fullWidth={fullWidth || false}
-      >
-        {label && <InputLabel>{label}</InputLabel>}
-        <Select value={selected} onChange={handleChange}>
-          {options.map((item, i) => (
-            <MenuItem key={i} value={item}>{item}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
+    <FormControl
+      style={{ ...styleContainer, marginLeft: "0px", marginRight: "0px" }}
+      variant={variant}
+      className={classes.formControl}
+      fullWidth={fullWidth || false}
+    >
+      {label && <InputLabel>{label}</InputLabel>}
+      <Select value={selected} onChange={handleChange}>
+        {options.map((item, i) => (
+          <MenuItem key={i} value={item}>
+            {item}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 };
 
@@ -70,4 +70,4 @@ const useStyles = makeStyles(theme =>
   })
 );
 
-export default GDSelect;
+export default SPYSelect;

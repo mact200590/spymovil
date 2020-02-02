@@ -2,7 +2,7 @@ import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import React from "react";
 import Size from "../style/size";
-import GDSelect from "./GDSelect";
+import GDSelect from "./SPYSelect";
 
 export type GDSelectPlayerType = "primary" | "secondary";
 
@@ -14,7 +14,7 @@ interface Props {
   onChange?: ((value: string) => void) | undefined;
 }
 
-const GDSelectLabel = ({
+const SPYSelectLabel = ({
   label: namePlayer,
   typeVariant,
   options,
@@ -38,7 +38,7 @@ const GDSelectLabel = ({
   );
 };
 
-export default GDSelectLabel;
+export default SPYSelectLabel;
 
 const useStyles = makeStyles(theme => ({
   container: {

@@ -6,17 +6,17 @@ interface Props {
     titleSubtitle?: string;
 }
 
-const GDText = ({ title, titleSubtitle }: Props) => {
+const SPYText = ({ title, titleSubtitle }: Props) => {
     const classes = useStyles();
     return (
         <div className={classes.container}>
             <p className={classes.title}>{title}</p>
-            <p className={classes.titleSubtitle}>{titleSubtitle}</p>
+            {titleSubtitle && <p className={classes.titleSubtitle}>{titleSubtitle}</p>}
         </div>
     )
 }
 
-export default GDText;
+export default SPYText;
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -26,6 +26,9 @@ const useStyles = makeStyles(theme => ({
     title: {
         fontFamily: "Times New Roman",
         fontSize: 40,
+        marginBottom: "0px",
+        marginTop: "0px",
+       
     },
     titleSubtitle: {
         fontFamily: "Times New Roman",

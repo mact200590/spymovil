@@ -2,7 +2,7 @@ import { Button } from "@material-ui/core";
 import { ButtonBaseProps } from "@material-ui/core/ButtonBase";
 import React, { useMemo } from "react";
 
-type ButtonType = "primary" | "secondary";
+export type ButtonType = "primary" | "secondary";
 
 type Props = {
   label: string;
@@ -10,7 +10,7 @@ type Props = {
   fullWidth: boolean;
 } & ButtonBaseProps;
 
-export const GDButton: React.FC<Props> = ({
+export const SPYButton: React.FC<Props> = ({
   label,
   typeVariant,
   fullWidth,

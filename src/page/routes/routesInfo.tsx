@@ -1,9 +1,6 @@
 import { RouteComponentProps } from "react-router-dom";
-import GDStartGame from "../GDStartGame";
-import GDBoardGame from "../GDBoardGame";
-import GDWinnerView from "../GDWinnerView";
-import GDConfiguration from "../GDConfiguration";
-import GDStatistics from "../GDStatistics";
+import SPYLogin from "../../components/SPYLogin";
+import SPYPageMain from "../SPYPageMain";
 
 export interface Route {
   path: string;
@@ -17,26 +14,11 @@ export const routesInfo: Route[] = [
   {
     exact: true,
     path: "/",
-    component: GDStartGame,
+    component: SPYLogin,
   },
   {
     exact: true,
-    path: "/main",
-    component: GDBoardGame,
-  },
-  {
-    exact: true,
-    path: "/result",
-    component: GDWinnerView,
-  },
-  {
-    exact: true,
-    path: "/config",
-    component: GDConfiguration,
-  },
-  {
-    exact: true,
-    path: "/statistics",
-    component: GDStatistics,
+    path: "/data-online",
+    component: SPYPageMain,
   }
 ];
