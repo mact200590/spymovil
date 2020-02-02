@@ -24,7 +24,7 @@ const SPYPageMain = () => {
               <SPYOrderContainer />
             </Box>
             <Box className={classes.width50New}>
-              <SPYText title={"Ordenar"} />
+              <SPYText title={"Order"} />
             </Box>
           </Container>
         </Box>
@@ -32,7 +32,7 @@ const SPYPageMain = () => {
 
       <Container className={classes.width50}>
         <Box className={classes.result}>
-          <SPYText title={"Resultado"} />
+          <SPYText title={"Result"} />
         </Box>
         <Box className={classes.height100}>
           <SPYCardListContainer />
@@ -43,7 +43,7 @@ const SPYPageMain = () => {
           style={{
             margin: "1em"
           }}
-          label={"Salir"}
+          label={"Logout"}
           typeVariant={"primary"}
           fullWidth={true}
           onClick={clearAuth}

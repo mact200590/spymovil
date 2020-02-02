@@ -104,16 +104,16 @@ const SPYFilters = ({ filter, onClickClear, onClick }: Props) => {
         <SPYInput
           classNameContainer={classes.input}
           typeVariant="primary"
-          placeholder="Nombre"
-          label="Nombre"
+          placeholder="Name"
+          label="Name"
           value={name}
           onChange={handleOnchangeName}
         />
         <SPYInput
           classNameContainer={classes.input}
           typeVariant="primary"
-          placeholder="Cloro"
-          label="Cloro"
+          placeholder="Chlorine"
+          label="Chlorine"
           value={chlorine}
           error={chlorineError}
           onChange={handleOnchangeChlorine}
@@ -122,13 +122,13 @@ const SPYFilters = ({ filter, onClickClear, onClick }: Props) => {
         <SPYInput
           classNameContainer={classes.input}
           typeVariant="primary"
-          placeholder="Tipo"
-          label="Tipo"
+          placeholder="Type"
+          label="Type"
           value={typeData}
           onChange={handleOnchangeType}
         />
         <SPYSelect
-          label={"Turbidez"}
+          label={"Turbidity"}
           styleContainer={{ marginTop: "0px", minWidth: "165px" }}
           typeVariant={"primary"}
           options={TURBIDITY_OF_WATER}
@@ -143,7 +143,7 @@ const SPYFilters = ({ filter, onClickClear, onClick }: Props) => {
         />
         <SPYSelect
           styleContainer={{ marginTop: "10px", minWidth: "165px" }}
-          label={"Elija el Ph"}
+          label={"Ph"}
           typeVariant={"primary"}
           options={PH_VALUE}
           value={phValueToLabel(ph)}
@@ -155,14 +155,14 @@ const SPYFilters = ({ filter, onClickClear, onClick }: Props) => {
           justify={"flex-start"}
           disableToolbar={false}
           id={"id-ph"}
-          label={"Elija la fecha"}
+          label={"Date"}
           onChange={handleOnchangeDate}
         />
       </Box>
       <Box className={classes.width50}>
         <SPYButton
           style={{ margin: "1em" }}
-          label={"Filtrar"}
+          label={"Filter"}
           typeVariant={"primary"}
           fullWidth={true}
           onClick={onClickCallBack}
@@ -171,7 +171,7 @@ const SPYFilters = ({ filter, onClickClear, onClick }: Props) => {
           style={{
             margin: "1em"
           }}
-          label={"Borrar"}
+          label={"Delete"}
           typeVariant={"primary"}
           fullWidth={true}
           onClick={() => onClickClear}

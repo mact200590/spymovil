@@ -23,20 +23,20 @@ const SPYLogin = () => {
           <SPYSpinner />
         </div>
       )}
-      <SPYText title={"Iniciar sesión"} />
+      <SPYText title={"Sign in"} />
 
       <div className={classes.fields}>
         <SPYInput
           typeVariant={"login"}
           value={user}
-          placeholder={"Usuario"}
+          placeholder={"User"}
           onChange={(
             event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
           ) => setUser(event.target.value)}
         />
         <SPYInput
           type={"password"}
-          placeholder={"Contraseña"}
+          placeholder={"Password"}
           value={password}
           onChange={(
             event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -45,7 +45,7 @@ const SPYLogin = () => {
         />
       </div>
       <SPYButton
-        label={"Entrar"}
+        label={"Login"}
         fullWidth={false}
         typeVariant={"primary"}
         onClick={() => {
