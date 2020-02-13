@@ -1,93 +1,129 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import CardHeader from '@material-ui/core/CardHeader';
-import theme from "../style/theme";
+import { Container } from "@material-ui/core";
+import Avatar from "@material-ui/core/Avatar";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+import { red } from "@material-ui/core/colors";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import moment from "moment";
+import React from "react";
 
 interface Plants {
-    id: number,
-    name: string
+  id: number;
+  name: string;
 }
 
 export interface DataApi {
-    id: number,
-    name: string,
-    chlorine: number,
-    ph: number,
-    turbidity: number,
-    date: string,
-    type: Plants
+  id: number;
+  name: string;
+  chlorine: number;
+  ph: number;
+  turbidity: number;
+  date: string;
+  type: Plants;
 }
 
 interface Props {
-    dataApi: DataApi,
+  dataApi: DataApi;
 }
 
-const SYPCard = ({ dataApi: { id, name, chlorine, ph, turbidity, date, type } }: Props) => {
-    const classes = useStyles();
-    return (
-        <Card className={classes.card} variant="elevation">
-            <CardHeader
-                className={classes.title}
-                title={name}
-            >
-            </CardHeader>
-            <CardContent className={classes.content}>
-                <CardContent className={classes.column}>
-                    <Typography component="h2">
-                        {`Chlorine: ${chlorine}`}
-                    </Typography>
-                    <Typography component="h2">
-                        {`Ph:  ${ph}`}
-                    </Typography>
-                    <Typography component="h2">
-                        {`Turbidity: ${turbidity}`}
-                    </Typography>
-                </CardContent>
+const SYPCard = ({
+  dataApi: { id, name, chlorine, ph, turbidity, date, type }
+}: Props) => {
+  const classes = useStyles();
+  const [expanded, setExpanded] = React.useState(false);
 
-                <CardContent className={classes.column}>
-                    <Typography component="h2">
-                        {`Date: ${date}`}
-                    </Typography>
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
-                    <Typography component="h2">
-                        {`Type of plant: ${type.name}`}
-                    </Typography>
-                </CardContent>
-            </CardContent>
-        </Card>
-    )
-}
+  return (
+    <Card className={classes.root}>
+      <CardMedia
+        className={classes.media}
+        image="/assets/images/colonia.jpg"
+        title="Paella dish"
+      />
+      <Container className={classes.nameContainer}>
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="h2"
+          className={classes.name}
+        >
+          {name}
+        </Typography>
+        <CardHeader
+          avatar={
+            <Avatar variant="rounded" className={classes.avatar}>
+              {""}
+            </Avatar>
+          }
+          title="Ph"
+          className={classes.ph}
+        />
+      </Container>
+      <Typography variant="body2" color="textSecondary" component="p">
+        {moment(date).format("d MMM, YY")}
+      </Typography>
+      <Typography variant="body2" color="textSecondary" component="p">
+        #:{" "}
+        <Typography variant="body2" color="textSecondary" component="p">
+          {id}
+        </Typography>
+      </Typography>
+    </Card>
+  );
+};
 
-const useStyles = makeStyles({
-    card: {
-        minWidth: "100%",
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: "100%"
     },
-    title: {
-        fontSize: 14,
-        fontFamily: "Arial",
-        color: 'white',
-        textAlign: 'center',
-        maxHeight: "10px",
-        backgroundColor: theme.palette.primary.main
+    nameContainer: {
+      display: "flex",
+      justifyContent: "space-between",
+      paddingLeft: 0,
+      paddingRight: 0,
+      paddingBottom: 0
     },
-    content: {
-        fontSize: 24,
-        textAlign: 'left',
-        display: "flex",
-        flexDirection: "row"
+    name: {
+      marginBottom: 0
     },
-    typography: {
-        fontFamily: "Arial",
-        fontWeight: "bolder"
+    ph: {
+      paddingTop: 2,
+      paddingLeft: 0,
+      paddingRight: 0,
+      paddingBottom: 2
     },
-    column: {
-        display: "flex",
-        flexDirection: "column"
+    media: {
+      height: "100%",
+      width: "100%",
+      minHeight: 150,
+      minWidth: 350,
+      borderRadius: 5
+      // [theme.breakpoints.down("xs")]: {
+      //   width: "100%"
+      // }
+    },
+    expand: {
+      transform: "rotate(0deg)",
+      marginLeft: "auto",
+      transition: theme.transitions.create("transform", {
+        duration: theme.transitions.duration.shortest
+      })
+    },
+    expandOpen: {
+      transform: "rotate(180deg)"
+    },
+    avatar: {
+      width: 50,
+      height: 5,
+      backgroundColor: red[500]
     }
-});
-
+  })
+);
 
 export default SYPCard;
