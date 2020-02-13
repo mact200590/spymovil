@@ -22,6 +22,7 @@ export interface DataApi {
   turbidity: number;
   date: string;
   type: Plants;
+
 }
 
 interface Props {
@@ -37,12 +38,16 @@ const SYPCard = ({
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  
+  const img=(id.toString()).concat(`.jpg`);
+  const image="/assets/images/"
+ const resut= image.concat(img)
 
-  return (
+  return (  
     <Card className={classes.root}>
       <CardMedia
         className={classes.media}
-        image="/assets/images/colonia.jpg"
+        image={resut}
         title="Paella dish"
       />
       <Container className={classes.nameContainer}>
@@ -64,13 +69,18 @@ const SYPCard = ({
           className={classes.ph}
         />
       </Container>
-      <Typography variant="body2" color="textSecondary" component="p">
-        {moment(date).format("d MMM, YY")}
+      <Typography className={classes.date} variant="body2" color="textSecondary" component="p">
+        {moment(date).format("DD, MMMM, YYYY")}
       </Typography>
-      <Typography variant="body2" color="textSecondary" component="p">
-        #:{" "}
+      <Typography  className={classes.itemValue}variant="body2" color="textSecondary" component="p">
+              <Typography variant="body2" color="textSecondary" component="p">
+          {`Chlorine:${chlorine}`}
+        </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          {id}
+          {`Turbidity:${turbidity}`}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {`Type:${type.name}`}
         </Typography>
       </Typography>
     </Card>
@@ -104,10 +114,7 @@ const useStyles = makeStyles((theme: Theme) =>
       minHeight: 150,
       minWidth: 350,
       borderRadius: 5
-      // [theme.breakpoints.down("xs")]: {
-      //   width: "100%"
-      // }
-    },
+        },
     expand: {
       transform: "rotate(0deg)",
       marginLeft: "auto",
@@ -121,7 +128,22 @@ const useStyles = makeStyles((theme: Theme) =>
     avatar: {
       width: 50,
       height: 5,
-      backgroundColor: red[500]
+      backgroundColor: red[500],
+      paddingRight:15,
+    }, 
+    date:{
+      borderRadius:5,
+      maxWidth:150,
+      border: 2, 
+      borderStyle:"solid", 
+      borderColor:"#858585",
+      opacity:1,
+      paddingLeft:5,
+      marginTop:5
+
+    },
+    itemValue:{
+     paddingLeft:5
     }
   })
 );
