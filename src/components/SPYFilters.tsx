@@ -143,7 +143,7 @@ const SPYFilters = ({ filter, onClickClear, onClick }: Props) => {
           label={"Ph"}
           typeVariant={"primary"}
           options={PH_VALUE}
-          value={phValueToLabel(ph)}
+          value={phValueToLabel(ph).label}
           onChange={handleOnchangePh}
         />
         <SPYDateSelector

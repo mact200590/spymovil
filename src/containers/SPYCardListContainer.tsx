@@ -13,7 +13,6 @@ const SPYCardListContainer = () => {
   const dataMemo = useSelector(getDataOrderSelector);
   const loading = useSelector(dataApiLoading);
   const error = useSelector(dataApiError);
-
   return (
     <SYPCardList listCardApi={dataMemo} isLoading={loading} error={error} />
   );
