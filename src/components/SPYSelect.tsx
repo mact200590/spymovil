@@ -61,11 +61,8 @@ const SPYSelect = ({
 const useStyles = makeStyles(theme =>
   createStyles({
     formControl: {
-      margin: theme.spacing(1),
+      margin: theme.spacing(0),
       minWidth: 120
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2)
     }
   })
 );

@@ -31,4 +31,3 @@ export const SPYButton: React.FC<Props> = ({
     </Button>
   );
 };
-
