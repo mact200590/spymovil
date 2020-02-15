@@ -8,7 +8,7 @@ import SPYOrderContainer from "../containers/SPYOrderContainer";
 const SPYPanelFilter = () => {
   const classes = useStyles();
   return (
-    <Container className={classes.width50Container} style={util as any}>
+    <Container className={classes.width50Container}>
       <Box className={classes.width50}>
         <SPYFilterContainer />
       </Box>
