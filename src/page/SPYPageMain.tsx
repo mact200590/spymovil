@@ -11,11 +11,10 @@ const SPYPageMain = () => {
   const { clearAuth } = useClearAuth();
   return (
     <Container className={classes.container}>
-      
       <SPYPanelFilter />
 
       <SPYPanelList />
-      
+
       <Box className={classes.containerButton}>
         <SPYButton
           style={{
@@ -44,7 +43,11 @@ const useStyles = makeStyles(theme =>
     },
     containerButton: {
       position: "absolute",
-      bottom: 0
+      bottom: 0,
+      [theme.breakpoints.down("sm")]: {
+        top: 0,
+        right: 0
+      }
     }
   })
 );

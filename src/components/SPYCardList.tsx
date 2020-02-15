@@ -33,7 +33,7 @@ const SYPCardList = ({ error, isLoading, listCardApi }: Props) => {
 const useStyles = makeStyles({
   root: {
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   list: {
     width: "100%",
