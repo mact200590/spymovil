@@ -1,93 +1,160 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import CardHeader from '@material-ui/core/CardHeader';
-import theme from "../style/theme";
+import { Container } from "@material-ui/core";
+import Avatar from "@material-ui/core/Avatar";
+import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import moment from "moment";
+import React from "react";
+import { phValueToLabel } from "../utils/helper";
 
 interface Plants {
-    id: number,
-    name: string
+  id: number;
+  name: string;
 }
 
 export interface DataApi {
-    id: number,
-    name: string,
-    chlorine: number,
-    ph: number,
-    turbidity: number,
-    date: string,
-    type: Plants
+  id: number;
+  name: string;
+  chlorine: number;
+  ph: number;
+  turbidity: number;
+  date: string;
+  type: Plants;
 }
 
 interface Props {
-    dataApi: DataApi,
+  dataApi: DataApi;
 }
 
-const SYPCard = ({ dataApi: { id, name, chlorine, ph, turbidity, date, type } }: Props) => {
-    const classes = useStyles();
-    return (
-        <Card className={classes.card} variant="elevation">
-            <CardHeader
-                className={classes.title}
-                title={name}
-            >
-            </CardHeader>
-            <CardContent className={classes.content}>
-                <CardContent className={classes.column}>
-                    <Typography component="h2">
-                        {`Chlorine: ${chlorine}`}
-                    </Typography>
-                    <Typography component="h2">
-                        {`Ph:  ${ph}`}
-                    </Typography>
-                    <Typography component="h2">
-                        {`Turbidity: ${turbidity}`}
-                    </Typography>
-                </CardContent>
+const SYPCard = ({
+  dataApi,
+  dataApi: { id, name, chlorine, ph, turbidity, date, type }
+}: Props) => {
+  const classes = useStyles({ dataApi });
+  const [expanded, setExpanded] = React.useState(false);
 
-                <CardContent className={classes.column}>
-                    <Typography component="h2">
-                        {`Date: ${date}`}
-                    </Typography>
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
-                    <Typography component="h2">
-                        {`Type of plant: ${type.name}`}
-                    </Typography>
-                </CardContent>
-            </CardContent>
-        </Card>
-    )
-}
+  const imagePath = `/assets/images/${id}.jpg`;
 
-const useStyles = makeStyles({
-    card: {
-        minWidth: "100%",
+  return (
+    <Card className={classes.root}>
+      <Typography
+        gutterBottom
+        variant="h5"
+        component="h2"
+        className={classes.name}
+      >
+        {name}
+      </Typography>
+      <CardMedia className={classes.media} image={imagePath} title="Paella dish" />
+
+      <Container className={classes.nameContainer}>
+        <Typography
+          className={classes.date}
+          variant="body2"
+          color="textSecondary"
+          component="p"
+        >
+          {moment(date).format("DD MMM, YYYY")}
+        </Typography>
+        <Avatar variant="rounded" className={classes.avatar}>
+          {""}
+        </Avatar>
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          component="p"
+          className={classes.ph}
+        >
+          Ph
+        </Typography>
+      </Container>
+
+      <Typography
+        className={classes.itemValue}
+        variant="body2"
+        color="textSecondary"
+        component="p"
+      >
+        <Typography variant="body2" color="textSecondary" component="p">
+          {`Chlorine: ${chlorine}`}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {`Turbidity: ${turbidity}`}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {`Type: ${type.name}`}
+        </Typography>
+      </Typography>
+    </Card>
+  );
+};
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: "100%",
+      borderWidth: 0,
+      boxShadow: "0px 0px 0px #FFFFFF"
     },
-    title: {
-        fontSize: 14,
-        fontFamily: "Arial",
-        color: 'white',
-        textAlign: 'center',
-        maxHeight: "10px",
-        backgroundColor: theme.palette.primary.main
+    nameContainer: {
+      display: "flex",
+      paddingLeft: 0,
+      paddingRight: 0,
+      paddingBottom: 0
     },
-    content: {
-        fontSize: 24,
-        textAlign: 'left',
-        display: "flex",
-        flexDirection: "row"
+    name: {
+      marginBottom: 0,
+      textShadow: "1px 2px 3px #3e3b3b",
+      color: "#3a3838"
     },
-    typography: {
-        fontFamily: "Arial",
-        fontWeight: "bolder"
+    ph: {
+      alignSelf: "center",
+      marginLeft: 5
     },
-    column: {
-        display: "flex",
-        flexDirection: "column"
+    media: {
+      height: "100%",
+      width: "100%",
+      minHeight: 250,
+      minWidth: 350,
+      borderRadius: 5
+    },
+    expand: {
+      transform: "rotate(0deg)",
+      marginLeft: "auto",
+      transition: theme.transitions.create("transform", {
+        duration: theme.transitions.duration.shortest
+      })
+    },
+    expandOpen: {
+      transform: "rotate(180deg)"
+    },
+    avatar: (props: Props) => ({
+      width: 10,
+      height: 10,
+      backgroundColor: phValueToLabel(props.dataApi.ph).color,
+      alignSelf: "center",
+      marginLeft: 15
+    }),
+    date: {
+      borderRadius: 5,
+      maxWidth: 150,
+      border: 2,
+      borderStyle: "solid",
+      borderColor: "#858585",
+      opacity: 1,
+      paddingLeft: 5,
+      paddingRight: 5,
+      marginTop: 5
+    },
+    itemValue: {
+      paddingLeft: 5
     }
-});
-
+  })
+);
 
 export default SYPCard;

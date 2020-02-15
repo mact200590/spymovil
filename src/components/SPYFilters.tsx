@@ -11,6 +11,7 @@ import SPYDateSelector from "./SPYDateSelector";
 import { SPYInput } from "./SPYInput";
 import SPYSelect from "./SPYSelect";
 import { phValueToLabel, phValueToPair } from "../utils/helper";
+import SPYText from "./SPYText";
 
 interface Props {
   filter: FilterState;
@@ -97,83 +98,76 @@ const SPYFilters = ({ filter, onClickClear, onClick }: Props) => {
 
   return (
     <Container className={classes.container}>
-      <Box className={classes.width50}>
-        <SPYInput
-          classNameContainer={classes.input}
-          typeVariant="primary"
-          placeholder="Name"
-          label="Name"
-          value={name}
-          onChange={handleOnchangeName}
-        />
-        <SPYInput
-          classNameContainer={classes.input}
-          typeVariant="primary"
-          placeholder="Chlorine"
-          label="Chlorine"
-          value={chlorine}
-          error={chlorineError}
-          onChange={handleOnchangeChlorine}
-        />
+      <Box>
+        <SPYText title={"Filter"} fontSize={25}/>
+      </Box>
+      <SPYInput
+        typeVariant="primary"
+        placeholder="Name"
+        label="Name"
+        value={name}
+        onChange={handleOnchangeName}
+        fullWidth
+      />
+      <SPYInput
+        typeVariant="primary"
+        placeholder="Chlorine"
+        label="Chlorine"
+        value={chlorine}
+        error={chlorineError}
+        onChange={handleOnchangeChlorine}
+        fullWidth
+      />
 
-        <SPYInput
-          classNameContainer={classes.input}
-          typeVariant="primary"
-          placeholder="Type"
-          label="Type"
-          value={typeData}
-          onChange={handleOnchangeType}
-        />
-        <SPYSelect
-          label={"Turbidity"}
-          styleContainer={{ marginTop: "0px", minWidth: "165px" }}
-          typeVariant={"primary"}
-          options={TURBIDITY_OF_WATER}
-          defaultValue={
-            turbidity === 0
-              ? "Limpios"
-              : turbidity === 10
-              ? "Sucios"
-              : undefined
-          }
-          onChange={handleOnchangeSelectTurbidity}
-        />
-        <SPYSelect
-          styleContainer={{ marginTop: "10px", minWidth: "165px" }}
-          label={"Ph"}
-          typeVariant={"primary"}
-          options={PH_VALUE}
-          value={phValueToLabel(ph)}
-          onChange={handleOnchangePh}
-        />
-        <SPYDateSelector
-          classNameContainer={classes.date}
-          variant={"inline"}
-          justify={"flex-start"}
-          disableToolbar={false}
-          id={"id-ph"}
-          label={"Date"}
-          onChange={handleOnchangeDate}
-        />
-      </Box>
-      <Box className={classes.width50}>
-        <SPYButton
-          style={{ margin: "1em" }}
-          label={"Filter"}
-          typeVariant={"primary"}
-          fullWidth={true}
-          onClick={onClickCallBack}
-        />
-        <SPYButton
-          style={{
-            margin: "1em"
-          }}
-          label={"Clear"}
-          typeVariant={"primary"}
-          fullWidth={true}
-          onClick={ onClickClear}
-        />
-      </Box>
+      <SPYInput
+        typeVariant="primary"
+        placeholder="Type"
+        label="Type"
+        value={typeData}
+        onChange={handleOnchangeType}
+        fullWidth
+      />
+      <SPYSelect
+        label={"Turbidity"}
+        styleContainer={{ marginTop: "0px", minWidth: "165px" }}
+        typeVariant={"primary"}
+        options={TURBIDITY_OF_WATER}
+        defaultValue={
+          turbidity === 0 ? "Limpios" : turbidity === 10 ? "Sucios" : undefined
+        }
+        onChange={handleOnchangeSelectTurbidity}
+      />
+      <SPYSelect
+        styleContainer={{ minWidth: "165px" }}
+        label={"Ph"}
+        typeVariant={"primary"}
+        options={PH_VALUE}
+        value={phValueToLabel(ph).label}
+        onChange={handleOnchangePh}
+      />
+      <SPYDateSelector
+        classNameContainer={classes.date}
+        variant={"inline"}
+        justify={"flex-start"}
+        disableToolbar={false}
+        id={"id-ph"}
+        label={""}
+        onChange={handleOnchangeDate}
+      />
+      <SPYButton
+        label={"Filter"}
+        typeVariant={"primary"}
+        fullWidth
+        onClick={onClickCallBack}
+        className={classes.button}
+      />
+      <SPYButton
+        label={"Clear"}
+        typeVariant={"primary"}
+        fullWidth
+        onClick={onClickClear}
+        className={classes.button}
+      />
     </Container>
   );
 };
@@ -181,18 +175,11 @@ const SPYFilters = ({ filter, onClickClear, onClick }: Props) => {
 const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
+    flexDirection: "column",
     height: "100%",
     width: "100%",
     maxWidth: "100%",
-    padding: "1em"
-  },
-  width50: {
-    height: "100%",
-    width: "50%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    minWidth: "150px"
+    padding: 0
   },
   filters: {
     display: "flex",
@@ -201,18 +188,18 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     marginTop: "10px",
-    marginLeft: "10px",
     maxHeight: "40px",
     display: "flex",
     flexDirection: "row",
-    width: "100%"
-  },
-  input: {
-    minWidth: "150px"
+    width: "100%",
+    borderRadius: 100
   },
   date: {
-    maxWidth: "165px",
-    marginTop: "30px"
+    marginBottom: "1em",
+    marginTop: "1em"
+  }, 
+  title: {
+    fontSize: 16,
   }
 }));
 

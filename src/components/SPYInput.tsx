@@ -33,7 +33,7 @@ export const SPYInput: React.FC<Props> = ({
   return (
     <div className={classNameContainer}>
       <TextField error={error ? true : false} {...rest} variant={variant} onChange={onChange}  value={value}/>
-      <FormHelperText className={classes.error} id="component-error-text">{error}</FormHelperText>
+      {error && <FormHelperText className={classes.error} id="component-error-text">{error}</FormHelperText>}
     </div>
   );
 };
