@@ -15,7 +15,7 @@
     "@types/react-router-dom": "^5.1.0",
     "date-fns": "^2.9.0",
     "local-storage": "^2.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-redux": "^7.1.3",
